@@ -1,0 +1,11 @@
+# Tijdelijke bestanden
+*.tmp
+*.temp
+.DS_Store
+
+# Persoonlijke notities
+persoonlijk/
+aantekeningen/
+
+# Backups
+*.bak
