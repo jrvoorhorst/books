@@ -1,8 +1,9 @@
 # Thematische Samenvatting Lolaland
 
 
+
 ## Emotionele Ontwikkeling & Karakterisering
-### Lisa als Tienermeisje
+### Lily als Tienermeisje
 - Combinatie van vrouwelijkheid en avontuurlijkheid
 - Realistische emotionele ontwikkeling voor haar leeftijd
 - Worsteling met intense emoties en driftbuien

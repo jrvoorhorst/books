@@ -1,6 +1,8 @@
 # Kernprincipes Lolaland: Theologische Diepgang en Literaire Aanpak
 
 
+
+
 ## Fundamentele Verhaalkeuzes
 
 ### Structurele Elementen
@@ -9,7 +11,7 @@
    - Geen zoete godfiguur, maar complex en soms streng
    - Handelt uit liefde, zelfs bij strenge oordelen
 
-2. Thomas' zelfopoffering
+2. Theo' zelfopoffering
    - Vrijwillig karakter van het offer
    - Geen religieuze plicht maar uit liefde
    - Echte consequenties (verbanning naar Schemerland)
@@ -45,7 +47,7 @@
 
 ### Symboliek
 1. De Sterrenjurk
-   - Weerspiegelt Lisa's spirituele staat
+   - Weerspiegelt Lily's spirituele staat
    - Sterren doven en herleven
    - Nieuwe glans na transformatie
 
@@ -91,7 +93,7 @@
    - Transformerende kracht
 
 3. Waarheid en Zelfkennis
-   - Pijnlijke zelfrealisatie
+   - Pijnlijke zelfreaLilytie
    - Groei door inzicht
    - Acceptatie van eigen fouten
 

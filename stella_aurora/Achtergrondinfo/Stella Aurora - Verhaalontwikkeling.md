@@ -2,9 +2,9 @@
 
 ## **Hoofdpersonages en setting**
 
-* Lisa: 11-jarig meisje, in Lolaland 14-15 jaar oud
-* Thomas: Leeftijdsgenoot van Lisa, wijze figuur
-* Schaduwkoningin: Antagonist, verleidt Lisa
+* Lily: 11-jarig meisje, in Lolaland 14-15 jaar oud
+* Theo: Leeftijdsgenoot van Lily, wijze figuur
+* Schaduwkoningin: Antagonist, verleidt Lily
 * Kindvrouw: Godachtige figuur, biedt leiding
 * Setting: Lolaland, fantasiewereld met Victoriaanse en Belle Époque elementen
 
@@ -18,17 +18,17 @@
 
 ## **Belangrijke plot elementen**
 
-1. Lisa's reis door Lolaland
+1. Lily's reis door Lolaland
 2. Verleiding door de Schaduwkoningin
-3. Morele afdwaling van Lisa
-4. Thomas' rol in het overnemen van Lisa's schuld
+3. Morele afdwaling van Lily
+4. Theo' rol in het overnemen van Lily's schuld
 5. Thema's van verlossing en nieuwe kansen
 
 ## **Symbolische elementen**
 
-* Lisa's jurk met sterren  
-  * Weerspiegelt Lisa's morele staat
-  * Sterren doven uit naarmate Lisa afdwaalt
+* Lily's jurk met sterren  
+  * Weerspiegelt Lily's morele staat
+  * Sterren doven uit naarmate Lily afdwaalt
   * Laatste ster als keerpunt
   * Heropleving van sterren symboliseert verlossing
 * Lolaland als metafoor voor innerlijke wereld en groeiproces
@@ -43,17 +43,17 @@
 
 ## **Verhaalontwikkeling**
 
-* Geleidelijke opbouw van Lisa's schuldsituatie
+* Geleidelijke opbouw van Lily's schuldsituatie
 * Subtiele verleiding door Schaduwkoningin
-* Thomas als constante, positieve aanwezigheid
-* Climax: Lisa's dieptepunt en Thomas' zelfopoffering
+* Theo als constante, positieve aanwezigheid
+* Climax: Lily's dieptepunt en Theo' zelfopoffering
 * Resolutie: Kans op nieuw begin en zelfacceptatie
 
 ## **Schrijfstijl en aanpak**
 
 * Subtiele verwerking van Bijbelse thema's zonder expliciete verwijzingen
 * Gebruik van symboliek en metaforen
-* Focus op emotionele en psychologische ontwikkeling van Lisa
+* Focus op emotionele en psychologische ontwikkeling van Lily
 * Balans tussen fantasie-elementen en diepere thematiek
 
 ## **Doelgroep en intentie**

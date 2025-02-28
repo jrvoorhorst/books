@@ -1,60 +1,62 @@
 # Structurele Opbouw Lolaland
 
 
+
+
 ## DEEL 1: AVONDSTER
 ### Begin: Gezamenlijke reis
-- Doorlopend verhaal vanuit Lisa's perspectief
-- Thomas als constante, betrouwbare metgezel
+- Doorlopend verhaal vanuit Lily's perspectief
+- Theo als constante, betrouwbare metgezel
 - Basis van vertrouwen en vriendschap
 - Eerste avonturen samen
 
 ### Overgang: De Lichttuin
 - Eerste splitsing in narratief
-- Lisa bij Avara
-- Thomas bij Jacob
+- Lily bij Avara
+- Theo bij Jacob
 - Begin van om-en-om hoofdstukken
 - Subtiele verwijdering begint
 
 ### Parallelle verhaallijnen
-1. Lisa in de Lichttuin:
+1. Lily in de Lichttuin:
    - Groeiende band met Avara
    - Eerste tekenen van manipulatie
    - Verlies van eigen licht
    - Toenemende isolatie
 
-2. Thomas bij Jacob:
+2. Theo bij Jacob:
    - Werk aan astronomische klok
    - Wijze lessen van Jacob
-   - Groeiende zorgen om Lisa
+   - Groeiende zorgen om Lily
    - Eigen ontwikkeling
 
 ## DEEL 2: NACHTSTER
-### Hoofdverhaal: Lisa's val
+### Hoofdverhaal: Lily's val
 - Langere hoofdstukken
 - Onder invloed Schaduwkoningin
 - Verraad van geheimen
 - Toenemende duisternis
 
-### Tussendoor: Thomas' glimpen
+### Tussendoor: Theo' glimpen
 - Kortere hoofdstukken
-- Pogingen Lisa te bereiken
+- Pogingen Lily te bereiken
 - Voorbereidingen op redding
 - Groeiend inzicht in gevaar
 
 ### Climax
 - Dramatische hereniging
-- Thomas' zelfopoffering
-- Lisa's ontwaken
+- Theo' zelfopoffering
+- Lily's ontwaken
 - Keerpunt in het verhaal
 
 ## DEEL 3: MORGENSTER
-### Lisa's herstel
+### Lily's herstel
 - Focus op verwerking
 - Leren van ervaringen
 - Nieuwe kracht vinden
 - Brief van Avara als afsluiting
 
-### Thomas' transformatie
+### Theo' transformatie
 - Ontsnapping uit verbanning
 - Innerlijke groei
 - Terugkeer als wijzer persoon
@@ -62,8 +64,8 @@
 
 ### Gezamenlijke afsluiting
 - Hereniging op nieuw niveau
-- Thomas prominenter aanwezig
-- Lisa's verlangen naar huis
+- Theo prominenter aanwezig
+- Lily's verlangen naar huis
 - Balans tussen fantasie en realiteit
 
 ## Thematische Ontwikkeling
@@ -124,7 +126,7 @@
    - Herstel en groei
 
 3. Karakterontwikkeling:
-   - Parallelle groei Lisa/Thomas
+   - Parallelle groei Lily/Theo
    - Contrasterende mentoren
    - Verschillende vormen van wijsheid
    - Transformatie door beproeving

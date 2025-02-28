@@ -10,7 +10,7 @@ In de hoogste kamers van Arafel's toren, waar schaduwen dansen als herinneringen
 
 Zijn rol in het verhaal:
 - Een onverwachte bondgenoot in de duisternis
-- Een brug tussen Lisa's onschuld en Arafel's schaduwen
+- Een brug tussen Lily's onschuld en Arafel's schaduwen
 - Een symbool van mogelijke verlossing
 - Een gids voor hen die hulp zoeken op donkere plekken
 
@@ -23,10 +23,10 @@ Grijsgeklede gestalten die door de torengangen glijden:
 
 ### Arafel's Rol
 De meesteres van de toren toont onverwachte diepgang:
-- Stuurt Lisa naar Ella, in verwachting van straf
+- Stuurt Lily naar Ella, in verwachting van straf
 - Ziet niet hoe deze beslissing tot haar eigen ondergang leidt
 - Draagt verborgen herinneringen aan haar eigen tijd in het licht
-- Zal uiteindelijk ten onder gaan aan Thomas' onthulling van waarheid
+- Zal uiteindelijk ten onder gaan aan Theo' onthulling van waarheid
 
 ## Belangrijke Scènes 
 
@@ -45,7 +45,7 @@ Een complexe scène die meerdere lagen toont:
 - De nevel die echo's van haar verleden begint te dragen
 
 ### Het Vertrek
-Demas die Lisa helpt ontsnappen:
+Demas die Lily helpt ontsnappen:
 - Geeft haar het ware kompas terug
 - Zorgt voor proviand en een pony
 - Biedt laatste raad over het volgen van sterren
@@ -89,11 +89,11 @@ Het verhaal biedt handvatten voor lezers in moeilijke situaties:
 ### Rechtvaardigheid en Genade
 - Arafel's misvatting van ware rechtvaardigheid
 - Het verschil tussen straf en verlossing
-- Thomas' uiteindelijke rol in het onthullen van waarheid
+- Theo' uiteindelijke rol in het onthullen van waarheid
 - De kracht van het onder ogen zien van je ware zelf
 
 ## Verdere Verhaalontwikkelingen
-- Thomas' confrontatie met Arafel
+- Theo' confrontatie met Arafel
 - De onthulling van haar verleden
 - Haar oplossing in de nevel die ze zelf gebruikte
 - De transformatie van de toren na haar val

@@ -76,7 +76,7 @@
 
 ## **Sfeer tijdens Verschillende Momenten**
 
-### **Bij Lisa's Oordeel**
+### **Bij Lily's Oordeel**
 
 * Gedempte akoestiek die elke stap betekenis geeft
 * Sterren die reageren op emotionele intensiteit
@@ -84,7 +84,7 @@
 * Schaduwen die langer worden
 * Echo's die woorden gewicht geven
 
-### **Bij Thomas' Offer**
+### **Bij Theo' Offer**
 
 * Licht dat zich concentreert op specifieke punten
 * Spiegels die momenten uit het verleden tonen

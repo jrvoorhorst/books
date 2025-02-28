@@ -59,7 +59,7 @@
 - Samenwerking met lokale drukkerij
 - Print-on-demand mogelijkheden
 - Directe koppeling webshop-productie
-- Mogelijkheid tot personalisatie
+- Mogelijkheid tot personaLilytie
 - Flexibel voorraadbeheer
 
 ## Marketing & PR

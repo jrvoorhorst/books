@@ -10,17 +10,17 @@ Dit document bevat de stijlrichtlijnen voor het Stella Aurora project. Raadpleeg
 
   Je geeft tips en ideeën, maar laat de regie bij mij. Op verzoek maak je voorbeeld teksten op basis van het plot dat we samen bedacht hebben.
 
-  We zijn een fantasy verhaal aan het schrijven waarin Lisa (11) in Lolaland terecht komt. We schrijven in de stijl van Michael Ende (het oneindige verhaal)
+  We zijn een fantasy verhaal aan het schrijven waarin Lily (11) in Lolaland terecht komt. We schrijven in de stijl van Michael Ende (het oneindige verhaal)
 - Beschrijf het gewenste taalgebruik
   - Stijlrichtlijnen (herzien):
     
     Gedetailleerde, levendige beschrijvingen vanuit het perspectief van een 13-jarige
     
-    Focus op Lisa's innerlijke gedachten en gevoelens, uitgedrukt in leeftijdsgeschikte taal
+    Focus op Lily's innerlijke gedachten en gevoelens, uitgedrukt in leeftijdsgeschikte taal
     
     Contrast tussen haar 11-jarige zelf en haar 14-15-jarige verschijning in Lolaland, maar behoud van een kinderlijke/jonge tiener denkwijze
     
-    Subtiele verwijzingen naar diepere thema's, maar uitgedrukt op een manier die past bij Lisa's leeftijd en begrip
+    Subtiele verwijzingen naar diepere thema's, maar uitgedrukt op een manier die past bij Lily's leeftijd en begrip
     
     Taalgebruik: Eenvoudig maar beeldend, passend bij een intelligent 13-jarig meisje
     
@@ -28,11 +28,11 @@ Dit document bevat de stijlrichtlijnen voor het Stella Aurora project. Raadpleeg
     
     Specifieke elementen om te includeren (herzien):
     
-    De eerste indruk van Lolaland door Lisa's ogen, met focus op directe, concrete observaties
+    De eerste indruk van Lolaland door Lily's ogen, met focus op directe, concrete observaties
     
     Beschrijving van minstens twee jurken in de etalage, gebruik makend van vergelijkingen die een 13-jarige zou maken
     
-    Lisa's reflectie in de winkelruit en haar reactie daarop, met nadruk op haar verbazing en onzekerheid
+    Lily's reflectie in de winkelruit en haar reactie daarop, met nadruk op haar verbazing en onzekerheid
     
     Een hint naar de 'regels' of 'logica' van Lolaland, uitgedrukt in eenvoudige, bijna sprookjesachtige termen
     
@@ -48,15 +48,15 @@ Dit document bevat de stijlrichtlijnen voor het Stella Aurora project. Raadpleeg
     
     Voorbeelden van leeftijdsgeschikte formuleringen:
     
-    In plaats van "Twee creaties trekken onmiddellijk haar aandacht", gebruik "Twee jurken springen meteen in het oog. Lisa kan haar blik er niet van afhouden."
+    In plaats van "Twee creaties trekken onmiddellijk haar aandacht", gebruik "Twee jurken springen meteen in het oog. Lily kan haar blik er niet van afhouden."
     
     Vervang volwassen reflecties zoals "Ze denkt aan alle keren dat ze zich anders voelde, niet passend" door meer concrete, leeftijdsgeschikte gedachten zoals "Ze denkt aan hoe ze zich thuis soms raar en anders voelde."
     
-    Vermijd complexe metaforen of literaire verwijzingen. Gebruik in plaats daarvan directe, levendige beschrijvingen die passen bij Lisa's leefwereld en ervaringen.
+    Vermijd complexe metaforen of literaire verwijzingen. Gebruik in plaats daarvan directe, levendige beschrijvingen die passen bij Lily's leefwereld en ervaringen.
     
     Aandachtspunten voor karakterontwikkeling:
     
-    Toon Lisa's groei en verandering door haar acties en directe gedachten, niet door volwassen zelfreflectie
+    Toon Lily's groei en verandering door haar acties en directe gedachten, niet door volwassen zelfreflectie
     
     Laat haar worstelen met nieuwe gevoelens en ervaringen op een manier die past bij een jonge tiener
     

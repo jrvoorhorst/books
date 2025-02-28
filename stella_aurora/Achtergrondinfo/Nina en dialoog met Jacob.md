@@ -10,17 +10,17 @@
 - Komt in de Lichttuin als haar moeder moet werken
 
 ### Symbolische Functie
-1. Spiegeling voor Lisa
-   - Weerspiegelt Lisa's vroegere onschuld
-   - Laat Lisa haar eigen manipulatie herkennen
-   - Trigger voor Lisa's beschermingsinstinct
-   - Katalysator voor Lisa's bewustwording
+1. Spiegeling voor Lily
+   - Weerspiegelt Lily's vroegere onschuld
+   - Laat Lily haar eigen manipulatie herkennen
+   - Trigger voor Lily's beschermingsinstinct
+   - Katalysator voor Lily's bewustwording
 
 2. Dramatische Functie
    - Verdiept het conflict
-   - Maakt Lisa's vertrek complexer
+   - Maakt Lily's vertrek complexer
    - Voegt moreel dilemma toe
-   - Versterkt de urgentie van Lisa's keuzes
+   - Versterkt de urgentie van Lily's keuzes
 
 ## De Dialoog met Jacob
 
@@ -41,7 +41,7 @@
 
 ### Dialoogstructuur
 1. Opening
-   - Lisa's emotionele binnenkomst
+   - Lily's emotionele binnenkomst
    - Jacob's rustige aanwezigheid
    - Eerste observaties van de klokken
    - Geleidelijke opbouw van vertrouwen
@@ -59,7 +59,7 @@
    - Belang van natuurlijke ritmes
 
 4. Sleutelmomenten
-   - Lisa's herkenning in klokkentikken
+   - Lily's herkenning in klokkentikken
    - Moment van doorbraak/inzicht
    - Besluit om weg te gaan
    - Belofte om terug te komen voor Nina
@@ -88,7 +88,7 @@
 
 ### Eerste Versie
 - Focus op Nina's situatie
-- Lisa's directe emotionele nood
+- Lily's directe emotionele nood
 - Jacobs eerste metaforen
 - Basis voor vertrouwen
 
@@ -120,7 +120,7 @@
 
 2. Karakterontwikkeling
    - Jacobs rustige wijsheid
-   - Lisa's groeiend inzicht
+   - Lily's groeiend inzicht
    - Subtiele karakterdetails
    - Authentieke emoties
 

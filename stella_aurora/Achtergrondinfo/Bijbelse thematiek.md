@@ -4,7 +4,7 @@
 
 * Verleider en bedrieger, zoals de slang in het paradijs
 * Belooft kennis en macht, maar leidt tot verwijdering van onschuld en zuiverheid
-* Gebruikt halve waarheden en verdraaiingen om Lisa te manipuleren
+* Gebruikt halve waarheden en verdraaiingen om Lily te manipuleren
 * Representeert de strijd tussen goed en kwaad, licht en duisternis
 
 ## **De kindvrouw als God-figuur**
@@ -16,7 +16,7 @@
 
 ## **Thematische implicaties**
 
-* Vrije wil en de keuzes die Lisa moet maken
+* Vrije wil en de keuzes die Lily moet maken
 * De strijd tussen onschuld en wereldlijkheid
 * Vergeving en genade als centrale thema's
 * Persoonlijke groei als een spirituele reis
@@ -24,7 +24,7 @@
 ## **Subtiele verwijzingen**
 
 * Gebruik van licht- en donkersymboliek
-* Momenten van 'openbaring' of 'verzoeking' voor Lisa
+* Momenten van 'openbaring' of 'verzoeking' voor Lily
 * Parallellen met Bijbelse verhalen (bv. de Hof van Eden, de woestijn)
 
 ## **Balans in presentatie**
@@ -36,10 +36,10 @@
 ## **Universele thema's (geïnspireerd door Bijbelse concepten)**
 
 1. Verlossing en transformatie  
-   * Lisa's reis als metafoor voor persoonlijke groei
+   * Lily's reis als metafoor voor persoonlijke groei
    * Momenten van inzicht die leiden tot verandering
 2. Vergeving en genade  
-   * Lisa leert zichzelf en anderen te vergeven
+   * Lily leert zichzelf en anderen te vergeven
    * Onvoorwaardelijke acceptatie door positieve figuren
 3. Vrije wil en keuzes  
    * Morele dilemma's zonder duidelijk juiste antwoorden
@@ -48,16 +48,16 @@
    * Symbolisch gebruik van licht en schaduw in Lolaland
    * Innerlijke strijd tussen positieve en negatieve impulsen
 5. Gemeenschap en individualiteit  
-   * Lisa's zoektocht naar waar ze thuishoort
+   * Lily's zoektocht naar waar ze thuishoort
    * Balans vinden tussen zelfexpressie en sociale acceptatie
 
 ## **Verwerking in het verhaal**
 
 * Gebruik symboliek en metaforen om thema's te verbeelden
-* Creëer situaties die Lisa's karakter testen en ontwikkelen
+* Creëer situaties die Lily's karakter testen en ontwikkelen
 * Laat ondersteunende personages verschillende perspectieven vertegenwoordigen
 * Gebruik de setting van Lolaland om abstracte concepten te concretiseren
-* Verweef thema's in Lisa's innerlijke monoloog en reflecties
+* Verweef thema's in Lily's innerlijke monoloog en reflecties
 
 ## **Balans en nuance**
 
@@ -76,7 +76,7 @@
    * Vertegenwoordigt zowel rechtvaardigheid als genade
    * Geen zoete godfiguur, maar complex en soms streng
    * Handelt uit liefde, zelfs bij strenge oordelen
-2. Thomas' zelfopoffering  
+2. Theo' zelfopoffering  
    * Vrijwillig karakter van het offer
    * Geen religieuze plicht maar uit liefde
    * Echte consequenties (verbanning naar Schemerland)
@@ -110,7 +110,7 @@
 ### **Symboliek**
 
 1. De Sterrenjurk  
-   * Weerspiegelt Lisa's spirituele staat
+   * Weerspiegelt Lily's spirituele staat
    * Sterren doven en herleven
    * Nieuwe glans na transformatie
 2. Het Schemerland  
@@ -152,7 +152,7 @@
    * Vrijwillig offer
    * Transformerende kracht
 3. Waarheid en Zelfkennis  
-   * Pijnlijke zelfrealisatie
+   * Pijnlijke zelfreaLilytie
    * Groei door inzicht
    * Acceptatie van eigen fouten
 
@@ -193,10 +193,10 @@ Deze principes dienen als fundament voor het verhaal, waarbij de theologische wa
 ## Universele thema's (geïnspireerd door Bijbelse concepten)
 
 1. Verlossing en transformatie
-   - Lisa's reis als metafoor voor persoonlijke groei
+   - Lily's reis als metafoor voor persoonlijke groei
    - Momenten van inzicht die leiden tot verandering
 2. Vergeving en genade
-   - Lisa leert zichzelf en anderen te vergeven
+   - Lily leert zichzelf en anderen te vergeven
    - Onvoorwaardelijke acceptatie door positieve figuren
 3. Vrije wil en keuzes
    - Morele dilemma's zonder duidelijk juiste antwoorden
@@ -205,16 +205,16 @@ Deze principes dienen als fundament voor het verhaal, waarbij de theologische wa
    - Symbolisch gebruik van licht en schaduw in Lolaland
    - Innerlijke strijd tussen positieve en negatieve impulsen
 5. Gemeenschap en individualiteit
-   - Lisa's zoektocht naar waar ze thuishoort
+   - Lily's zoektocht naar waar ze thuishoort
    - Balans vinden tussen zelfexpressie en sociale acceptatie
 
 ## Verwerking in het verhaal
 
 - Gebruik symboliek en metaforen om thema's te verbeelden
-- Creëer situaties die Lisa's karakter testen en ontwikkelen
+- Creëer situaties die Lily's karakter testen en ontwikkelen
 - Laat ondersteunende personages verschillende perspectieven vertegenwoordigen
 - Gebruik de setting van Lolaland om abstracte concepten te concretiseren
-- Verweef thema's in Lisa's innerlijke monoloog en reflecties
+- Verweef thema's in Lily's innerlijke monoloog en reflecties
 
 ## Balans en nuance
 

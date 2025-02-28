@@ -25,4 +25,4 @@ Dat naar vrijheid spreekt
 
 ---
 
-*Als schutblad voor het verhaal van Lisa in Lolaland*
+*Als schutblad voor het verhaal van Lily in Lolaland*

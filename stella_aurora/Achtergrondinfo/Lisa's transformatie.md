@@ -1,17 +1,19 @@
-# De Reis van de Drie Sterren: Lisa's Transformatie in Lolaland
+# De Reis van de Drie Sterren: Lily's Transformatie in Lolaland
+
+
 
 
 ## De Avondster: Het Begin
-In de koperen omhelzing van de Sterrenwacht ontdekt Lisa voor het eerst de Avondster, rood en warm als een hartslag in de fluweelzwarte hemel. Het is een tijd van eerste ontmoetingen:
+In de koperen omhelzing van de Sterrenwacht ontdekt Lily voor het eerst de Avondster, rood en warm als een hartslag in de fluweelzwarte hemel. Het is een tijd van eerste ontmoetingen:
 - De mysterieuze Jacob met zijn sterrenkaarten
-- Thomas, die de sterren kent als oude vrienden
+- Theo, die de sterren kent als oude vrienden
 - De belofte van een groter avontuur
 
-De Avondster zingt van verlangen en mogelijkheden, een lied dat Lisa's hart doet resoneren met een dieper verlangen naar betekenis.
+De Avondster zingt van verlangen en mogelijkheden, een lied dat Lily's hart doet resoneren met een dieper verlangen naar betekenis.
 
 ## De Nachtster: De Duisternis
 ### De Verlaten Sterrenwacht
-Na Thomas' verbanning naar de Nevelbergen en haar eigen veroordeling door Ella, keert Lisa terug naar een veranderde Sterrenwacht:
+Na Theo' verbanning naar de Nevelbergen en haar eigen veroordeling door Ella, keert Lily terug naar een veranderde Sterrenwacht:
 - Verlaten werkbanken bedekt met nevelig stof
 - Gedoofde instrumenten die ooit zo warm glinsterden
 - Jacob's vergeten sterrenkaarten
@@ -28,7 +30,7 @@ De tuin van Avara, ooit een plaats van schoonheid en manipulatie, is nu:
 
 ## De Morgenster: De Laatste Reis
 ### De Onverwachte Keuze
-Op het moment dat Lisa's pad dat van Thomas weer kruist, staat ze voor een cruciaal besluit:
+Op het moment dat Lily's pad dat van Theo weer kruist, staat ze voor een cruciaal besluit:
 - De vertrouwde weg terug naar haar eigen wereld
 - Of de eenzame reis voorwaarts, geleid door een dieper weten
 - Een keuze tussen veiligheid en een hoger doel
@@ -54,7 +56,7 @@ In het moment van ontwaken:
 - De Morgenster → De vervulling die komt door overgave
 
 ### De Transformatie van de Heldin
-Lisa's reis beweegt van:
+Lily's reis beweegt van:
 - Onschuld naar wijsheid
 - Manipulatie naar authentieke kracht
 - Afhankelijkheid naar vrije keuze
@@ -67,4 +69,4 @@ Het verhaal ontvouwt zich als een mysterie waarin:
 - De weg voorwaarts soms door het loslaten van het bekende gaat
 - De grootste transformaties in de kleinste kamers kunnen plaatsvinden
 
-De drie sterren vormen samen niet zozeer een pad als wel een dans van transformatie, waarbij elke stap Lisa dichter brengt bij een waarheid die ze alleen zelf kan ontdekken.
+De drie sterren vormen samen niet zozeer een pad als wel een dans van transformatie, waarbij elke stap Lily dichter brengt bij een waarheid die ze alleen zelf kan ontdekken.

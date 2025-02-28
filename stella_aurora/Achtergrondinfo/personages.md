@@ -1,21 +1,23 @@
 # Overzicht Personages Lolaland
 
 
+
+
 ## Hoofdverhaallijn
 
 ### Centrale Personages
-1. **Lisa**
+1. **Lily**
    - 11 jaar oud in de gewone wereld
    - 14-15 jaar in Lolaland
    - Verlegen, creatief, vaak alleen
    - Gefascineerd door mooie kleding en sprookjesachtige dingen
    - Zoekt haar weg tussen kind-zijn en volwassen worden
 
-2. **Thomas**
-   - Leeftijdsgenoot van Lisa
+2. **Theo**
+   - Leeftijdsgenoot van Lily
    - Wijs voor zijn leeftijd, maar met jongensachtige trekken
    - Loyaal en zorgzaam
-   - Neemt later Lisa's schuld op zich
+   - Neemt later Lily's schuld op zich
    - Werkt bij Jacob in de sterrenwacht
    - Christus-typologie in verlossingsthema
 
@@ -44,7 +46,7 @@
 ### Ondersteunende Personages
 1. **Jacob**
    - Wijze figuur in de Sterrenwacht
-   - Mentor van Thomas
+   - Mentor van Theo
    - Beheert belangrijke sterrenkaarten
    - Geeft wijze lessen
 
@@ -73,7 +75,7 @@
 
 2. **Het Bloemenvrouwtje** (Avara in latere versie)
    - Manipulatieve figuur in de Lichttuin
-   - Gebruikt Lisa's verlangen naar acceptatie
+   - Gebruikt Lily's verlangen naar acceptatie
 
 3. **Arafel**
    - Heerseres van de Nevelbergen
@@ -85,17 +87,17 @@
 
 ### Morele Spectrum
 - **Zuiver Goed**: Ella
-- **Verlossende Figuur**: Thomas
-- **Zoekend/Groeiend**: Lisa
+- **Verlossende Figuur**: Theo
+- **Zoekend/Groeiend**: Lily
 - **Manipulatief**: Avara
 - **Complex Kwaad**: Arafel
 
 ### Relaties en Dynamiek
-- Lisa ↔ Thomas: Vriendschap en vertrouwen
-- Lisa ↔ Ella: Goddelijke leiding en genade
-- Lisa ↔ Avara: Eerste test met manipulatie
-- Lisa ↔ Arafel: Ultieme verleiding
-- Thomas ↔ Jacob: Mentorschap
+- Lily ↔ Theo: Vriendschap en vertrouwen
+- Lily ↔ Ella: Goddelijke leiding en genade
+- Lily ↔ Avara: Eerste test met manipulatie
+- Lily ↔ Arafel: Ultieme verleiding
+- Theo ↔ Jacob: Mentorschap
 - Ella ↔ Arafel: Verbroken band/gevallen engel parallel
 
 Deze personages vormen samen een rijk web van relaties en symboliek, waarin thema's van vertrouwen, verraad, verlossing en groei worden verkend door verschillende perspectieven en interacties.

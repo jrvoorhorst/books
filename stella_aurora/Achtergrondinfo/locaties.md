@@ -1,6 +1,8 @@
 # Belangrijke Locaties in Lolaland
 
 
+
+
 ## Centrale Locaties
 
 ### De Spiegelzaal
@@ -27,7 +29,7 @@
 
 ### De Sterrenwacht
 - Jacob's domein
-- Plaats waar Thomas werkt en leert
+- Plaats waar Theo werkt en leert
 - Bewaarplaats van belangrijke sterrenkaarten
 - Plek van wijsheid en kennis
 - Verbinding tussen aarde en hemel
@@ -56,7 +58,7 @@
 
 ### Het Schemerland
 - Plaats van verbanning/beproeving
-- Waar Thomas naartoe gaat na zijn offer
+- Waar Theo naartoe gaat na zijn offer
 - Gebied tussen licht en duister
 
 ## Kenmerken van de Wereld
@@ -80,7 +82,7 @@
 - Grenzen tussen verschillende staten van zijn
 
 ### Magische Eigenschappen
-- Veranderende leeftijd (Lisa)
+- Veranderende leeftijd (Lily)
 - Verschuivende werkelijkheid
 - Levende architectuur
 - Reagerende natuur

@@ -1,22 +1,24 @@
 # Het Laatste Hoofdstuk: Van Keuze tot Herkenning
 
 
+
+
 ## De Aanloop naar het Einde
 
 ### De Laatste Keuze
-- Lisa krijgt de kans om terug te keren naar de gewone wereld
+- Lily krijgt de kans om terug te keren naar de gewone wereld
 - Ze kiest ervoor om te blijven vanwege een ziek kind dat haar nodig heeft
 - De keuze komt voort uit intrinsieke motivatie, niet uit verplichting
-- Echo van eerdere keuzes (zoals het moment met Thomas versus Avara)
+- Echo van eerdere keuzes (zoals het moment met Theo versus Avara)
 
 ### De Drie Weken van Waken
 - Setting: kleine, eenvoudige kamer
-- Lisa's toegewijde zorg voor het zieke kind
+- Lily's toegewijde zorg voor het zieke kind
 - Reflectiemomenten over haar reis:
   - Contrast met haar tijd bij Avara
   - Groei in onderscheidingsvermogen
   - De betekenis van echte zorg versus manipulatie
-  - Thomas' rol in haar ontwikkeling
+  - Theo' rol in haar ontwikkeling
 
 ## De Slotscène
 
@@ -24,17 +26,17 @@
 - Langzame opbouw naar het moment van herkenning
 - Het zieke kind dat langzaam herstelt
 - Het moment van oogcontact
-- Lisa's herkenning: "Ella?"
+- Lily's herkenning: "Ella?"
 - Echo van het Bijbelse moment waarbij Maria Jezus herkent, maar dan omgekeerd
 
 ### De Setting
 - Intieme, kleine kamer
 - Olielamp die zacht licht geeft
-- Lisa's sterrenjurk die nog steeds zacht gloeit
+- Lily's sterrenjurk die nog steeds zacht gloeit
 - De morgenster zichtbaar door het raam
 
 ### De Laatste Momenten
-- De stilte tussen Lisa en Ella
+- De stilte tussen Lily en Ella
 - De eenvoud van het moment
 - Geen grote woorden of verklaringen nodig
 - De blik naar buiten waar de morgenster fonkelt

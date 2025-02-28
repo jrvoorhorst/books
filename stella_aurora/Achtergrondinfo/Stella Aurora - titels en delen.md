@@ -15,7 +15,7 @@
 ### Hoofdstukken
 
 1. **Aankomst in Lolaland**
-   - Lisa vindt de poort in het park
+   - Lily vindt de poort in het park
    - Eerste transformatie (van 11 naar 14-15)
    - Het ontvangen van de sterrenjurk
    - Kennismaking met de regels van Lolaland
@@ -26,24 +26,24 @@
    - Eerste tekenen van de invloed van Arafel
 3. **Het Klooster van de Eeuwige Verwondering**
    - Confrontatie met volwassenen die weigeren op te groeien
-   - Thomas' eerste beschermende rol
+   - Theo' eerste beschermende rol
    - Waarschuwing over het gevaar van stilstand
-   - Lisa's eerste test: de verleiding om "klein" te blijven
+   - Lily's eerste test: de verleiding om "klein" te blijven
 4. **De Lichttuin**
    - Introductie van Avara
    - Eerste ontmoeting met meneer Blackwood
    - Begin van de manipulatie
-   - Lisa's groeiende verwarring
+   - Lily's groeiende verwarring
 5. **De Sterrenwacht**
    - Veilige haven bij Jacob
-   - Thomas' werk met de sterrenkaarten
+   - Theo' werk met de sterrenkaarten
    - Lessen over wijsheid en onderscheidingsvermogen
    - De rust voor de storm
 
 ### Suggestie voor extra scène:
 
-- Een hoofdstuk waarin Lisa voor het eerst alleen met Blackwood is
-- Focus op subtiele dreiging en Lisa's groeiende ongemak
+- Een hoofdstuk waarin Lily voor het eerst alleen met Blackwood is
+- Focus op subtiele dreiging en Lily's groeiende ongemak
 
 ## Deel 2: Nachtster
 
@@ -54,38 +54,38 @@
 1. **De Strijd om de Waarheid**
    - Jacob confronteert Blackwood
    - De raad kiest partij
-   - Thomas en Lisa moeten vluchten
+   - Theo en Lily moeten vluchten
    - Begin van de reis naar Ella
 2. **Door de Nevelbergen**
    - Toenemende invloed van de nevel
    - Herinneringen beginnen te vervagen
-   - Test van vertrouwen tussen Lisa en Thomas
+   - Test van vertrouwen tussen Lily en Theo
    - Eerste tekenen van Arafel's macht
 3. **Het Doolhof van Ora**
    - Het labyrint dat levend lijkt
-   - Scheiding van Thomas en Lisa
+   - Scheiding van Theo en Lily
    - Keuze tussen twee paden
    - Laatste gesprek voor de scheiding
 4. **Gescheiden Wegen**
-   - Thomas' reis over de dodenweg
-   - Lisa's tocht naar Arafel's toren
+   - Theo' reis over de dodenweg
+   - Lily's tocht naar Arafel's toren
    - Parallel vertelde verhaallijnen
    - Groeiende eenzaamheid
 5. **De Zwarte Toren**
-   - Lisa's verraad van de sterrenkaart
+   - Lily's verraad van de sterrenkaart
    - Arafel's manipulatie
    - De boodschap voor Ella
-   - Het dieptepunt van Lisa's reis
+   - Het dieptepunt van Lily's reis
 6. **De Spiegelzaal**
-   - Lisa's veroordeling door Ella
-   - Thomas' zelfopoffering
-   - Transformatie van de sterren op Lisa's jurk
+   - Lily's veroordeling door Ella
+   - Theo' zelfopoffering
+   - Transformatie van de sterren op Lily's jurk
    - Het keerpunt in het verhaal
 
 ### Suggestie voor extra scènes:
 
-- Een hoofdstuk over Lisa's worsteling met schuldgevoel
-- Een scène waarin we Thomas' gedachten volgen voor zijn offer
+- Een hoofdstuk over Lily's worsteling met schuldgevoel
+- Een scène waarin we Theo' gedachten volgen voor zijn offer
 
 ## Deel 3: Morgenster
 
@@ -94,11 +94,11 @@
 ### Hoofdstukken
 
 1. **Tijd van Herstel**
-   - Lisa's verwerking van de gebeurtenissen
+   - Lily's verwerking van de gebeurtenissen
    - Eerste stappen naar zelfvergeving
-   - Leren leven met Thomas' offer
+   - Leren leven met Theo' offer
    - Begin van nieuwe kracht
-2. **Thomas in de Nevelbergen**
+2. **Theo in de Nevelbergen**
    - Zijn confrontatie met Arafel
    - De macht van waarheid over manipulatie
    - Het breken van Arafel's heerschappij
@@ -107,7 +107,7 @@
    - Confrontatie met het verleden
    - Avara met Blackwood's kettinkje
    - Niet alle verhalen eindigen goed
-   - Lisa's groei in wijsheid
+   - Lily's groei in wijsheid
 4. **De Laatste Reis**
    - Het zieke meisje dat hulp nodig heeft
    - Drie weken van waken
@@ -116,9 +116,9 @@
 
 ### Suggestie voor extra scènes:
 
-- Een hoofdstuk over Lisa's eerste echte keuze voor anderen
-- Een scène die laat zien hoe Thomas is veranderd door zijn beproeving
-- Een gesprek tussen Lisa en Ella over de aard van vergeving
+- Een hoofdstuk over Lily's eerste echte keuze voor anderen
+- Een scène die laat zien hoe Theo is veranderd door zijn beproeving
+- Een gesprek tussen Lily en Ella over de aard van vergeving
 
 ## Overkoepelende Thema's
 
@@ -129,7 +129,7 @@
 
 ## Symbolische Elementen
 
-- De sterren op Lisa's jurk als spiegel van haar morele staat
+- De sterren op Lily's jurk als spiegel van haar morele staat
 - De nevel als symbool voor verwarring en verloren identiteit
 - Blackwood's kettinkje als teken van bezit en controle
 - De spiegels in Ella's zaal als symbool voor waarheid

@@ -1,23 +1,25 @@
 # Verhaallijn Lolaland: De Donkere Tuinen
 
 
+
+
 ## Kern Ontwikkeling
-De verhaallijn ontwikkelt zich van een subtiel manipulatief systeem naar een confrontatie met institutioneel misbruik, verteld door de ogen van Lisa.
+De verhaallijn ontwikkelt zich van een subtiel manipulatief systeem naar een confrontatie met institutioneel misbruik, verteld door de ogen van Lily.
 
 ### Hoofdpersonages in deze Arc
-- **Lisa**: Jong meisje dat steeds dieper verstrikt raakt
+- **Lily**: Jong meisje dat steeds dieper verstrikt raakt
 - **Avara**: Het bloemenvrouwtje, handlanger van Blackwood
 - **Blackwood**: Hoofd van de raad, predator achter een perfecte façade
-- **Thomas**: Lisa's beschermer, leerling van Jacob
+- **Theo**: Lily's beschermer, leerling van Jacob
 - **Jacob**: Lid van de raad die de waarheid ontdekt
-- **Nina**: Avara's jonge nichtje, catalyst voor Lisa's bevrijding
+- **Nina**: Avara's jonge nichtje, catalyst voor Lily's bevrijding
 - **Marianne**: Bondgenoot binnen de raad
 
 ## Sleutelscènes
 
 ### 1. De Schuur
 ```
-In de schuur rook het naar vochtige aarde en roestig metaal. Lisa waste de tuinschaar af, het water in de emmer werd bruin van de modder. Ze wilde zo snel mogelijk klaar zijn.
+In de schuur rook het naar vochtige aarde en roestig metaal. Lily waste de tuinschaar af, het water in de emmer werd bruin van de modder. Ze wilde zo snel mogelijk klaar zijn.
 
 Een schaduw viel over de werkbank.
 
@@ -30,7 +32,7 @@ Een schaduw viel over de werkbank.
 
 [...]
 
-Voor Lisa kon wegstappen, gleed het koude zilver al om haar hals. Er klonk een zacht klikje.
+Voor Lily kon wegstappen, gleed het koude zilver al om haar hals. Er klonk een zacht klikje.
 
 "Een speciaal slot," glimlachte hij. Zijn vingers streelden even over de sluiting.
 ```
@@ -39,7 +41,7 @@ Voor Lisa kon wegstappen, gleed het koude zilver al om haar hals. Er klonk een z
 ```
 "Je doet me denken aan Clara," zei meneer Blackwood, terwijl hij een roos tussen zijn gehandschoende vingers draaide. "Zij verzorgde mijn bloemen voordat jij kwam. Zo'n toegewijd meisje."
 
-Lisa's hart sloeg een slag over. "Wat... wat is er met haar gebeurd?"
+Lily's hart sloeg een slag over. "Wat... wat is er met haar gebeurd?"
 
 "Oh." Zijn glimlach werd iets breder, maar zijn ogen bleven koud. "Ze werd ondankbaar. Vergat wie haar vrienden waren."
 ```
@@ -55,7 +57,7 @@ De raadszaal was donker, alleen verlicht door kaarsen in zilveren houders. Jacob
 
 ### 5. Het Keerpunt met Nina
 ```
-"Nina," snikte Lisa. "Ze hebben Nina meegenomen naar... naar..."
+"Nina," snikte Lily. "Ze hebben Nina meegenomen naar... naar..."
 
 Jacob verstijfde. "Naar wie, kind?"
 
@@ -68,15 +70,15 @@ Langzaam trok ze het zilveren kettinkje tevoorschijn. Het bekende symbool van Bl
 
 ### 6. De Blauwe Mantel
 ```
-"Deze was van mijn voorganger. Een man die helder bleef denken toen anderen zich lieten verblinden. Die rechtop bleef staan in de zwaarste stormen." Jacob's stem werd zachter. "Nu is hij van jou, Thomas."
+"Deze was van mijn voorganger. Een man die helder bleef denken toen anderen zich lieten verblinden. Die rechtop bleef staan in de zwaarste stormen." Jacob's stem werd zachter. "Nu is hij van jou, Theo."
 
-Thomas raakte de stof aan. Die voelde stevig aan, betrouwbaar. Zoals Jacob zelf.
+Theo raakte de stof aan. Die voelde stevig aan, betrouwbaar. Zoals Jacob zelf.
 ```
 
 ## Thematische Elementen
 
 ### Symboliek
-- Dovende sterren op Lisa's jurk
+- Dovende sterren op Lily's jurk
 - Het zilveren kettinkje als teken van bezit
 - De blauwe mantel als symbool van waarheid en standvastigheid
 - Blackwood's perfecte handschoenen en wandelstok
@@ -97,10 +99,10 @@ Thomas raakte de stof aan. Die voelde stevig aan, betrouwbaar. Zoals Jacob zelf.
 ## Transitie naar Nachtster
 
 De ontdekking van Nina's lot vormt de katalysator voor:
-- Lisa's vlucht naar de sterrenwacht
+- Lily's vlucht naar de sterrenwacht
 - Jacob's vertrek uit de raad
 - De vorming van een ondergronds verzetsnetwerk
-- Thomas en Lisa's reis naar Ella
+- Theo en Lily's reis naar Ella
 
 De reis naar Ella wordt nu noodzakelijk omdat:
 - Normale kanalen (de raad) zijn geblokkeerd

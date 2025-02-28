@@ -1,4 +1,4 @@
-# Lisa's Ontwikkeling in Lolaland
+# Lily's Ontwikkeling in Lolaland
 
 ## Fase 1: Het Verlegen Meisje
 ### Uitgangssituatie
@@ -20,7 +20,7 @@
 - Ontdekking van eigen schoonheid
 - Verwondering over magische wereld
 
-### Thomas' Invloed
+### Theo' Invloed
 - Zijn bescherming biedt veilige basis
 - Ruimte voor exploratie
 - Eerste lessen over onderscheidingsvermogen
@@ -31,7 +31,7 @@
 - Subtiele manipulatie begint
 - Verlangen naar acceptatie wordt uitgebuit
 - Verwarring over zorg versus controle
-- Thomas raakt meer op achtergrond
+- Theo raakt meer op achtergrond
 
 ### Innerlijke Strijd
 - Twijfel aan eigen oordeelsvermogen
@@ -53,7 +53,7 @@
 ## Fase 5: Bewustwording
 ### Groeiend Inzicht
 - Herkenning van manipulatiepatronen
-- Begrip van Thomas' eerdere waarschuwingen
+- Begrip van Theo' eerdere waarschuwingen
 - Onderscheid tussen oprechte en valse zorg
 
 ### Innerlijke Groei
@@ -62,7 +62,7 @@
 - Begin van echte volwassenheid
 
 ## Fase 6: Verlossing
-### Thomas' Offer
+### Theo' Offer
 - Confrontatie met onbaatzuchtige liefde
 - Contrast met eerdere manipulaties
 - Herstel van vertrouwen

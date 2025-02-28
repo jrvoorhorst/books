@@ -1,9 +1,11 @@
 # De naamgeving van Arafel: Van Schaduwkoningin naar Heerseres van de Nevelbergen
 
 
+
+
 ## Aanleiding voor naamsverandering
 De oorspronkelijke benaming "Schaduwkoningin" bleek inconsistent met de naamgeving van andere karakters in Lolaland. Met name:
-- Andere hoofdpersonages hebben persoonlijke namen (Lisa, Thomas, Ella)
+- Andere hoofdpersonages hebben persoonlijke namen (Lily, Theo, Ella)
 - De titel "koningin" past niet in de hiërarchie waar Ella geen koningin is
 - De naam miste de subtiliteit die het karakter vereist
 

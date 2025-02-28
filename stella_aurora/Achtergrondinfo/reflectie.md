@@ -1,16 +1,18 @@
 # Reflectie op Lolaland: Thema's, Motivaties en Aanpak
 
 
+
+
 ## Kernthema's en Karakters
 
-### Lisa als Hoofdpersonage
+### Lily als Hoofdpersonage
 - In ontwikkeling, nog relatief oppervlakkig
 - Gebaseerd op praktijkervaring met kinderen
 - Focus op kwetsbaarheid én innerlijke kracht
 - Worsteling met communicatie onder druk
 
-### Thomas als Medereiziger
-- Leeftijdsgenoot van Lisa
+### Theo als Medereiziger
+- Leeftijdsgenoot van Lily
 - Christus-typologie in verlossingsthema
 - Vermogen tot constructieve communicatie
 - Rol in schuld overnemen/verlossing
