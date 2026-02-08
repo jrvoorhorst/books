@@ -1666,6 +1666,148 @@ interface Inconsistentie {
 | Relatie | D1: relaties | Avara helpt Lily → maar relatie is "manipulatief" |
 | Tijdlijn | D1: tijdlijn | Scène na Theo's offer maar Theo is nog aanwezig |
 
+### Stijlconsistentie voor locaties en situaties
+
+Niet alleen personages hebben een "stem" - locaties en terugkerende situaties ook. Als de Sterrenwacht in hoofdstuk 2 rustig en warm aanvoelt, moet dat bij elk volgend bezoek hetzelfde zijn — tenzij er in het verhaal iets is veranderd.
+
+```typescript
+interface LocatieStijlProfiel {
+  locatie: string;
+  goedgekeurdePassages: string[];     // R2 keys naar goedgekeurde beschrijvingen
+  kenmerkendeToon: string;            // Samenvatting van de "stem"
+  zintuiglijkPalet: {
+    visueel: string[];                // "warm kaarslicht", "sterrenkaarten"
+    geluid: string[];                 // "stilte", "zacht tikken van instrumenten"
+    geur: string[];                   // "oud hout", "sterrenstof"
+    gevoel: string[];                 // "veilig", "wijs", "tijdloos"
+  };
+  woordkeuzes: {
+    welGebruikt: string[];            // Woorden die passen bij deze locatie
+    nietGebruiken: string[];          // Woorden die hier niet thuishoren
+  };
+}
+```
+
+```
+── VOORBEELD: Sterrenwacht ───────────────────────────
+
+In hoofdstuk 2 (goedgekeurd) schreef je:
+
+  "De trap kraakte onder Lily's voeten, maar het was
+   een vriendelijk kraken, alsof het gebouw haar
+   begroette. Boven rook het naar oud hout en iets
+   dat ze niet kende — later zou ze leren dat het
+   sterrenstof was."
+
+Dit wordt het stijlprofiel voor de Sterrenwacht:
+  toon:     warm, verwelkomend, wijs
+  zintuig:  krakend hout, oud hout + sterrenstof, zacht licht
+  gevoel:   veilig, alsof het gebouw leeft
+
+── LATER: Lily bezoekt de Sterrenwacht opnieuw ───────
+
+JIJ SCHRIJFT:
+  "Lily betrad het koude, stille gebouw."
+
+BEGELEIDER:
+  ⚠ LOCATIE-STIJL: De Sterrenwacht is in eerdere
+    (goedgekeurde) beschrijvingen warm en verwelkomend.
+    "Koud" en "stil" passen niet — tenzij er iets is
+    veranderd in het verhaal.
+
+    Is de Sterrenwacht veranderd? (Bijv: Jacob is weg,
+    sterren zijn gedimd in Deel 2)
+    → [Ja, de sfeer is veranderd]
+    → [Nee, ik pas mijn tekst aan]
+
+    Als de sfeer hetzelfde is, suggestie:
+    "De trap kraakte weer onder haar voeten. Dezelfde
+     geur van oud hout. Maar dit keer voelde Lily
+     iets anders — alsof het gebouw wist dat ze
+     terugkwam met een geheim."
+```
+
+Dit geldt ook voor **terugkerende situaties**:
+
+```
+── VOORBEELD: Lily kijkt in een spiegel ──────────────
+
+Spiegelscènes zijn een terugkerend motief. De eerste
+keer (goedgekeurd, H1) was het:
+  "Ze schrok van het meisje in de ruit. Het was haar
+   gezicht, maar dan ouder. Anders."
+
+Bij elke volgende spiegelscène checkt het systeem:
+- Hetzelfde gevoel van vervreemding? Of is dat gegroeid?
+- Dezelfde soort beschrijving? (concreet, 13-jarig)
+- Past de ontwikkeling? (in Deel 2 zou ze misschien
+  minder schrikken en meer herkennen)
+
+── VOORBEELD: Avara biedt iets aan ──────────────────
+
+Avara's manipulatie volgt een patroon. Als je in H3
+schreef (goedgekeurd):
+  "Avara's glimlach was warm, maar haar ogen bewogen
+   niet mee. Lily merkte het niet."
+
+Dan moet dat patroon terugkomen. Maar in Deel 2 zou
+Lily het WEL kunnen merken:
+  "Avara glimlachte. Die glimlach kende Lily nu —
+   de mond zei ja, maar de ogen zeiden iets anders."
+
+Het systeem detecteert het terugkerende patroon en
+checkt: past de ontwikkeling bij waar Lily nu is?
+```
+
+```typescript
+// Bij het schrijven checkt de Verteller:
+async function checkLocatieStijl(
+  locatie: string,
+  nieuweTekst: string
+): Promise<StijlFeedback[]> {
+  // 1. Zoek alle goedgekeurde beschrijvingen van deze locatie
+  const eerdereBeschrijvingen = await vectorize.query(
+    await embed(nieuweTekst),
+    {
+      topK: 5,
+      filter: {
+        type: "locatie_beschrijving",
+        locatie: locatie,
+        status: "goedgekeurd"
+      }
+    }
+  );
+
+  // 2. Zoek het locatie-stijlprofiel
+  const stijlProfiel = await r2.get(
+    `locaties/${locatie}/stijlprofiel.json`
+  );
+
+  // 3. Check of de locatie-conditie is veranderd
+  const huidigeConditie = await d1.prepare(
+    `SELECT conditie FROM locaties WHERE naam = ?`
+  ).bind(locatie).first();
+
+  const eerderConditie = eerdereBeschrijvingen[0]?.metadata?.conditie;
+
+  // 4. Als conditie gelijk → stijl moet consistent zijn
+  // Als conditie veranderd → afwijking mag, maar moet
+  //    passen bij de verandering
+  if (huidigeConditie === eerderConditie) {
+    return vergelijkStijl(nieuweTekst, stijlProfiel, "consistent");
+  } else {
+    return vergelijkStijl(nieuweTekst, stijlProfiel, "ontwikkeling",
+      { van: eerderConditie, naar: huidigeConditie });
+  }
+}
+```
+
+Het systeem bouwt automatisch stijlprofielen op:
+- Eerste beschrijving van een locatie → wordt het **basisprofiel**
+- Bij goedkeuring → profiel wordt verrijkt met concrete voorbeelden
+- Bij volgende bezoeken → vergelijk met profiel
+- Bij verhaalverandering (conditie daalt) → sta afwijking toe maar check of het past
+
 ### Bestaande tekst importeren
 
 De al geschreven hoofdstukken en fragmenten worden geïmporteerd met status:
