@@ -21,7 +21,7 @@ De kern van het idee: **bovennatuurlijke gaven worden permissiemodellen** voor i
 ┌─────────────────────────────────────────────────────┐
 │              VERTELLER DO (Orchestrator)             │
 │  - Beheert scène-context en voortgang               │
-│  - Coördineert personage-interacties                │
+│  - Coördineert personage- EN locatie-interacties    │
 │  - Bewaakt narratieve consistentie                  │
 │  - Genereert verhaaltekst samen met auteur          │
 │  - Bepaalt welke personages "in scène" zijn         │
@@ -35,15 +35,33 @@ De kern van het idee: **bovennatuurlijke gaven worden permissiemodellen** voor i
 │ Locatie  ││ Locatie  ││ Locatie  ││ Locatie  │
 │ Doelen   ││ Doelen   ││ Doelen   ││ Doelen   │
 │ Gaven    ││ Gaven    ││ Gaven    ││ Gaven    │
+└─────┬────┘└────┬─────┘└────┬─────┘└────┬─────┘
+      │          │           │           │
+      ▼          ▼           ▼           ▼
+      ┌──────────────────────────────────┐
+      │    ◄── betreden / verlaten ──►   │
+      └──────────────────────────────────┘
+       │          │          │          │
+       ▼          ▼          ▼          ▼
+┌──────────┐┌──────────┐┌──────────┐┌──────────┐
+│Lichttuin ││Nevelberg.││Spiegelzl.││Labyrint  │  ...
+│  DO      ││  DO      ││  DO      ││  DO      │
+│          ││          ││          ││          │
+│ Conditie ││ Conditie ││ Conditie ││ Conditie │
+│ Sfeer    ││ Sfeer    ││ Sfeer    ││ Sfeer    │
+│ Effecten ││ Effecten ││ Effecten ││ Effecten │
+│ Beheerder││ Beheerder││ Beheerder││ Eigen wil│
 └──────────┘└──────────┘└──────────┘└──────────┘
        │          │          │          │
        ▼          ▼          ▼          ▼
 ┌─────────────────────────────────────────────────────┐
 │                   VECTORIZE                          │
 │  Herinneringen per personage (semantisch zoekbaar)  │
+│  Locatie-geschiedenis (wat is hier eerder gebeurd?) │
 │  - Ervaringen & gebeurtenissen                      │
 │  - Relatie-geschiedenis                             │
 │  - Emotionele indrukken                             │
+│  - Locatie-specifieke gebeurtenissen                │
 └─────────────────────────────────────────────────────┘
        │
        ▼
@@ -51,6 +69,7 @@ De kern van het idee: **bovennatuurlijke gaven worden permissiemodellen** voor i
 │                   D1 / R2                            │
 │  D1: Gestructureerde data                           │
 │  - Tijdlijn, locaties, relatie-status               │
+│  - Locatie-conditie per verhaalmoment               │
 │  - Scene-metadata, hoofdstukindeling                │
 │  R2: Opslag                                         │
 │  - Geschreven hoofdstukken                          │
@@ -209,6 +228,251 @@ Wanneer een personage moet reageren in een scène:
 2. Het personage-DO zoekt in Vectorize naar relevante herinneringen
 3. Deze herinneringen kleuren de reactie (een personage met pijnlijke herinneringen aan een plek reageert anders)
 4. Nieuwe ervaringen worden als herinneringen opgeslagen
+
+---
+
+## Locatie Durable Objects
+
+Locaties zijn niet alleen decor - ze zijn **levende entiteiten** met eigen staat, gedrag en invloed. Elke belangrijke locatie krijgt een eigen DO.
+
+### Locatie Configuratie
+
+```typescript
+interface LocatieConfig {
+  naam: string;
+  type: "neutraal" | "beschermend" | "manipulatief" | "heilig" | "corrupt";
+  beheerder?: string;              // Welk personage-DO heeft invloed?
+  eigenWil: boolean;               // Heeft de locatie eigen agency?
+  sfeerBasis: string;              // Standaard atmosfeer
+  zintuigen: string[];             // Wat kan de locatie waarnemen?
+}
+
+interface LocatieState {
+  seizoen: string;
+  conditie: number;                // 0 (vervallen) tot 1 (bloeiend)
+  sfeer: Sfeer;                    // Huidige atmosfeer
+  aanwezigen: string[];            // Welke personage-DOs zijn hier?
+  actieveEffecten: Effect[];       // Lopende magische effecten
+  verborgenElementen: string[];    // Wat is er te ontdekken?
+  geschiedenisLaag: number;        // Hoe veel geschiedenis is "zichtbaar"?
+}
+
+interface Sfeer {
+  licht: "stralend" | "zacht" | "schemerig" | "duister";
+  geluid: string;                  // Wat hoor je?
+  geur: string;                    // Wat ruik je?
+  temperatuur: "warm" | "aangenaam" | "koel" | "koud";
+  magischeIntensiteit: number;     // 0-1
+}
+
+interface Effect {
+  type: "bescherming" | "verleiding" | "verwarring" | "openbaring" | "onderdrukking";
+  sterkte: number;
+  doelwit?: string;                // Specifiek personage of "iedereen"
+  bron: string;                    // Waar komt het effect vandaan?
+}
+```
+
+### Locatie-DOs voor Stella Aurora
+
+#### De Lichttuin
+
+```typescript
+const lichttuin: LocatieConfig = {
+  naam: "De Lichttuin",
+  type: "manipulatief",
+  beheerder: "Avara",
+  eigenWil: false,                 // Reageert op Avara's wil
+  sfeerBasis: "Overweldigend mooi, bijna te perfect",
+  zintuigen: ["aanwezigheid", "emotionele_staat"]
+};
+```
+
+**Dynamisch gedrag:**
+- **Bloemen bloeien** als Avara een doelwit manipuleert - de tuin *helpt* haar
+- **Kleuren vervagen** als een bezoeker wantrouwen voelt
+- **Geuren worden intenser** naarmate iemand dieper de tuin ingaat
+- **Paden verschuiven subtiel** - je kunt altijd dieper in, maar de weg terug is langer
+- De tuin heeft een `conditie` die daalt als Avara's macht afneemt
+
+```
+LICHTTUIN DO ontvangt: Lily betreedt de tuin
+→ Check Lily's emotionele staat (via Verteller)
+→ Lily voelt verwondering → bloemen openen zich, kleuren worden feller
+→ Lily voelt twijfel → paden worden smaller, schaduwen langer
+→ Avara DO ontvangt: "tuin signaleert twijfel bij bezoeker"
+→ Avara past strategie aan
+```
+
+#### De Nevelbergen
+
+```typescript
+const nevelbergen: LocatieConfig = {
+  naam: "De Nevelbergen",
+  type: "corrupt",
+  beheerder: "Arafel",
+  eigenWil: true,                  // De nevel heeft EIGEN intentie
+  sfeerBasis: "Beklemmend, desoriënterend, verleidelijk fluisterend",
+  zintuigen: ["aanwezigheid", "emotionele_staat", "herinneringen", "angsten"]
+};
+```
+
+**Dynamisch gedrag:**
+- **Nevel wordt dichter** naarmate reiziger dieper gaat - niet lineair maar in golven
+- **Nevel fluistert** - trekt herinneringen uit personage-DOs en vervormt ze
+- **Beschermende mantels verzwakken** - locatie-DO stuurt `onderdrukking`-effect naar personage-DOs
+- **Paden veranderen** - de bergen hebben eigen agency, los van Arafel
+- **Arafel's macht versterkt** - haar gave-permissies upgraden binnen dit domein
+
+```
+NEVELBERGEN DO ontvangt: Lily en Theo betreden de bergen
+→ Query naar beide personage-DOs: angsten? herinneringen?
+→ Lily's angst: "alleen gelaten worden" → nevel fluistert: "Theo gaat je verlaten"
+→ Theo's angst: "niet sterk genoeg zijn" → nevel fluistert: "je kunt haar niet redden"
+→ Nevel scheidt hen geleidelijk (eigen agency)
+→ Arafel DO ontvangt: "twee reizigers in domein, worden gescheiden"
+→ Arafel's gaven upgraden: NEVELZICHT nu volledig actief
+```
+
+#### Het Labyrint van Ora
+
+```typescript
+const labyrintVanOra: LocatieConfig = {
+  naam: "Het Labyrint van Ora",
+  type: "neutraal",               // Niet goed, niet kwaad
+  beheerder: undefined,            // Niemand beheerst het Labyrint
+  eigenWil: true,                  // Sterkste eigen wil van alle locaties
+  sfeerBasis: "Oud, onpeilbaar, eigen logica",
+  zintuigen: ["aanwezigheid", "bestemming", "waardigheid"]
+};
+```
+
+**Dynamisch gedrag:**
+- **Immuun voor Arafel** - het Labyrint luistert niet naar haar bevelen
+- **Kiest eigen paden** voor elke reiziger op basis van hun bestemming
+- **Scheidt Lily en Theo** - niet uit kwaadaardigheid maar uit noodzaak
+- **Twee paden**: "Het Pad der Doden" (Theo) en "De Oude Reisweg" (Lily)
+- **Kompassen werken niet** - het Labyrint overschrijft alle navigatie
+
+```
+LABYRINT DO ontvangt: Lily en Theo betreden het labyrint
+→ Labyrint heeft EIGEN logica (geen beheerder)
+→ Query: wat is de bestemming van elk personage?
+  → Lily: moet naar Arafel's toren (haar keuze, haar pad)
+  → Theo: moet naar het Schemerland (zijn offer, zijn pad)
+→ Paden splitsen - niet te stoppen, niet te manipuleren
+→ Arafel DO probeert invloed: GEWEIGERD (labyrint is immuun)
+→ Ella DO observeert: kent de uitkomst maar grijpt niet in
+```
+
+#### De Spiegelzaal
+
+```typescript
+const spiegelzaal: LocatieConfig = {
+  naam: "De Spiegelzaal",
+  type: "heilig",
+  beheerder: "Ella",
+  eigenWil: false,                 // Reflecteert Ella's wil
+  sfeerBasis: "Ontzagwekkend, eerlijk, troostend en confronterend tegelijk",
+  zintuigen: ["alles"]             // De spiegels zien alles
+};
+```
+
+**Dynamisch gedrag:**
+- **Spiegels tonen waarheid** - ongeacht wat een personage probeert te verbergen
+- **Licht concentreert** zich op belangrijke momenten
+- **Sterren aan het plafond** dimmen of flikkeren bij emotionele intensiteit
+- **Echo's versterken** woorden met gewicht en betekenis
+- **Wordt kwetsbaar** als Ella ziek wordt - spiegels worden troebel
+
+```
+SPIEGELZAAL DO ontvangt: Lily betreedt de zaal voor haar oordeel
+→ Query naar Lily DO: ALLE state (geheimen, schuld, herinneringen)
+→ Spiegels tonen: elke leugen, elke verkeerde keuze, maar ook...
+→ Spiegels tonen ook: elk moment van moed, elk sprankje hoop
+→ Ella DO ontvangt: volledige context voor genade-moment
+→ Licht in de zaal verandert: van confronterend naar warm
+```
+
+#### De Sterrenwacht
+
+```typescript
+const sterrenwacht: LocatieConfig = {
+  naam: "De Sterrenwacht",
+  type: "beschermend",
+  beheerder: "Jacob",
+  eigenWil: false,
+  sfeerBasis: "Rustig, wijs, verbinding tussen aarde en hemel",
+  zintuigen: ["sterrenpatronen", "profetische_signalen"]
+};
+```
+
+**Dynamisch gedrag:**
+- **Sterrenkaarten updaten** zich op basis van verhaalgebeurtenissen
+- **Kompassen met sterrenlicht-kern** worden hier gemaakt
+- **Waarschuwingssignalen** als er gevaar dreigt voor bekende personages
+- **Beschermende aura** - manipulatieve effecten van andere locaties werken hier niet
+
+### Locatie-Personage Interactie
+
+Locaties beïnvloeden personages die er binnenkomen, en personages beïnvloeden locaties:
+
+```typescript
+// Wanneer een personage een locatie betreedt
+async function betreedt(personageDO: PersonageDO, locatieDO: LocatieDO) {
+  // 1. Locatie registreert aanwezigheid
+  locatieDO.state.aanwezigen.push(personageDO.naam);
+
+  // 2. Locatie past sfeer aan op basis van personage
+  const emotie = await personageDO.getEmotioneleStaat();
+  const nieuweSfeer = locatieDO.berekenSfeer(emotie);
+  locatieDO.state.sfeer = nieuweSfeer;
+
+  // 3. Locatie stuurt effecten naar personage
+  for (const effect of locatieDO.state.actieveEffecten) {
+    if (effect.doelwit === "iedereen" || effect.doelwit === personageDO.naam) {
+      await personageDO.ontvangEffect(effect);
+    }
+  }
+
+  // 4. Beheerder wordt geïnformeerd (als die er is)
+  if (locatieDO.config.beheerder) {
+    const beheerder = getBeheerderDO(locatieDO.config.beheerder);
+    await beheerder.onBezoeker(personageDO.naam, emotie);
+  }
+
+  // 5. Verteller ontvangt locatiebeschrijving voor de scène
+  return {
+    beschrijving: locatieDO.genereerBeschrijving(personageDO),
+    effecten: locatieDO.state.actieveEffecten,
+    sfeer: nieuweSfeer
+  };
+}
+```
+
+### Locatie-Evolutie door het Verhaal
+
+Locaties veranderen mee met het verhaal:
+
+```
+DEEL 1 (Stella Crepuscula):
+  Lichttuin:    conditie 0.9 → bloeiend, verleidelijk
+  Nevelbergen:  conditie 0.7 → dreigend maar nog op afstand
+  Spiegelzaal:  conditie 1.0 → op volle kracht
+  Sterrenwacht: conditie 0.8 → actief, waarschuwend
+
+DEEL 2 (Stella Noctis):
+  Lichttuin:    conditie 0.4 → verwelkend, Avara verliest grip
+  Nevelbergen:  conditie 0.9 → op volle macht, Arafel triomfeert
+  Spiegelzaal:  conditie 0.5 → spiegels worden troebel (Ella ziek)
+  Sterrenwacht: conditie 0.6 → sterren dimmen, Jacob bezorgd
+
+DEEL 3 (Stella Aurora):
+  Lichttuin:    conditie 0.1 → bijna dood, maar één bloem bloeit nog
+  Nevelbergen:  conditie 0.3 → nevel trekt op na Arafel's val
+  Spiegelzaal:  conditie 1.0 → hersteld, helderder dan ooit
+  Sterrenwacht: conditie 0.9 → sterren stralen, nieuwe sterrenbeelden
+```
 
 ---
 
@@ -383,7 +647,7 @@ const lilyGavenPerDeel = {
 
 | Service | Gebruik |
 |---------|---------|
-| **Durable Objects** | Personage-agents + Verteller |
+| **Durable Objects** | Personage-agents + Locatie-agents + Verteller |
 | **Vectorize** | Herinneringen (semantisch zoekbaar) |
 | **Workers AI** | LLM-aanroepen voor personage-responses |
 | **D1** | Tijdlijn, relaties, locaties, metadata |
@@ -396,15 +660,21 @@ const lilyGavenPerDeel = {
 Auteur schrijft instructie
     → Workers API
     → Verteller DO
+    → Verteller activeert locatie-DO (sfeer, effecten, conditie)
     → Verteller vraagt relevante personage-DOs
+    → Personage-DOs "betreden" locatie-DO → ontvangen effecten
+    → Locatie-DO reageert op personage-emoties (bloemen bloeien, nevel dikt in)
     → Personage-DOs raadplegen Vectorize (herinneringen)
     → Personage-DOs raadplegen elkaar (via gaven/permissies)
+    → Locatie-DO informeert beheerder-DO (Avara weet dat Lily twijfelt)
     → Personage-DOs geven response aan Verteller
+    → Locatie-DO geeft sfeer-beschrijving aan Verteller
     → Verteller combineert tot verhaaltekst
     → Workers AI genereert proza
     → Auteur ontvangt tekst + kan feedback geven
     → Nieuwe herinneringen worden opgeslagen in Vectorize
-    → State-updates in D1
+    → Locatie-geschiedenis wordt opgeslagen in Vectorize
+    → State-updates in D1 (incl. locatie-conditie)
     → Definitieve tekst naar R2
 ```
 
@@ -433,8 +703,10 @@ Het permissiemodel maakt het mogelijk dat meerdere auteurs aan het verhaal werke
 
 ## Volgende Stappen
 
-1. **Proof of Concept**: Begin met 2 personages (Lily + Avara) en de Verteller
+1. **Proof of Concept**: Begin met 2 personages (Lily + Avara), 1 locatie (Lichttuin) en de Verteller
 2. **Herinnering-systeem**: Seed Vectorize met bestaande verhaalfragmenten
-3. **Eerste scène**: Laat het systeem de Lichttuin-scène genereren
-4. **Iteratie**: Voeg personages toe, verfijn gave-permissies
-5. **Integratie**: Koppel aan bestaande hoofdstukken in `deel_1/`
+3. **Eerste scène**: Laat het systeem de Lichttuin-scène genereren - de tuin reageert op Lily's emoties
+4. **Locatie-interactie**: Test hoe de Lichttuin Avara informeert over Lily's twijfels
+5. **Uitbreiding**: Voeg Nevelbergen + Arafel toe, test domein-gebonden gaven
+6. **Labyrint**: Implementeer het Labyrint van Ora als locatie met eigen wil
+7. **Integratie**: Koppel aan bestaande hoofdstukken in `deel_1/`
