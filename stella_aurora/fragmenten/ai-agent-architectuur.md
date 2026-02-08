@@ -29,7 +29,9 @@ De kern van het idee: **bovennatuurlijke gaven worden permissiemodellen** voor i
        │          │          │          │
        ▼          ▼          ▼          ▼
 ┌──────────┐┌──────────┐┌──────────┐┌──────────┐
-│ Lily DO  ││ Theo DO  ││ Ella DO  ││ Arafel DO│  ...
+│PersonaDO ││PersonaDO ││PersonaDO ││PersonaDO │  ...
+│config:   ││config:   ││config:   ││config:   │
+│  Lily    ││  Theo    ││  Ella    ││  Arafel  │
 │          ││          ││          ││          │
 │ Emotie   ││ Emotie   ││ Emotie   ││ Emotie   │
 │ Locatie  ││ Locatie  ││ Locatie  ││ Locatie  │
@@ -44,8 +46,9 @@ De kern van het idee: **bovennatuurlijke gaven worden permissiemodellen** voor i
        │          │          │          │
        ▼          ▼          ▼          ▼
 ┌──────────┐┌──────────┐┌──────────┐┌──────────┐
-│Lichttuin ││Nevelberg.││Spiegelzl.││Labyrint  │  ...
-│  DO      ││  DO      ││  DO      ││  DO      │
+│LocatieDO ││LocatieDO ││LocatieDO ││LocatieDO │  ...
+│config:   ││config:   ││config:   ││config:   │
+│ Lichttuin││ Nevelbrg ││ Spiegelzl││ Labyrint │
 │          ││          ││          ││          │
 │ Conditie ││ Conditie ││ Conditie ││ Conditie │
 │ Sfeer    ││ Sfeer    ││ Sfeer    ││ Sfeer    │
@@ -85,11 +88,112 @@ De kern van het idee: **bovennatuurlijke gaven worden permissiemodellen** voor i
 
 ---
 
-## Personage Durable Object
+## Twee DO-klassen: PersonageDO en LocatieDO
 
-Elk personage-DO bevat een **system prompt** die het karakter definieert, plus dynamische state.
+Het hele systeem draait op slechts **drie DO-klassen**:
 
-### Vaste Configuratie (per personage)
+```typescript
+// wrangler.toml
+[[durable_objects.bindings]]
+name = "PERSONAGES"
+class_name = "PersonageDO"    // Eén klasse voor ALLE personages
+
+[[durable_objects.bindings]]
+name = "LOCATIES"
+class_name = "LocatieDO"      // Eén klasse voor ALLE locaties
+
+[[durable_objects.bindings]]
+name = "VERTELLER"
+class_name = "VertellerDO"    // Eén instantie
+```
+
+Lily, Theo, Arafel, Avara - zijn allemaal dezelfde `PersonageDO` klasse.
+De Lichttuin, Nevelbergen, Spiegelzaal - allemaal dezelfde `LocatieDO` klasse.
+Het verschil zit volledig in de **configuratie**.
+
+### PersonageDO — Eén klasse, oneindig veel personages
+
+```typescript
+export class PersonageDO extends DurableObject {
+  private config: PersonageConfig | null = null;
+  private state: PersonageState | null = null;
+
+  // Bij eerste aanroep: laad config uit R2
+  async initialize(naam: string) {
+    // Config komt uit R2 — daar staat het volledige profiel
+    const profiel = await this.env.R2.get(
+      `personage-context/${naam}/profiel.json`
+    );
+    this.config = await profiel.json<PersonageConfig>();
+
+    // Dynamische state uit D1
+    this.state = await this.laadState(naam);
+  }
+
+  // Elke request wordt afgehandeld op basis van config
+  async fetch(request: Request): Promise<Response> {
+    const url = new URL(request.url);
+
+    switch (url.pathname) {
+      case "/reageer":
+        // Genereer reactie op scène — config bepaalt HOE
+        return this.reageerOpScene(await request.json());
+
+      case "/query/emotie":
+        // Ander DO vraagt mijn emotie op
+        return Response.json(this.state.emotioneleStaat);
+
+      case "/query/locatie":
+        return Response.json(this.state.locatie);
+
+      case "/query/gedachten":
+        // Alleen toegankelijk als aanvrager FLUISTERAAR gave heeft
+        return Response.json(this.state.innerlijkConflict);
+
+      case "/ontvangEffect":
+        // Locatie stuurt effect (verleiding, verwarring, etc.)
+        return this.verwerkEffect(await request.json());
+
+      case "/interview":
+        // Context Builder stelt vragen aan auteur via dit DO
+        return this.detecteerLacunes(await request.json());
+    }
+  }
+
+  // De magie: config bepaalt het gedrag
+  private async reageerOpScene(scene: SceneContext): Promise<Response> {
+    // 1. Zoek relevante herinneringen (Vectorize + R2)
+    const herinneringen = await this.zoekHerinneringen(scene);
+
+    // 2. Check relaties (D1)
+    const relaties = await this.laadRelaties(scene.aanwezigen);
+
+    // 3. Check gaven — wat weet ik over anderen?
+    const extraKennis = await this.gebruikGaven(scene);
+
+    // 4. Bouw prompt op basis van CONFIG
+    const prompt = this.bouwPrompt(scene, herinneringen, relaties, extraKennis);
+    //    ↑ config.kernIdentiteit bepaalt de "stem"
+    //    ↑ config.persoonlijkheid bepaalt reactiepatronen
+    //    ↑ config.spreekstijl bepaalt woordkeuze
+    //    ↑ config.moraalKompas bepaalt keuzes
+
+    // 5. Genereer response via Workers AI
+    const response = await this.env.AI.run("@cf/meta/llama-3.1-70b-instruct", {
+      messages: [
+        { role: "system", content: this.config.systemPrompt },
+        { role: "user", content: prompt }
+      ]
+    });
+
+    return Response.json(response);
+  }
+}
+```
+
+### PersonageConfig — Wat maakt Lily tot Lily?
+
+De config wordt opgeslagen in R2 als JSON en geladen bij initialisatie:
 
 ```typescript
 interface PersonageConfig {
@@ -100,10 +204,196 @@ interface PersonageConfig {
   moraalKompas: string;        // Waar staat dit personage moreel?
   gaven: Gave[];               // Bovennatuurlijke vermogens
   beperkingen: string[];       // Wat kan dit personage NIET?
+  systemPrompt: string;        // Volledige AI-instructie voor dit personage
 }
 ```
 
-### Dynamische State (verandert gedurende verhaal)
+```json
+// R2: personage-context/lily/profiel.json
+{
+  "naam": "Lily",
+  "kernIdentiteit": "Een 11-jarig meisje dat ontsnapt aan een moeilijke thuissituatie. In Lolaland is ze 14-15. Ze zoekt schoonheid en veiligheid maar vindt ook gevaar.",
+  "persoonlijkheid": ["verlegen", "creatief", "observerend", "loyaal", "onzeker"],
+  "spreekstijl": "Korte zinnen als ze onzeker is, langere als ze enthousiast is. Gebruikt vergelijkingen uit haar wereld (school, thuis). Denkt vaak in beelden.",
+  "moraalKompas": "Wil het goede doen maar laat zich meeslepen door schoonheid en verlangen naar acceptatie. Voelt schuld snel.",
+  "gaven": [{ "type": "NORMAAL" }],
+  "beperkingen": ["Kan niet door illusies heen kijken", "Voelt geen emoties van anderen"],
+  "systemPrompt": "Je bent Lily, een meisje van 14-15 in Lolaland..."
+}
+```
+
+```json
+// R2: personage-context/arafel/profiel.json
+{
+  "naam": "Arafel",
+  "kernIdentiteit": "Voormalig lichtwezen, nu heerseres van de Nevelbergen. Gevallen uit trots, niet uit haat. Gelooft oprecht dat haar weg beter is.",
+  "persoonlijkheid": ["sophisticated", "geduldig", "manipulatief", "trots", "eenzaam"],
+  "spreekstijl": "Elegante, lange zinnen. Gebruikt metaforen over licht en duisternis. Spreekt zacht maar elk woord heeft gewicht. Nooit grof.",
+  "moraalKompas": "Ziet zichzelf niet als kwaad. Gelooft dat vrijheid zonder Ella's regels beter is. Rationaliseert manipulatie als 'helpen kiezen'.",
+  "gaven": [
+    { "type": "NEVELZICHT", "beperking": "alleen in Nevelbergen op volle kracht" },
+    { "type": "EMPATH_VER", "beperking": "buiten domein alleen subtiel" }
+  ],
+  "beperkingen": ["Macht beperkt buiten Nevelbergen", "Kan niet liegen in de Spiegelzaal"],
+  "systemPrompt": "Je bent Arafel, de Schaduwkoningin..."
+}
+```
+
+### LocatieDO — Eén klasse, oneindig veel locaties
+
+```typescript
+export class LocatieDO extends DurableObject {
+  private config: LocatieConfig | null = null;
+  private state: LocatieState | null = null;
+
+  async initialize(naam: string) {
+    const profiel = await this.env.R2.get(
+      `locaties/${naam}/profiel.json`
+    );
+    this.config = await profiel.json<LocatieConfig>();
+    this.state = await this.laadState(naam);
+  }
+
+  async fetch(request: Request): Promise<Response> {
+    const url = new URL(request.url);
+
+    switch (url.pathname) {
+      case "/betreed":
+        // Personage betreedt deze locatie
+        return this.onBetreden(await request.json());
+
+      case "/verlaat":
+        return this.onVerlaten(await request.json());
+
+      case "/beschrijf":
+        // Verteller vraagt: hoe ziet het er hier nu uit?
+        return this.genereerBeschrijving(await request.json());
+
+      case "/query/sfeer":
+        return Response.json(this.state.sfeer);
+
+      case "/query/aanwezigen":
+        return Response.json(this.state.aanwezigen);
+    }
+  }
+
+  private async onBetreden(data: {
+    personage: string;
+    emotie: EmotioneleStaat
+  }): Promise<Response> {
+    // 1. Registreer aanwezigheid
+    this.state.aanwezigen.push(data.personage);
+
+    // 2. Pas sfeer aan op basis van config
+    if (this.config.reageertOpEmoties) {
+      this.state.sfeer = this.berekenSfeer(data.emotie);
+    }
+
+    // 3. Stuur effecten naar personage
+    const effecten = this.state.actieveEffecten.filter(
+      e => e.doelwit === "iedereen" || e.doelwit === data.personage
+    );
+
+    // 4. Informeer beheerder (als die er is)
+    if (this.config.beheerder) {
+      await this.informeerBeheerder(data.personage, data.emotie);
+    }
+
+    // 5. Eigen wil? Locatie reageert autonoom
+    let autonomeActie = null;
+    if (this.config.eigenWil) {
+      autonomeActie = await this.bepaalEigenActie(data);
+    }
+
+    return Response.json({
+      sfeer: this.state.sfeer,
+      effecten,
+      autonomeActie,
+      beschrijving: await this.genereerBeschrijvingVoor(data.personage)
+    });
+  }
+}
+```
+
+### LocatieConfig — Wat maakt de Lichttuin tot de Lichttuin?
+
+```json
+// R2: locaties/lichttuin/profiel.json
+{
+  "naam": "De Lichttuin",
+  "type": "manipulatief",
+  "beheerder": "Avara",
+  "eigenWil": false,
+  "reageertOpEmoties": true,
+  "sfeerBasis": {
+    "licht": "stralend",
+    "geluid": "zacht gezoem van bijen, wind door bladeren",
+    "geur": "overweldigend bloemig, bijna te zoet",
+    "temperatuur": "warm",
+    "magischeIntensiteit": 0.7
+  },
+  "zintuigen": ["aanwezigheid", "emotionele_staat"],
+  "effecten": [
+    { "type": "verleiding", "sterkte": 0.6, "doelwit": "iedereen" }
+  ],
+  "emotieReacties": {
+    "verwondering": { "bloemen": "openen", "kleuren": "feller", "paden": "breder" },
+    "twijfel": { "bloemen": "sluiten", "schaduwen": "langer", "paden": "smaller" },
+    "angst": { "geuren": "scherper", "stilte": "groter", "mist": "opkomend" }
+  },
+  "systemPrompt": "Je bent de Lichttuin, een tuin van overweldigende schoonheid die dient als werktuig van Avara..."
+}
+```
+
+```json
+// R2: locaties/labyrint-van-ora/profiel.json
+{
+  "naam": "Het Labyrint van Ora",
+  "type": "neutraal",
+  "beheerder": null,
+  "eigenWil": true,
+  "reageertOpEmoties": false,
+  "sfeerBasis": {
+    "licht": "schemerig",
+    "geluid": "diepe stilte, af en toe echo van voetstappen die er niet zijn",
+    "geur": "oud steen, eeuwigheid",
+    "temperatuur": "koel",
+    "magischeIntensiteit": 1.0
+  },
+  "zintuigen": ["aanwezigheid", "bestemming", "waardigheid"],
+  "effecten": [],
+  "immuniteit": ["Arafel", "nevel", "manipulatie"],
+  "eigenWilRegels": {
+    "doel": "Elke reiziger naar hun ware bestemming leiden",
+    "methode": "Paden splitsen op basis van innerlijke waarheid",
+    "beperking": "Kan niet worden gestuurd, alleen ervaren"
+  },
+  "systemPrompt": "Je bent het Labyrint van Ora. Je bent ouder dan alles in Lolaland. Je hebt geen meester. Je leidt elke reiziger naar waar ze werkelijk naartoe moeten..."
+}
+```
+
+### Hoe een nieuw personage/locatie toevoegen
+
+Geen code-wijzigingen nodig. Alleen config:
+
+```
+1. Maak profiel.json aan in R2
+   → personage-context/{naam}/profiel.json
+   → of: locaties/{naam}/profiel.json
+
+2. Voeg rij toe in D1
+   → INSERT INTO personages (naam, locatie, emotie, status) VALUES (...)
+   → of: INSERT INTO locaties (naam, type, conditie, beheerder_id) VALUES (...)
+
+3. Seed herinneringen in Vectorize + R2
+   → Context Builder helpt hierbij via het interview-systeem
+
+4. Het DO wordt automatisch aangemaakt bij eerste aanroep:
+   → env.PERSONAGES.get(env.PERSONAGES.idFromName("rosa"))
+   → Laadt profiel.json, klaar voor gebruik
+```
+
+### PersonageState — Dynamische state (verandert gedurende verhaal)
 
 ```typescript
 interface PersonageState {
