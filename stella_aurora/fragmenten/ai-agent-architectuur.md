@@ -867,6 +867,325 @@ Auteur schrijft instructie
 
 ---
 
+## Context Builder: Het Interview-systeem
+
+De Context Builder is de brug tussen de auteur en het systeem. Het werkt in twee modi: **Onboarding** (nieuw personage/locatie opzetten) en **Doorlopend** (kennislacunes detecteren tijdens het schrijven).
+
+### Modus 1: Onboarding — Een personage tot leven brengen
+
+Wanneer je een nieuw personage aanmaakt, start de Context Builder een gesprek dat steeds dieper graaft. Het begint breed en wordt specifieker op basis van je antwoorden.
+
+```
+┌─────────────────────────────────────────────────────┐
+│              CONTEXT BUILDER                         │
+│                                                     │
+│  AUTEUR ◄──── gesprek ────► AI INTERVIEWER          │
+│                                                     │
+│  Antwoorden worden automatisch verwerkt:            │
+│                                                     │
+│  "ouders maken ruzie"                               │
+│    → D1: relatie Lily↔ouders: "gespannen"           │
+│    → R2: achtergrond/lily/gezin.json (volledig)     │
+│    → Vectorize: "Lily's thuissituatie is onveilig"  │
+│                                                     │
+│  "ze heeft een zusje"                               │
+│    → D1: relatie Lily↔zusje: "beschermend"          │
+│    → D1: nieuw personage "zusje" (stub)             │
+│    → AI: "Hoe heet haar zusje? Hoe oud is ze?"      │
+│                                                     │
+│  "ze heet Rosa, 7 jaar"                             │
+│    → D1: personage Rosa, leeftijd 7                 │
+│    → AI: "Zorgt Lily vaak voor Rosa? Is ze meer     │
+│       moeder of vriendin voor haar?"                │
+│                                                     │
+│  "meer moeder, ze leest haar voor en brengt         │
+│   haar naar bed als mama dat niet doet"             │
+│    → R2: achtergrond/lily/rol_als_zus.json          │
+│    → Vectorize: "Lily neemt moederrol voor Rosa"    │
+│    → D1: relatie Lily↔Rosa: "beschermend/moederlijk"│
+│    → AI detecteert thematische link:                │
+│      "Dit verklaart waarom Lily in Lolaland         │
+│       zowel kind wil zijn als verantwoordelijkheid  │
+│       voelt. Wil je dat dit conflict doorwerkt      │
+│       in hoe ze reageert op Ella's zorg?"           │
+└─────────────────────────────────────────────────────┘
+```
+
+### Interview-strategieën
+
+De AI kiest vragen op basis van wat het systeem nodig heeft:
+
+```typescript
+interface InterviewStrategie {
+  type: "breed" | "verdiepend" | "relatie" | "conflict" | "thematisch";
+  prioriteit: number;
+  context: string;  // Waarom wordt deze vraag gesteld?
+}
+
+// De AI kiest uit verschillende vraagtypes:
+const vraagStrategieen = {
+
+  // BREED — Begin, grote lijnen
+  breed: [
+    "Vertel me over de achtergrond van {personage}.",
+    "Waar komt {personage} vandaan?",
+    "Wat is het eerste dat je denkt bij {personage}?"
+  ],
+
+  // VERDIEPEND — Inzoomen op een antwoord
+  verdiepend: [
+    "Je zei dat {detail}. Kun je daar meer over vertellen?",
+    "Hoe voelt {personage} zich daarbij?",
+    "Wanneer begon dat?"
+  ],
+
+  // RELATIE — Connecties tussen personages
+  relatie: [
+    "Hoe staat {personage_a} tegenover {personage_b}?",
+    "Weet {personage_b} hoe {personage_a} zich voelt?",
+    "Wat zou {personage_a} opofferen voor {personage_b}?"
+  ],
+
+  // CONFLICT — Innerlijke spanning
+  conflict: [
+    "Wat wil {personage} het liefst maar durft niet?",
+    "Waar schaamt {personage} zich voor?",
+    "Wat is de leugen die {personage} zichzelf vertelt?"
+  ],
+
+  // THEMATISCH — Koppeling aan verhaalthema's
+  thematisch: [
+    "Hoe raakt {detail} aan het thema van {thema}?",
+    "Wil je dat dit doorwerkt in {verhaallijn}?",
+    "Ik zie een parallel met {ander_personage}. Is dat bewust?"
+  ]
+};
+```
+
+### Modus 2: Doorlopend — Kennislacunes detecteren
+
+Dit is de kern: **het systeem weet wat het niet weet**. Tijdens het schrijven van een scène detecteert het DO wanneer het onvoldoende context heeft.
+
+```typescript
+interface KennisLacune {
+  personage: string;
+  onderwerp: string;
+  waaromNodig: string;          // Welke scène triggert dit?
+  urgentie: "blokkerend" | "verrijkend" | "optioneel";
+  suggestieVraag: string;       // Voorgestelde vraag aan auteur
+}
+
+// Het personage-DO detecteert lacunes bij het genereren van een response
+async function detecteerLacunes(
+  personage: string,
+  sceneContext: Scene
+): Promise<KennisLacune[]> {
+
+  const lacunes: KennisLacune[] = [];
+
+  // Check: heeft dit personage relevante herinneringen voor deze scène?
+  const relevanteHerinneringen = await zoekHerinneringen(personage, sceneContext);
+
+  if (relevanteHerinneringen.length === 0) {
+    lacunes.push({
+      personage,
+      onderwerp: sceneContext.thema,
+      waaromNodig: `Scène in ${sceneContext.locatie}`,
+      urgentie: "blokkerend",
+      suggestieVraag: `Ik heb nog geen context over hoe ${personage} zich voelt bij ${sceneContext.thema}. Kun je me daar meer over vertellen?`
+    });
+  }
+
+  // Check: zijn er onbekende relaties die in deze scène relevant zijn?
+  for (const anderPersonage of sceneContext.aanwezigen) {
+    const relatie = await d1.prepare(
+      `SELECT * FROM relaties WHERE personage_a = ? AND personage_b = ?`
+    ).bind(personage, anderPersonage).first();
+
+    if (!relatie) {
+      lacunes.push({
+        personage,
+        onderwerp: `relatie met ${anderPersonage}`,
+        waaromNodig: `${personage} en ${anderPersonage} zijn samen in scène`,
+        urgentie: "blokkerend",
+        suggestieVraag: `Hoe kent ${personage} ${anderPersonage}? Wat voelt ${personage} bij ${anderPersonage}?`
+      });
+    }
+  }
+
+  return lacunes;
+}
+```
+
+### Voorbeelden: Doorlopende Context-vragen
+
+```
+── VOORBEELD 1: Ontbrekende familiecontext ──────────
+
+AUTEUR: "Schrijf een scène waarin Lily in Lolaland een klein meisje
+         ziet dat verloren is, en Lily denkt aan haar zusje."
+
+SYSTEEM detecteert:
+  → Lily DO zoekt herinneringen over "zusje"
+  → Vectorize: 0 resultaten
+  → D1: relatie Lily↔zusje: NIET GEVONDEN
+
+CONTEXT BUILDER:
+  "Voor deze scène heb ik nog onvoldoende kennis van Lily
+   als grote zus. Een paar vragen:
+   - Heeft Lily een zusje? Hoe heet ze en hoe oud is ze?
+   - Zorgt Lily voor haar? Op welke manier?
+   - Mist Lily haar zusje in Lolaland, of is het juist een
+     opluchting om even niet verantwoordelijk te zijn?"
+
+AUTEUR: "Ze heet Rosa, 7 jaar. Lily brengt haar naar bed als
+         mama dat niet doet. Ze mist haar heel erg maar voelt
+         zich ook schuldig dat ze soms blij is even weg te zijn."
+
+SYSTEEM verwerkt:
+  → D1: INSERT personage Rosa (7 jaar, Lily's zusje)
+  → D1: INSERT relatie Lily↔Rosa (beschermend/moederlijk)
+  → R2: achtergrond/lily/gezin.json (volledige context)
+  → Vectorize: 3 nieuwe entries
+    - "Lily zorgt voor Rosa als moederfiguur"
+    - "Lily mist Rosa in Lolaland"
+    - "Lily voelt schuld over opluchting weg van thuis"
+
+→ NU kan de scène geschreven worden met echte emotionele diepte.
+
+
+── VOORBEELD 2: Ontbrekende locatiedetails ──────────
+
+AUTEUR: "Lily loopt door de Lichttuin in de herfst."
+
+LICHTTUIN DO detecteert:
+  → Seizoensinformatie: NIET GEVONDEN
+  → Heeft de tuin seizoenen? Of is het altijd zomer?
+
+CONTEXT BUILDER:
+  "De Lichttuin kent in mijn huidige informatie geen seizoenen.
+   Heeft de tuin seizoenen, of is het er altijd hetzelfde?
+   - Als er seizoenen zijn: wat gebeurt er in de herfst?
+     Vallen de blaadjes, of verwelken de bloemen anders?
+   - Of is de tuin altijd in bloei - en is dat juist
+     onderdeel van de onnatuurlijke perfectie?"
+
+AUTEUR: "De tuin is altijd in bloei - maar als Avara's macht
+         afneemt beginnen er voor het eerst blaadjes te vallen.
+         Dat is een teken dat er iets verandert."
+
+SYSTEEM verwerkt:
+  → R2: locaties/lichttuin/seizoenen.json
+  → Vectorize: "Lichttuin kent geen seizoenen, altijd in bloei,
+                bladval = teken van Avara's verzwakking"
+  → D1: UPDATE locaties SET seizoenen = false WHERE naam = 'Lichttuin'
+
+
+── VOORBEELD 3: Thematische verdieping ──────────────
+
+AUTEUR: "Schrijf de scène waarin Theo Lily's schuld overneemt."
+
+THEO DO + VERTELLER detecteren:
+  → Dit is het kernmoment van het hele verhaal
+  → Christus-typologie is vastgelegd maar...
+  → Hoe precies? Wat zegt Theo? Wat voelt hij?
+
+CONTEXT BUILDER:
+  "Dit is het hart van het verlossingsthema. Ik heb de
+   theologische achtergrond, maar voor deze scène heb ik
+   jouw visie nodig op een paar cruciale punten:
+
+   - Weet Theo vooraf wat er gaat gebeuren, of is het
+     een spontane keuze in het moment?
+   - Wat zijn zijn exacte woorden? Of wil je dat ik
+     voorstellen doe?
+   - Voelt Theo angst, of is er vrede?
+   - Ziet Lily wat er gebeurt, of begrijpt ze het pas later?
+   - Hoe fysiek is de schuldovername? Is het zichtbaar,
+     of innerlijk?"
+
+→ De vragen worden steeds dieper en specifieker
+  naarmate het moment belangrijker is.
+```
+
+### Completeness Score
+
+Het systeem houdt per personage/locatie bij hoe "compleet" de context is:
+
+```typescript
+interface CompletenessScore {
+  entiteit: string;
+  scores: {
+    achtergrond: number;       // 0-1: familie, verleden, motivatie
+    relaties: number;          // 0-1: connecties met andere personages
+    innerlijkLeven: number;    // 0-1: angsten, verlangens, conflicten
+    spraak: number;            // 0-1: hoe praat dit personage?
+    thematisch: number;        // 0-1: hoe past dit in de verhaalthema's
+    sensorisch: number;        // 0-1: (voor locaties) hoe voelt/ruikt/klinkt het?
+  };
+  totaal: number;
+  lacunes: string[];           // Concrete ontbrekende onderdelen
+}
+
+// Voorbeeld
+const lilyCompleteness: CompletenessScore = {
+  entiteit: "Lily",
+  scores: {
+    achtergrond: 0.7,          // Gezinssituatie nu bekend, school nog niet
+    relaties: 0.8,             // Theo, Ella, Avara goed, Rosa nieuw
+    innerlijkLeven: 0.6,       // Schuld en verlangen bekend, angsten deels
+    spraak: 0.4,               // Weten we hoe ze praat? Dialect? Stijl?
+    thematisch: 0.9,           // Goed gekoppeld aan verhaanthema's
+    sensorisch: 0.0            // n.v.t. voor personages
+  },
+  totaal: 0.68,
+  lacunes: [
+    "Hoe praat Lily? Gebruikt ze lange zinnen of korte?",
+    "Heeft Lily vriendinnen op school of is ze echt alleen?",
+    "Wat zijn Lily's specifieke angsten? (niet alleen 'alleen zijn')"
+  ]
+};
+```
+
+### UI Concept
+
+```
+┌─────────────────────────────────────────────────────┐
+│  STELLA AURORA — Context Builder                     │
+├─────────────────────────────────────────────────────┤
+│                                                     │
+│  Personages          Locaties         Verhaallijnen │
+│  ├─ Lily     [68%]   ├─ Lichttuin [82%]            │
+│  ├─ Theo     [55%]   ├─ Nevelbergen [71%]          │
+│  ├─ Ella     [73%]   ├─ Spiegelzaal [60%]          │
+│  ├─ Arafel   [61%]   ├─ Labyrint [45%]             │
+│  ├─ Avara    [50%]   └─ Sterrenwacht [38%]         │
+│  ├─ Jacob    [30%]                                  │
+│  └─ Rosa     [15%] ← NIEUW                        │
+│                                                     │
+├─────────────────────────────────────────────────────┤
+│  💬 Interview: Rosa                                 │
+│                                                     │
+│  AI: Je vertelde dat Rosa 7 jaar is en dat Lily     │
+│      voor haar zorgt. Ik wil Rosa beter begrijpen   │
+│      als eigenstandig personage:                    │
+│                                                     │
+│      - Weet Rosa dat de thuissituatie niet normaal  │
+│        is? Of beschermt Lily haar daartegen?        │
+│      - Heeft Rosa een eigen fantasiewereld, of is   │
+│        het juist een nuchter kind?                  │
+│      - Komt Rosa ooit in Lolaland?                  │
+│                                                     │
+│  Jij: Rosa weet het wel maar ze doet alsof ze het   │
+│       niet weet. Ze doet dat voor Lily, zodat Lily  │
+│       niet nog meer zorgen heeft. ze is eigenlijk... │
+│                                                     │
+│  [Verstuur]                                         │
+└─────────────────────────────────────────────────────┘
+```
+
+---
+
 ## Toekomstige Mogelijkheden
 
 ### "Wat als" scenarios
