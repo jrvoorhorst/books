@@ -83,6 +83,7 @@ De kern van het idee: **bovennatuurlijke gaven worden permissiemodellen** voor i
 │  - tijdlijn: gebeurtenissen, volgorde               │
 │  - gave_permissies: type, bereik, actief            │
 │  - locatie_effecten: type, sterkte, doelwit         │
+│  - verhaallijnen: split, merge, parallelle paden    │
 └─────────────────────────────────────────────────────┘
 ```
 
@@ -548,6 +549,10 @@ De drie opslaglagen hebben elk een eigen rol. Ze werken samen als een gelaagd sy
 │                      actief, beperking                  │
 │  locatie_effecten   → locatie_id, effect_type, sterkte, │
 │                      doelwit, actief                    │
+│  verhaallijnen     → naam, status, personages, split,  │
+│                      merge, spanning, tijdstip          │
+│  lijn_scenes       → lijn_id, scene_id, volgorde       │
+│  lijn_splits       → bron_lijn, nieuwe_lijnen, reden   │
 └─────────────────────────────────────────────────────────┘
 ```
 
@@ -1871,6 +1876,328 @@ Bij het importeren:
 │  │  anders was"  │  │               │  │ [Meer...]   │ │
 │  └───────────────┘  └───────────────┘  └─────────────┘ │
 └─────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Verhaallijnen: Splitsen en Samenkomen
+
+Het verhaal is niet één rechte lijn. Wanneer personages uit elkaar gaan, ontstaan **parallelle verhaallijnen** die elk hun eigen tempo, locatie en spanning hebben — en op een later moment weer samenkomen.
+
+### Het kernidee
+
+```
+DEEL 1: Eén lijn
+  Lily + Theo samen → alles op één verhaallijn
+
+         ┌──── Lily's pad (naar Arafel's toren) ────┐
+DEEL 2:  │                                           │
+  Labyrint splitst                              Hereniging?
+         │                                           │
+         └──── Theo's pad (Het Pad der Doden) ───────┘
+
+DEEL 3: Lijnen komen samen → climax
+```
+
+### D1 Schema: Verhaallijnen
+
+```sql
+-- Elke verhaallijn is een zelfstandige draad
+CREATE TABLE verhaallijnen (
+  id TEXT PRIMARY KEY,                -- "lijn_hoofdverhaal"
+  naam TEXT NOT NULL,                 -- "Lily en Theo samen"
+  status TEXT DEFAULT 'actief',       -- actief | gepauzeerd | afgerond | samengevoegd
+  start_hoofdstuk TEXT,               -- "deel_1:hoofdstuk_01"
+  eind_hoofdstuk TEXT,                -- NULL als nog lopend
+  ouder_lijn_id TEXT,                 -- Waar splitste deze lijn vanaf?
+  samenvoeg_lijn_id TEXT,            -- Met welke lijn komt deze samen?
+  samenvoeg_hoofdstuk TEXT,          -- Waar komen ze samen?
+  actieve_personages TEXT,            -- JSON: ["Lily", "Theo"]
+  actieve_locaties TEXT,              -- JSON: ["Lichttuin"]
+  spanning REAL DEFAULT 0.5,          -- 0-1, huidige spanning op deze lijn
+  tijdstip TEXT,                      -- Verhaaltijd (kan per lijn anders lopen)
+  beschrijving TEXT,                  -- Korte samenvatting van deze lijn
+  FOREIGN KEY (ouder_lijn_id) REFERENCES verhaallijnen(id)
+);
+
+-- Koppeltabel: welke scènes horen bij welke lijn?
+CREATE TABLE lijn_scenes (
+  lijn_id TEXT NOT NULL,
+  scene_id TEXT NOT NULL,
+  volgorde INTEGER NOT NULL,
+  PRIMARY KEY (lijn_id, scene_id),
+  FOREIGN KEY (lijn_id) REFERENCES verhaallijnen(id)
+);
+
+-- Splitpunten: waar en waarom splitst een lijn?
+CREATE TABLE lijn_splits (
+  id TEXT PRIMARY KEY,
+  bron_lijn_id TEXT NOT NULL,         -- De originele lijn
+  nieuwe_lijnen TEXT NOT NULL,         -- JSON: ["lijn_lily_toren", "lijn_theo_schemerland"]
+  hoofdstuk TEXT NOT NULL,             -- Waar vindt de split plaats?
+  reden TEXT,                          -- "Het Labyrint scheidt Lily en Theo"
+  type TEXT DEFAULT 'verhaal',         -- verhaal | wat-als | alternatief
+  FOREIGN KEY (bron_lijn_id) REFERENCES verhaallijnen(id)
+);
+```
+
+### TypeScript Interfaces
+
+```typescript
+interface VerhaalLijn {
+  id: string;
+  naam: string;
+  status: "actief" | "gepauzeerd" | "afgerond" | "samengevoegd";
+  personages: string[];               // Wie zit op deze lijn?
+  locaties: string[];                 // Waar speelt deze lijn?
+  spanning: number;                   // 0-1
+  tijdstip: VerhaalTijdstip;         // Kan per lijn anders lopen!
+  ouderLijn?: string;                 // Waar kwam deze vandaan?
+}
+
+interface LijnSplit {
+  bronLijn: string;
+  nieuweLijnen: VerhaalLijn[];
+  hoofdstuk: string;
+  reden: string;
+}
+
+interface LijnSamenvoeging {
+  lijnen: string[];                   // Welke lijnen komen samen?
+  resultaatLijn: string;             // De nieuwe gecombineerde lijn
+  hoofdstuk: string;
+  hoe: string;                        // "Lily en Theo vinden elkaar terug"
+}
+```
+
+### Hoe het werkt: Het Labyrint splitst
+
+```
+── VOOR DE SPLIT ───────────────────────────────────
+
+verhaallijnen:
+┌──────────────────┬──────────┬─────────────────────┐
+│ id               │ status   │ personages           │
+├──────────────────┼──────────┼─────────────────────┤
+│ lijn_hoofd       │ actief   │ ["Lily", "Theo"]     │
+└──────────────────┴──────────┴─────────────────────┘
+
+── HET LABYRINT SPLITST ────────────────────────────
+
+Verteller detecteert: Labyrint van Ora scheidt Lily en Theo.
+Dit is een SPLIT-moment.
+
+→ lijn_hoofd wordt "gepauzeerd"
+→ Twee nieuwe lijnen worden aangemaakt:
+
+verhaallijnen:
+┌──────────────────┬──────────┬─────────────────────┐
+│ id               │ status   │ personages           │
+├──────────────────┼──────────┼─────────────────────┤
+│ lijn_hoofd       │ gepauz.  │ ["Lily", "Theo"]     │
+│ lijn_lily_toren  │ actief   │ ["Lily"]             │
+│ lijn_theo_doden  │ actief   │ ["Theo"]             │
+└──────────────────┴──────────┴─────────────────────┘
+
+lijn_splits:
+┌────────────┬───────────────────────────────────────┐
+│ bron       │ nieuwe lijnen                          │
+├────────────┼───────────────────────────────────────┤
+│ lijn_hoofd │ ["lijn_lily_toren","lijn_theo_doden"] │
+│ reden:     │ "Het Labyrint scheidt hen"            │
+└────────────┴───────────────────────────────────────┘
+```
+
+### De Verteller coördineert parallelle lijnen
+
+Na een split moet de Verteller beide lijnen beheren. De auteur kiest welke lijn actief geschreven wordt, maar het systeem houdt de andere lijn bij.
+
+```typescript
+// In de Verteller DO
+interface VertellerLijnBeheer {
+  actieveLijnen: VerhaalLijn[];
+  focusLijn: string;                  // Welke lijn wordt nu geschreven?
+
+  // Wissel tussen lijnen
+  async wisselFocus(lijnId: string): Promise<void>;
+
+  // Synchroniseer tijd tussen lijnen
+  async synchroniseerTijd(lijnen: string[]): Promise<void>;
+
+  // Check: moeten lijnen samenkomen?
+  async checkSamenvoeging(): Promise<LijnSamenvoeging | null>;
+}
+
+// De Verteller weet wanneer te wisselen
+async function beheerLijnen(verteller: VertellerDO): Promise<void> {
+  const lijnen = await d1.prepare(
+    `SELECT * FROM verhaallijnen WHERE status = 'actief'`
+  ).all();
+
+  if (lijnen.results.length > 1) {
+    // Meerdere actieve lijnen — informeer de auteur
+    // "Er lopen nu 2 verhaallijnen parallel.
+    //  Je schrijft nu aan Lily's pad naar de toren.
+    //  Ondertussen: Theo is op Het Pad der Doden.
+    //  Wil je wisselen?"
+  }
+}
+```
+
+### Tijd loopt niet altijd gelijk
+
+Parallelle lijnen kunnen een **ander tempo** hebben. Terwijl Lily drie dagen reist naar de toren, beleeft Theo misschien één intense nacht op Het Pad der Doden.
+
+```typescript
+// Tijdsynchronisatie bij samenvoeging
+interface TijdSync {
+  lijn: string;
+  verhaalTijd: string;               // "dag 5 na het Labyrint"
+  sceneTempo: "snel" | "normaal" | "langzaam";
+  // Bij samenvoeging: de lijnen moeten op hetzelfde
+  // verhaalmoment uitkomen
+}
+
+// De Verteller houdt dit bij
+async function checkTijdVerschil(): Promise<string | null> {
+  const lijnen = await getActieveLijnen();
+
+  if (lijnen.length < 2) return null;
+
+  const tijden = lijnen.map(l => l.tijdstip);
+
+  // Als de lijnen te ver uit elkaar lopen:
+  // "Let op: Lily is op dag 7, maar Theo nog op dag 3.
+  //  Als ze elkaar terugvinden, moet de tijd kloppen.
+  //  Wil je een tijdsprong op Theo's lijn?"
+}
+```
+
+### Samenvoeging: Lijnen komen weer samen
+
+```
+── SAMENVOEGING ────────────────────────────────────
+
+De auteur schrijft het moment dat Lily en Theo
+elkaar terugvinden.
+
+Verteller detecteert: samenvoeging-moment.
+
+verhaallijnen:
+┌──────────────────┬──────────┬─────────────────────┐
+│ id               │ status   │ personages           │
+├──────────────────┼──────────┼─────────────────────┤
+│ lijn_hoofd       │ gepauz.  │ ["Lily", "Theo"]     │
+│ lijn_lily_toren  │ afgerond │ ["Lily"]             │
+│ lijn_theo_doden  │ afgerond │ ["Theo"]             │
+│ lijn_hereniging  │ actief   │ ["Lily", "Theo"]     │
+└──────────────────┴──────────┴─────────────────────┘
+
+Beide personage-DOs brengen hun ervaringen mee:
+→ Lily DO: herinneringen van de toren, confrontatie met Arafel
+→ Theo DO: herinneringen van Het Pad der Doden, zijn offer
+→ Ze kennen elkaars ervaringen NIET (tenzij ze het vertellen)
+→ Dit creëert natuurlijke spanning en ontdekking
+```
+
+### Wat de Verteller weet bij samenvoeging
+
+```typescript
+async function bereidSamenvoegingVoor(
+  lijnA: string,
+  lijnB: string
+): Promise<SamenvoegContext> {
+  // 1. Wat is er op elke lijn gebeurd?
+  const gebA = await d1.prepare(
+    `SELECT * FROM lijn_scenes WHERE lijn_id = ? ORDER BY volgorde`
+  ).bind(lijnA).all();
+
+  const gebB = await d1.prepare(
+    `SELECT * FROM lijn_scenes WHERE lijn_id = ? ORDER BY volgorde`
+  ).bind(lijnB).all();
+
+  // 2. Hoe zijn de personages veranderd?
+  // Lily na de toren: angstiger? sterker? weet ze iets nieuws?
+  // Theo na Het Pad der Doden: wat heeft hij opgeofferd?
+
+  // 3. Wat weten ze NIET van elkaar?
+  //    Dit is cruciaal: Lily weet niet wat Theo heeft doorgemaakt.
+  //    Theo weet niet wat Lily bij Arafel heeft meegemaakt.
+  //    → Dit zijn de meest krachtige scènes bij hereniging.
+
+  // 4. Kloppen de tijdlijnen?
+  //    Komen ze op hetzelfde verhaalmoment uit?
+
+  return {
+    gebeurtenissenA: gebA.results,
+    gebeurtenissenB: gebB.results,
+    informatieGaten: detecteerWatZeNietWeten(lijnA, lijnB),
+    tijdVerschil: berekenTijdVerschil(lijnA, lijnB),
+    emotioneleStaat: {
+      [lijnA]: await getPersonageEmotie(lijnA),
+      [lijnB]: await getPersonageEmotie(lijnB)
+    }
+  };
+}
+```
+
+### Overzicht in de UI
+
+```
+┌─────────────────────────────────────────────────────┐
+│  STELLA AURORA — Verhaallijnen                       │
+├─────────────────────────────────────────────────────┤
+│                                                     │
+│  ══ Hoofdverhaal ═══════════════════════ [gepauz.]  │
+│  │  H1──H2──H3──H4──H5──Labyrint                   │
+│  │                        │                         │
+│  │  ┌─── Lily's pad ─────────────────── [actief] ◄  │
+│  │  │    H6a──H7a──H8a──H9a                        │
+│  │  │    Locatie: Arafel's toren                    │
+│  │  │    Spanning: ████████░░ 0.8                   │
+│  │  │    Tijd: dag 7 na Labyrint                    │
+│  │  │                                               │
+│  │  └─── Theo's pad ────────────────── [actief]     │
+│  │       H6b──H7b──H8b                             │
+│  │       Locatie: Het Pad der Doden                 │
+│  │       Spanning: ██████████ 1.0                   │
+│  │       Tijd: dag 3 na Labyrint ⚠ tijdverschil    │
+│  │                                                  │
+│  └─── Hereniging ─────────────────────── [gepland]  │
+│                                                     │
+│  [Wissel focus]  [Synchroniseer tijd]  [Samenvoeging]│
+└─────────────────────────────────────────────────────┘
+```
+
+### Stella Aurora: Concrete Verhaallijnen
+
+```
+DEEL 1 — Stella Crepuscula
+  lijn_hoofd: Lily + Theo samen
+    H1: Aankomst in Lolaland
+    H2: De Sterrenwacht (ontmoeting Jacob)
+    H3: De Lichttuin (Avara's manipulatie)
+    H4: Fluisterbos + reis
+    H5: Het Labyrint van Ora
+                    │
+                    ├── SPLIT ──┐
+                    │           │
+DEEL 2 — Stella Noctis         │
+  lijn_lily_toren:              │   lijn_theo_doden:
+    Lily alleen naar            │     Theo op Het Pad
+    Arafel's toren              │     der Doden
+    - Nevelbergen               │     - Schemerland
+    - Confrontatie Arafel       │     - Jacob's les herinneren
+    - Verleiding en val         │     - Besluit tot offer
+                    │           │
+                    └── MERGE ──┘
+                         │
+DEEL 3 — Stella Aurora   │
+  lijn_hereniging:
+    Lily en Theo herenigd
+    - Spiegelzaal: oordeel
+    - Theo's offer
+    - Verlossing en dageraad
 ```
 
 ---
