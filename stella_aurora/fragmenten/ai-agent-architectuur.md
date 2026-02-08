@@ -83,7 +83,9 @@ De kern van het idee: **bovennatuurlijke gaven worden permissiemodellen** voor i
 │  - tijdlijn: gebeurtenissen, volgorde               │
 │  - gave_permissies: type, bereik, actief            │
 │  - locatie_effecten: type, sterkte, doelwit         │
+│  - scenes: chronologisch + vertelvolgorde            │
 │  - verhaallijnen: split, merge, parallelle paden    │
+│  - scene_verbindingen: echo's, onthullingen         │
 └─────────────────────────────────────────────────────┘
 ```
 
@@ -549,10 +551,11 @@ De drie opslaglagen hebben elk een eigen rol. Ze werken samen als een gelaagd sy
 │                      actief, beperking                  │
 │  locatie_effecten   → locatie_id, effect_type, sterkte, │
 │                      doelwit, actief                    │
-│  verhaallijnen     → naam, status, personages, split,  │
-│                      merge, spanning, tijdstip          │
-│  lijn_scenes       → lijn_id, scene_id, volgorde       │
+│  scenes            → chronologisch, vertelvolgorde,    │
+│                      tijdlaag, verhaallijn, locatie     │
+│  verhaallijnen     → naam, status, personages, split   │
 │  lijn_splits       → bron_lijn, nieuwe_lijnen, reden   │
+│  scene_verbindingen→ echo, onthult, contrasteert       │
 └─────────────────────────────────────────────────────────┘
 ```
 
@@ -1880,324 +1883,474 @@ Bij het importeren:
 
 ---
 
-## Verhaallijnen: Splitsen en Samenkomen
+## Verhaallijnen, Scènes en Vertelvolgorde
 
-Het verhaal is niet één rechte lijn. Wanneer personages uit elkaar gaan, ontstaan **parallelle verhaallijnen** die elk hun eigen tempo, locatie en spanning hebben — en op een later moment weer samenkomen.
+Het verhaal van Stella Aurora is **niet-lineair** — geïnspireerd door *Kringen in een Bos* van Dalene Matthee. De lezer begint bijna aan het einde en reist dan steeds dieper het verleden in. Dat betekent: **twee tijdassen**.
 
-### Het kernidee
+### Twee volgordes: Chronologisch vs. Vertelling
 
 ```
-DEEL 1: Eén lijn
-  Lily + Theo samen → alles op één verhaallijn
+CHRONOLOGISCH (wanneer het gebeurt in de verhaalwereld):
+  1. Lily's thuissituatie — ruzie thuis, Rosa naar bed brengen
+  2. De oversteek naar Lolaland
+  3. Aankomst, eerste verwondering
+  4. Ontmoeting met Ella
+  5. De Sterrenwacht, Jacob
+  ...
+  28. Theo's offer
+  29. Spiegelzaal — oordeel
+  30. Dageraad
 
-         ┌──── Lily's pad (naar Arafel's toren) ────┐
-DEEL 2:  │                                           │
-  Labyrint splitst                              Hereniging?
-         │                                           │
-         └──── Theo's pad (Het Pad der Doden) ───────┘
+VERTELVOLGORDE (wat de lezer wanneer leest):
+  1. → Scène 29: Spiegelzaal — Lily staat terecht. Waarom?
+  2. → Scène 1: Thuis. Ruzie onder. Rosa slaapt niet.
+  3. → Scène 28: Theo's ogen. Hij wist het. Hoe lang al?
+  4. → Scène 2-3: De oversteek. Alles was nog heel.
+  ...
 
-DEEL 3: Lijnen komen samen → climax
+De lezer ervaart het als ringen — steeds dieper,
+steeds meer begrip van wat er eigenlijk is gebeurd.
 ```
 
-### D1 Schema: Verhaallijnen
+De kern: elke **scène** is een bouwblok. Het systeem kent de chronologische plek én de vertelplek.
+
+### D1 Schema: Scènes als bouwblokken
 
 ```sql
--- Elke verhaallijn is een zelfstandige draad
+-- De scène is het kleinste verhaalelement
+CREATE TABLE scenes (
+  id TEXT PRIMARY KEY,                -- "scene_spiegelzaal_oordeel"
+  naam TEXT NOT NULL,                 -- "De Spiegelzaal: Lily's oordeel"
+  samenvatting TEXT,                  -- Korte beschrijving
+
+  -- TWEE VOLGORDES
+  chronologisch INTEGER NOT NULL,     -- Wanneer het GEBEURT (1, 2, 3...)
+  vertelvolgorde INTEGER NOT NULL,    -- Wanneer de lezer het LEEST (1, 2, 3...)
+
+  -- Context
+  verhaallijn_id TEXT,                -- Bij welke lijn hoort deze scène?
+  locatie TEXT,                       -- Waar speelt het?
+  personages TEXT,                    -- JSON: ["Lily", "Theo"]
+  tijdstip TEXT,                      -- Verhaaltijd: "dag 7 in Lolaland"
+  spanning REAL DEFAULT 0.5,          -- 0-1
+
+  -- Status
+  status TEXT DEFAULT 'gepland',      -- gepland | schets | concept | review | goedgekeurd
+  tekst_r2_key TEXT,                  -- R2 pad naar geschreven tekst
+
+  -- Kringen-structuur
+  tijdlaag TEXT,                      -- "heden" | "verleden_1" | "verleden_2" | "oorsprong"
+  terugkoppeling TEXT,                -- Wat onthult deze scène over een eerdere/latere scène?
+
+  FOREIGN KEY (verhaallijn_id) REFERENCES verhaallijnen(id)
+);
+
+-- Verhaallijnen: draden die splitsen en samenkomen
 CREATE TABLE verhaallijnen (
   id TEXT PRIMARY KEY,                -- "lijn_hoofdverhaal"
   naam TEXT NOT NULL,                 -- "Lily en Theo samen"
   status TEXT DEFAULT 'actief',       -- actief | gepauzeerd | afgerond | samengevoegd
-  start_hoofdstuk TEXT,               -- "deel_1:hoofdstuk_01"
-  eind_hoofdstuk TEXT,                -- NULL als nog lopend
   ouder_lijn_id TEXT,                 -- Waar splitste deze lijn vanaf?
   samenvoeg_lijn_id TEXT,            -- Met welke lijn komt deze samen?
-  samenvoeg_hoofdstuk TEXT,          -- Waar komen ze samen?
   actieve_personages TEXT,            -- JSON: ["Lily", "Theo"]
-  actieve_locaties TEXT,              -- JSON: ["Lichttuin"]
-  spanning REAL DEFAULT 0.5,          -- 0-1, huidige spanning op deze lijn
-  tijdstip TEXT,                      -- Verhaaltijd (kan per lijn anders lopen)
-  beschrijving TEXT,                  -- Korte samenvatting van deze lijn
+  spanning REAL DEFAULT 0.5,
+  beschrijving TEXT,
   FOREIGN KEY (ouder_lijn_id) REFERENCES verhaallijnen(id)
 );
 
--- Koppeltabel: welke scènes horen bij welke lijn?
-CREATE TABLE lijn_scenes (
-  lijn_id TEXT NOT NULL,
-  scene_id TEXT NOT NULL,
-  volgorde INTEGER NOT NULL,
-  PRIMARY KEY (lijn_id, scene_id),
-  FOREIGN KEY (lijn_id) REFERENCES verhaallijnen(id)
-);
-
--- Splitpunten: waar en waarom splitst een lijn?
+-- Splitpunten
 CREATE TABLE lijn_splits (
   id TEXT PRIMARY KEY,
-  bron_lijn_id TEXT NOT NULL,         -- De originele lijn
-  nieuwe_lijnen TEXT NOT NULL,         -- JSON: ["lijn_lily_toren", "lijn_theo_schemerland"]
-  hoofdstuk TEXT NOT NULL,             -- Waar vindt de split plaats?
-  reden TEXT,                          -- "Het Labyrint scheidt Lily en Theo"
-  type TEXT DEFAULT 'verhaal',         -- verhaal | wat-als | alternatief
-  FOREIGN KEY (bron_lijn_id) REFERENCES verhaallijnen(id)
+  bron_lijn_id TEXT NOT NULL,
+  nieuwe_lijnen TEXT NOT NULL,         -- JSON: ["lijn_lily_toren", "lijn_theo_doden"]
+  split_scene_id TEXT NOT NULL,        -- Bij welke scène splitst het?
+  reden TEXT,
+  FOREIGN KEY (bron_lijn_id) REFERENCES verhaallijnen(id),
+  FOREIGN KEY (split_scene_id) REFERENCES scenes(id)
+);
+
+-- Verbindingen tussen scènes (echo's, onthullingen, terugkoppelingen)
+CREATE TABLE scene_verbindingen (
+  bron_scene_id TEXT NOT NULL,
+  doel_scene_id TEXT NOT NULL,
+  type TEXT NOT NULL,                  -- "onthult" | "echo" | "contrasteert" | "verklaart"
+  beschrijving TEXT,                   -- "Lezer begrijpt nu pas waarom Lily huilde"
+  PRIMARY KEY (bron_scene_id, doel_scene_id),
+  FOREIGN KEY (bron_scene_id) REFERENCES scenes(id),
+  FOREIGN KEY (doel_scene_id) REFERENCES scenes(id)
 );
 ```
 
-### TypeScript Interfaces
+### TypeScript: De Scène
 
 ```typescript
-interface VerhaalLijn {
+interface Scene {
   id: string;
   naam: string;
-  status: "actief" | "gepauzeerd" | "afgerond" | "samengevoegd";
-  personages: string[];               // Wie zit op deze lijn?
-  locaties: string[];                 // Waar speelt deze lijn?
-  spanning: number;                   // 0-1
-  tijdstip: VerhaalTijdstip;         // Kan per lijn anders lopen!
-  ouderLijn?: string;                 // Waar kwam deze vandaan?
+
+  // De twee tijdassen
+  chronologisch: number;              // Wanneer het GEBEURT
+  vertelvolgorde: number;             // Wanneer de lezer het LEEST
+
+  // Kringen-structuur
+  tijdlaag: "heden" | "verleden_1" | "verleden_2" | "oorsprong";
+  terugkoppeling?: string;            // Wat verklaart deze scène?
+
+  // Verhaalcontext
+  verhaallijn: string;
+  locatie: string;
+  personages: string[];
+  spanning: number;
+  status: SceneStatus;
 }
 
-interface LijnSplit {
-  bronLijn: string;
-  nieuweLijnen: VerhaalLijn[];
-  hoofdstuk: string;
-  reden: string;
-}
+type SceneStatus = "gepland" | "schets" | "concept" | "review" | "goedgekeurd";
 
-interface LijnSamenvoeging {
-  lijnen: string[];                   // Welke lijnen komen samen?
-  resultaatLijn: string;             // De nieuwe gecombineerde lijn
-  hoofdstuk: string;
-  hoe: string;                        // "Lily en Theo vinden elkaar terug"
+// Verbinding tussen twee scènes (over tijdlagen heen)
+interface SceneVerbinding {
+  bron: string;                        // Scène die de lezer nu leest
+  doel: string;                        // Scène waarnaar verwezen wordt
+  type: "onthult" | "echo" | "contrasteert" | "verklaart";
+  beschrijving: string;
 }
 ```
 
-### Hoe het werkt: Het Labyrint splitst
+### Hoe de Kringen werken: Stella Aurora voorbeeld
 
 ```
-── VOOR DE SPLIT ───────────────────────────────────
+── VERTELVOLGORDE (wat de lezer ervaart) ────────────
 
-verhaallijnen:
-┌──────────────────┬──────────┬─────────────────────┐
-│ id               │ status   │ personages           │
-├──────────────────┼──────────┼─────────────────────┤
-│ lijn_hoofd       │ actief   │ ["Lily", "Theo"]     │
-└──────────────────┴──────────┴─────────────────────┘
+RING 0 — HEDEN (het bijna-einde)
+  Scène 1 (chronologisch: 29)
+    De Spiegelzaal. Lily staat voor de spiegels.
+    De lezer weet niet waarom. Alleen dat het erg is.
+    → spanning, vragen, geen antwoorden
 
-── HET LABYRINT SPLITST ────────────────────────────
+RING 1 — VERLEDEN (het begin)
+  Scène 2 (chronologisch: 1)
+    Thuis. Lily's ouders schreeuwen beneden.
+    Rosa kan niet slapen. Lily leest haar voor.
+    → de lezer begint te begrijpen wie Lily is
 
-Verteller detecteert: Labyrint van Ora scheidt Lily en Theo.
-Dit is een SPLIT-moment.
+RING 0 — TERUG NAAR HEDEN
+  Scène 3 (chronologisch: 28)
+    Theo in de Spiegelzaal. Zijn ogen.
+    Hij wist dit ging gebeuren. De lezer weet niet wat.
+    → nog meer vragen
 
-→ lijn_hoofd wordt "gepauzeerd"
-→ Twee nieuwe lijnen worden aangemaakt:
+RING 2 — DIEPER VERLEDEN (Lolaland, het begin)
+  Scène 4 (chronologisch: 2-3)
+    De oversteek. De verwondering. Alles was nog heel.
+    → contrast met het heden maakt het pijnlijker
 
-verhaallijnen:
-┌──────────────────┬──────────┬─────────────────────┐
-│ id               │ status   │ personages           │
-├──────────────────┼──────────┼─────────────────────┤
-│ lijn_hoofd       │ gepauz.  │ ["Lily", "Theo"]     │
-│ lijn_lily_toren  │ actief   │ ["Lily"]             │
-│ lijn_theo_doden  │ actief   │ ["Theo"]             │
-└──────────────────┴──────────┴─────────────────────┘
+RING 0 — HEDEN
+  Scène 5 (chronologisch: 30)
+    Ella spreekt. De spiegels tonen alles.
+    Nu begint de lezer stukjes te begrijpen.
 
-lijn_splits:
-┌────────────┬───────────────────────────────────────┐
-│ bron       │ nieuwe lijnen                          │
-├────────────┼───────────────────────────────────────┤
-│ lijn_hoofd │ ["lijn_lily_toren","lijn_theo_doden"] │
-│ reden:     │ "Het Labyrint scheidt hen"            │
-└────────────┴───────────────────────────────────────┘
+... enzovoort, steeds dieper, steeds meer onthulling ...
+
+RING 3 — DE OORSPRONG
+  Scène N (chronologisch: 15)
+    Het Labyrint scheidt Lily en Theo.
+    DIT was het moment dat alles veranderde.
+    De lezer begrijpt nu pas de volle impact.
 ```
 
-### De Verteller coördineert parallelle lijnen
-
-Na een split moet de Verteller beide lijnen beheren. De auteur kiest welke lijn actief geschreven wordt, maar het systeem houdt de andere lijn bij.
+### De Verteller begrijpt beide volgordes
 
 ```typescript
-// In de Verteller DO
-interface VertellerLijnBeheer {
-  actieveLijnen: VerhaalLijn[];
-  focusLijn: string;                  // Welke lijn wordt nu geschreven?
+interface VertellerVolgordeBeheer {
+  // Wat is de volgende scène voor de LEZER?
+  volgendeVertelScene(): Scene;
 
-  // Wissel tussen lijnen
-  async wisselFocus(lijnId: string): Promise<void>;
+  // Wat weet de lezer op dit punt WEL en NIET?
+  lezerKennis(vertelvolgorde: number): LezerKennis;
 
-  // Synchroniseer tijd tussen lijnen
-  async synchroniseerTijd(lijnen: string[]): Promise<void>;
-
-  // Check: moeten lijnen samenkomen?
-  async checkSamenvoeging(): Promise<LijnSamenvoeging | null>;
+  // Wat weten de personages op dit punt in de CHRONOLOGIE?
+  personageKennis(chronologisch: number, personage: string): PersonageKennis;
 }
 
-// De Verteller weet wanneer te wisselen
-async function beheerLijnen(verteller: VertellerDO): Promise<void> {
-  const lijnen = await d1.prepare(
-    `SELECT * FROM verhaallijnen WHERE status = 'actief'`
-  ).all();
+interface LezerKennis {
+  // Na scène 3 (vertelvolgorde) weet de lezer:
+  weet: string[];         // ["Lily staat terecht", "Theo wist iets",
+                          //  "Lily heeft een zusje Rosa"]
+  weetNietMaar: string[]; // ["Waarom Lily terechtstaat",
+                          //  "Wat Theo wist", "Wat er in het
+                          //  Labyrint is gebeurd"]
+  vermoedt: string[];     // ["Het heeft met Theo te maken",
+                          //  "Lily voelt schuld"]
+}
+```
 
-  if (lijnen.results.length > 1) {
-    // Meerdere actieve lijnen — informeer de auteur
-    // "Er lopen nu 2 verhaallijnen parallel.
-    //  Je schrijft nu aan Lily's pad naar de toren.
-    //  Ondertussen: Theo is op Het Pad der Doden.
-    //  Wil je wisselen?"
+Dit is cruciaal voor de schrijfbegeleider. Bij elke scène die geschreven wordt, moet het systeem weten:
+
+```
+── SCHRIJFBEGELEIDER BIJ NIET-LINEAIR SCHRIJVEN ────
+
+JIJ SCHRIJFT: Scène 5 (vertelvolgorde)
+  → chronologisch: scène 30 (Ella spreekt in de Spiegelzaal)
+
+BEGELEIDER:
+  "Let op: de lezer heeft op dit punt nog NIET gezien:
+   - Hoe Lily in Lolaland is gekomen (chrono 2-3)
+   - De ontmoeting met Avara (chrono 8)
+   - Het Labyrint (chrono 15)
+   - Theo's offer (chrono 28 — alleen zijn ogen gezien)
+
+   De lezer WEL al:
+   - Lily staat terecht (chrono 29, verteld in scène 1)
+   - Lily's thuissituatie (chrono 1, verteld in scène 2)
+   - Theo wist iets (chrono 28, deels verteld in scène 3)
+
+   Ella's woorden mogen dus NIET verwijzen naar
+   details die de lezer nog niet kent. Maar ze mogen
+   wel hints geven die pas later begrepen worden."
+
+   ⚠ SPANNING: Als Ella hier zegt "je koos verkeerd bij
+   de bloemen" snapt de lezer het niet (Lichttuin is nog
+   niet verteld). Dat is goed — het creëert een vraag.
+   Maar als ze zegt "na het Labyrint..." is dat te
+   expliciet voor wat de lezer nu weet.
+```
+
+### Verhaallijnen: Splitsen en samenkomen
+
+Verhaallijnen werken samen met de scène-structuur. Een lijn is een groep scènes die chronologisch samen horen — maar in de vertelling door elkaar heen geweven worden.
+
+```
+── CHRONOLOGISCHE STRUCTUUR ─────────────────────────
+
+lijn_hoofd: Lily + Theo samen
+  chrono 1─2─3─4─5─6─7─8─9─10 ... 15 (Labyrint)
+                                      │
+                          ┌── SPLIT ──┤
+                          │           │
+lijn_lily_toren:          │    lijn_theo_doden:
+  chrono 16─17─18─19─20   │      chrono 16─17─18─19─20
+                          │           │
+                          └── MERGE ──┘
+                                │
+lijn_hereniging:                │
+  chrono 21─22─23 ... 28─29─30
+
+
+── VERTELVOLGORDE ───────────────────────────────────
+
+  vertel 1:  chrono 29  (Spiegelzaal)    ← heden
+  vertel 2:  chrono 1   (thuis)          ← ring 1: verleden
+  vertel 3:  chrono 28  (Theo's ogen)    ← heden
+  vertel 4:  chrono 2-3 (oversteek)      ← ring 2: dieper
+  vertel 5:  chrono 30  (Ella spreekt)   ← heden
+  vertel 6:  chrono 8   (Lichttuin)      ← ring 2
+  vertel 7:  chrono 20  (Lily alleen)    ← ring 1
+  vertel 8:  chrono 15  (Labyrint)       ← ring 3: oorsprong
+  ...
+
+De ringen gaan heen en weer: heden → verleden → heden →
+dieper verleden → heden → nog dieper → tot de kern.
+```
+
+### Scene-verbindingen: Echo's en onthullingen
+
+Het krachtige van niet-lineair vertellen: scènes verwijzen naar elkaar over tijdlagen heen. De lezer leest iets in het heden en begrijpt het pas als het verleden wordt onthuld.
+
+```typescript
+// Voorbeelden van scene-verbindingen
+const verbindingen: SceneVerbinding[] = [
+  {
+    // De lezer ziet Lily terechtstaan (scène 1)
+    // en begrijpt pas WAAROM als de Lichttuin verteld wordt (scène 6)
+    bron: "scene_lichttuin_avara",        // vertelvolgorde 6
+    doel: "scene_spiegelzaal_oordeel",    // vertelvolgorde 1
+    type: "verklaart",
+    beschrijving: "Nu snapt de lezer welke 'verkeerde keuze' Ella bedoelde"
+  },
+  {
+    // Theo's ogen in de Spiegelzaal (scène 3)
+    // echo't naar het moment dat hij Rosa's verhaal hoorde
+    bron: "scene_theo_ogen",              // vertelvolgorde 3
+    doel: "scene_theo_hoort_rosa",        // vertelvolgorde 11
+    type: "echo",
+    beschrijving: "Theo's blik krijgt pas betekenis als de lezer weet over Rosa"
+  },
+  {
+    // De verwondering bij aankomst (scène 4)
+    // contrasteert met de Spiegelzaal (scène 1)
+    bron: "scene_aankomst_lolaland",      // vertelvolgorde 4
+    doel: "scene_spiegelzaal_oordeel",    // vertelvolgorde 1
+    type: "contrasteert",
+    beschrijving: "Alles was nog heel — de lezer voelt het contrast"
   }
-}
+];
 ```
 
-### Tijd loopt niet altijd gelijk
-
-Parallelle lijnen kunnen een **ander tempo** hebben. Terwijl Lily drie dagen reist naar de toren, beleeft Theo misschien één intense nacht op Het Pad der Doden.
+### De Verteller gebruikt verbindingen bij het schrijven
 
 ```typescript
-// Tijdsynchronisatie bij samenvoeging
-interface TijdSync {
-  lijn: string;
-  verhaalTijd: string;               // "dag 5 na het Labyrint"
-  sceneTempo: "snel" | "normaal" | "langzaam";
-  // Bij samenvoeging: de lijnen moeten op hetzelfde
-  // verhaalmoment uitkomen
-}
+async function bereidSceneVoor(sceneId: string): Promise<SchrijfContext> {
+  const scene = await getScene(sceneId);
 
-// De Verteller houdt dit bij
-async function checkTijdVerschil(): Promise<string | null> {
-  const lijnen = await getActieveLijnen();
+  // 1. Welke scènes heeft de lezer AL gelezen (vertelvolgorde < deze)?
+  const gelezenScenes = await d1.prepare(
+    `SELECT * FROM scenes WHERE vertelvolgorde < ? ORDER BY vertelvolgorde`
+  ).bind(scene.vertelvolgorde).all();
 
-  if (lijnen.length < 2) return null;
+  // 2. Welke verbindingen zijn relevant?
+  const verbindingen = await d1.prepare(
+    `SELECT * FROM scene_verbindingen
+     WHERE bron_scene_id = ? OR doel_scene_id = ?`
+  ).bind(sceneId, sceneId).all();
 
-  const tijden = lijnen.map(l => l.tijdstip);
+  // 3. Wat mag de lezer hier weten, en wat niet?
+  const lezerWeet = berekenLezerKennis(gelezenScenes.results);
 
-  // Als de lijnen te ver uit elkaar lopen:
-  // "Let op: Lily is op dag 7, maar Theo nog op dag 3.
-  //  Als ze elkaar terugvinden, moet de tijd kloppen.
-  //  Wil je een tijdsprong op Theo's lijn?"
-}
-```
+  // 4. Welke hints kun je planten voor latere scènes?
+  const toekomstigeOnthullingen = verbindingen.results.filter(
+    v => v.doel_scene_id === sceneId
+      && !gelezenScenes.results.find(s => s.id === v.bron_scene_id)
+  );
+  // → Deze scène is het DOEL van een onthulling die nog komt
+  // → Plant hier al hints die pas later begrepen worden
 
-### Samenvoeging: Lijnen komen weer samen
-
-```
-── SAMENVOEGING ────────────────────────────────────
-
-De auteur schrijft het moment dat Lily en Theo
-elkaar terugvinden.
-
-Verteller detecteert: samenvoeging-moment.
-
-verhaallijnen:
-┌──────────────────┬──────────┬─────────────────────┐
-│ id               │ status   │ personages           │
-├──────────────────┼──────────┼─────────────────────┤
-│ lijn_hoofd       │ gepauz.  │ ["Lily", "Theo"]     │
-│ lijn_lily_toren  │ afgerond │ ["Lily"]             │
-│ lijn_theo_doden  │ afgerond │ ["Theo"]             │
-│ lijn_hereniging  │ actief   │ ["Lily", "Theo"]     │
-└──────────────────┴──────────┴─────────────────────┘
-
-Beide personage-DOs brengen hun ervaringen mee:
-→ Lily DO: herinneringen van de toren, confrontatie met Arafel
-→ Theo DO: herinneringen van Het Pad der Doden, zijn offer
-→ Ze kennen elkaars ervaringen NIET (tenzij ze het vertellen)
-→ Dit creëert natuurlijke spanning en ontdekking
-```
-
-### Wat de Verteller weet bij samenvoeging
-
-```typescript
-async function bereidSamenvoegingVoor(
-  lijnA: string,
-  lijnB: string
-): Promise<SamenvoegContext> {
-  // 1. Wat is er op elke lijn gebeurd?
-  const gebA = await d1.prepare(
-    `SELECT * FROM lijn_scenes WHERE lijn_id = ? ORDER BY volgorde`
-  ).bind(lijnA).all();
-
-  const gebB = await d1.prepare(
-    `SELECT * FROM lijn_scenes WHERE lijn_id = ? ORDER BY volgorde`
-  ).bind(lijnB).all();
-
-  // 2. Hoe zijn de personages veranderd?
-  // Lily na de toren: angstiger? sterker? weet ze iets nieuws?
-  // Theo na Het Pad der Doden: wat heeft hij opgeofferd?
-
-  // 3. Wat weten ze NIET van elkaar?
-  //    Dit is cruciaal: Lily weet niet wat Theo heeft doorgemaakt.
-  //    Theo weet niet wat Lily bij Arafel heeft meegemaakt.
-  //    → Dit zijn de meest krachtige scènes bij hereniging.
-
-  // 4. Kloppen de tijdlijnen?
-  //    Komen ze op hetzelfde verhaalmoment uit?
+  // 5. Welke eerdere hints worden hier opgelost?
+  const opgelosteHints = verbindingen.results.filter(
+    v => v.bron_scene_id === sceneId
+      && gelezenScenes.results.find(s => s.id === v.doel_scene_id)
+  );
+  // → De lezer heeft het doel al gelezen
+  // → DEZE scène verklaart dat moment
 
   return {
-    gebeurtenissenA: gebA.results,
-    gebeurtenissenB: gebB.results,
-    informatieGaten: detecteerWatZeNietWeten(lijnA, lijnB),
-    tijdVerschil: berekenTijdVerschil(lijnA, lijnB),
-    emotioneleStaat: {
-      [lijnA]: await getPersonageEmotie(lijnA),
-      [lijnB]: await getPersonageEmotie(lijnB)
-    }
+    scene,
+    lezerWeet,
+    tePlanten: toekomstigeOnthullingen,
+    teOnthullen: opgelosteHints,
+    chronologischeContext: await getChronologischeContext(scene),
+    verhaallijn: await getVerhaallijn(scene.verhaallijn)
   };
 }
 ```
 
-### Overzicht in de UI
+### UI: Twee weergaven
 
 ```
-┌─────────────────────────────────────────────────────┐
-│  STELLA AURORA — Verhaallijnen                       │
-├─────────────────────────────────────────────────────┤
-│                                                     │
-│  ══ Hoofdverhaal ═══════════════════════ [gepauz.]  │
-│  │  H1──H2──H3──H4──H5──Labyrint                   │
-│  │                        │                         │
-│  │  ┌─── Lily's pad ─────────────────── [actief] ◄  │
-│  │  │    H6a──H7a──H8a──H9a                        │
-│  │  │    Locatie: Arafel's toren                    │
-│  │  │    Spanning: ████████░░ 0.8                   │
-│  │  │    Tijd: dag 7 na Labyrint                    │
-│  │  │                                               │
-│  │  └─── Theo's pad ────────────────── [actief]     │
-│  │       H6b──H7b──H8b                             │
-│  │       Locatie: Het Pad der Doden                 │
-│  │       Spanning: ██████████ 1.0                   │
-│  │       Tijd: dag 3 na Labyrint ⚠ tijdverschil    │
-│  │                                                  │
-│  └─── Hereniging ─────────────────────── [gepland]  │
-│                                                     │
-│  [Wissel focus]  [Synchroniseer tijd]  [Samenvoeging]│
-└─────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────┐
+│  STELLA AURORA — Scèneoverzicht                          │
+│                                                         │
+│  [Chronologisch]  [Vertelvolgorde]  [Kringen]           │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  ── KRINGEN WEERGAVE ──────────────────────────────     │
+│                                                         │
+│           ┌─── RING 0: HEDEN ───┐                      │
+│           │ S1: Spiegelzaal  ◄──┼─── schrijf hier      │
+│           │ S3: Theo's ogen     │                       │
+│           │ S5: Ella spreekt    │                       │
+│           └─────────────────────┘                       │
+│                    │                                     │
+│           ┌─── RING 1: VERLEDEN ┐                      │
+│           │ S2: Thuis, Rosa     │                       │
+│           │ S7: Lily alleen     │                       │
+│           └─────────────────────┘                       │
+│                    │                                     │
+│           ┌─── RING 2: DIEPER ──┐                      │
+│           │ S4: De oversteek    │                       │
+│           │ S6: Lichttuin       │                       │
+│           └─────────────────────┘                       │
+│                    │                                     │
+│           ┌─── RING 3: OORSPRONG┐                      │
+│           │ S8: Het Labyrint    │                       │
+│           └─────────────────────┘                       │
+│                                                         │
+│  Verbindingen:                                          │
+│  S6 ──verklaart──→ S1  "waarom Lily terechtstaat"      │
+│  S3 ──echo──→ S11      "Theo's blik + Rosa's verhaal"  │
+│  S4 ──contrasteert──→ S1  "onschuld vs. oordeel"       │
+│                                                         │
+├─────────────────────────────────────────────────────────┤
+│  Lezerkennis na scène 5:                                │
+│  ✓ Lily staat terecht                                   │
+│  ✓ Ze heeft een zusje Rosa                              │
+│  ✓ Theo wist iets                                       │
+│  ✗ Waarom ze terechtstaat                               │
+│  ✗ Het Labyrint                                         │
+│  ✗ Avara's manipulatie                                  │
+│  ? Vermoeden: het heeft met Theo te maken               │
+└─────────────────────────────────────────────────────────┘
 ```
 
-### Stella Aurora: Concrete Verhaallijnen
+### Verhaallijnen binnen de kringen
+
+De split/merge van verhaallijnen werkt samen met de kringen-structuur:
 
 ```
-DEEL 1 — Stella Crepuscula
-  lijn_hoofd: Lily + Theo samen
-    H1: Aankomst in Lolaland
-    H2: De Sterrenwacht (ontmoeting Jacob)
-    H3: De Lichttuin (Avara's manipulatie)
-    H4: Fluisterbos + reis
-    H5: Het Labyrint van Ora
-                    │
-                    ├── SPLIT ──┐
-                    │           │
-DEEL 2 — Stella Noctis         │
-  lijn_lily_toren:              │   lijn_theo_doden:
-    Lily alleen naar            │     Theo op Het Pad
-    Arafel's toren              │     der Doden
-    - Nevelbergen               │     - Schemerland
-    - Confrontatie Arafel       │     - Jacob's les herinneren
-    - Verleiding en val         │     - Besluit tot offer
-                    │           │
-                    └── MERGE ──┘
-                         │
-DEEL 3 — Stella Aurora   │
-  lijn_hereniging:
-    Lily en Theo herenigd
-    - Spiegelzaal: oordeel
-    - Theo's offer
-    - Verlossing en dageraad
+Lily en Theo scheiden bij het Labyrint (chronologisch 15).
+Dit wordt verteld in Ring 3 — diep in het boek.
+
+Maar de GEVOLGEN van de scheiding (Lily alleen, Theo's pad)
+worden eerder verteld, in Ring 1 en Ring 2.
+
+De lezer leest:
+  Ring 0: Lily in de Spiegelzaal (chrono 29)
+          → lezer weet niet eens dat Theo er niet is
+  Ring 1: Lily alleen in de Nevelbergen (chrono 17)
+          → lezer denkt: waar is Theo?
+  Ring 0: Theo's ogen (chrono 28)
+          → hij is er weer, maar iets is anders
+  Ring 2: Het Labyrint (chrono 15)
+          → AH. Dáár zijn ze uit elkaar gegaan.
+
+De vertelling onthult de scheiding NADAT de lezer
+de gevolgen al heeft gezien. Dat maakt het krachtiger.
+```
+
+```typescript
+// De Verteller kan controleren:
+async function checkKringenConsistentie(
+  scene: Scene
+): Promise<KringenFeedback[]> {
+  const feedback: KringenFeedback[] = [];
+
+  // Zijn er scènes die de gevolgen tonen van iets
+  // dat de lezer nog niet kent?
+  const gevolgen = await d1.prepare(
+    `SELECT s.*, sv.beschrijving as verbinding
+     FROM scenes s
+     JOIN scene_verbindingen sv ON sv.bron_scene_id = s.id
+     WHERE sv.doel_scene_id = ?
+       AND s.vertelvolgorde < ?`
+  ).bind(scene.id, scene.vertelvolgorde).all();
+
+  for (const gevolg of gevolgen.results) {
+    feedback.push({
+      type: "onthulling",
+      bericht: `Deze scène verklaart iets dat de lezer al heeft
+                gezien in "${gevolg.naam}" (vertelscène ${gevolg.vertelvolgorde}).
+                Zorg dat de onthulling voldoende impact heeft.`
+    });
+  }
+
+  // Worden er hints geplant die later opgepakt worden?
+  const hints = await d1.prepare(
+    `SELECT s.*, sv.beschrijving as verbinding
+     FROM scenes s
+     JOIN scene_verbindingen sv ON sv.doel_scene_id = s.id
+     WHERE sv.bron_scene_id = ?
+       AND s.vertelvolgorde > ?`
+  ).bind(scene.id, scene.vertelvolgorde).all();
+
+  if (hints.results.length > 0) {
+    feedback.push({
+      type: "hint",
+      bericht: `Plant hier hints voor: ${hints.results.map(h => h.naam).join(", ")}.
+                Subtiel genoeg dat de lezer het niet snapt,
+                krachtig genoeg dat het later klikt.`
+    });
+  }
+
+  return feedback;
+}
 ```
 
 ---
