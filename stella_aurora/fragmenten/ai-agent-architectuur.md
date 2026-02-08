@@ -56,24 +56,30 @@ De kern van het idee: **bovennatuurlijke gaven worden permissiemodellen** voor i
        ▼          ▼          ▼          ▼
 ┌─────────────────────────────────────────────────────┐
 │                   VECTORIZE                          │
-│  Herinneringen per personage (semantisch zoekbaar)  │
-│  Locatie-geschiedenis (wat is hier eerder gebeurd?) │
-│  - Ervaringen & gebeurtenissen                      │
-│  - Relatie-geschiedenis                             │
-│  - Emotionele indrukken                             │
-│  - Locatie-specifieke gebeurtenissen                │
+│              Semantische zoekindex                   │
+│  - Embedding + compacte metadata + r2_key           │
+│  - "Vind wat relevant is"                           │
+└──────────────────────┬──────────────────────────────┘
+                       │ r2_key
+                       ▼
+┌─────────────────────────────────────────────────────┐
+│                      R2                              │
+│              Volledige inhoud                        │
+│  - herinneringen/{personage}/{id}.json              │
+│  - hoofdstukken/deel_{n}/hoofdstuk_{nn}.md          │
+│  - locaties/{locatie}/geschiedenis.json             │
+│  - personage-context/{personage}/profiel.json       │
 └─────────────────────────────────────────────────────┘
        │
        ▼
 ┌─────────────────────────────────────────────────────┐
-│                   D1 / R2                            │
-│  D1: Gestructureerde data                           │
-│  - Tijdlijn, locaties, relatie-status               │
-│  - Locatie-conditie per verhaalmoment               │
-│  - Scene-metadata, hoofdstukindeling                │
-│  R2: Opslag                                         │
-│  - Geschreven hoofdstukken                          │
-│  - Gegenereerde verhaaltekst                        │
+│                      D1                              │
+│              Gestructureerde relaties (SQL)          │
+│  - personages: locatie, emotie, status              │
+│  - relaties: type, sterkte, richting                │
+│  - tijdlijn: gebeurtenissen, volgorde               │
+│  - gave_permissies: type, bereik, actief            │
+│  - locatie_effecten: type, sterkte, doelwit         │
 └─────────────────────────────────────────────────────┘
 ```
 
@@ -187,47 +193,228 @@ async function queryAnderPersonage(
 
 ---
 
-## Herinneringen in Vectorize
+## Opslagarchitectuur: Vectorize + R2 + D1
 
-Elk personage heeft een eigen namespace in Vectorize. Herinneringen worden opgeslagen als embeddings zodat het personage **semantisch relevante herinneringen** kan ophalen.
+De drie opslaglagen hebben elk een eigen rol. Ze werken samen als een gelaagd systeem:
 
-### Herinnering Structuur
+```
+┌─────────────────────────────────────────────────────────┐
+│                    VECTORIZE                             │
+│              Semantische zoekindex                       │
+│                                                         │
+│  Wat:  Embeddings + compacte metadata                   │
+│  Doel: "Vind relevante herinneringen/context"           │
+│  Limiet: ~10KB metadata per vector                      │
+│                                                         │
+│  Bevat per vector:                                      │
+│  - embedding (semantische representatie)                │
+│  - metadata: { personage, type, locatie, tijdstip,      │
+│    emotioneleLading, r2_key, samenvatting }              │
+│                                                         │
+│  De samenvatting is kort genoeg voor metadata,          │
+│  de volledige inhoud staat in R2.                        │
+└───────────────────────┬─────────────────────────────────┘
+                        │ r2_key
+                        ▼
+┌─────────────────────────────────────────────────────────┐
+│                       R2                                 │
+│              Volledige inhoud (object storage)            │
+│                                                         │
+│  Wat:  Ongelimiteerde opslag per object                 │
+│  Doel: "Haal de complete tekst/context op"              │
+│                                                         │
+│  Buckets:                                               │
+│  herinneringen/                                         │
+│    {personage}/{id}.json     → volledige herinnering    │
+│  hoofdstukken/                                          │
+│    deel_{n}/hoofdstuk_{nn}.md → geschreven tekst         │
+│  locaties/                                              │
+│    {locatie}/geschiedenis.json → wat hier is gebeurd    │
+│  fragmenten/                                            │
+│    {id}.md                   → ruwe ideeën, notities    │
+│  personage-context/                                     │
+│    {personage}/profiel.json  → volledig system prompt   │
+│    {personage}/dagboek.json  → intern perspectief       │
+└─────────────────────────────────────────────────────────┘
+                        │
+                        │ gestructureerde queries
+                        ▼
+┌─────────────────────────────────────────────────────────┐
+│                       D1                                 │
+│              Gestructureerde relaties (SQL)               │
+│                                                         │
+│  Wat:  Relationele data, exacte queries                 │
+│  Doel: "Wie is waar? Wat is de status? Wat was de       │
+│         volgorde van gebeurtenissen?"                    │
+│                                                         │
+│  Tabellen:                                              │
+│  personages        → naam, locatie_id, emotie, status   │
+│  locaties          → naam, type, conditie, beheerder_id │
+│  relaties          → personage_a, personage_b, type,    │
+│                      sterkte, status                    │
+│  tijdlijn          → hoofdstuk, scene, gebeurtenis,     │
+│                      tijdstip, betrokkenen              │
+│  gave_permissies   → personage_id, gave_type, bereik,   │
+│                      actief, beperking                  │
+│  locatie_effecten   → locatie_id, effect_type, sterkte, │
+│                      doelwit, actief                    │
+└─────────────────────────────────────────────────────────┘
+```
+
+### Hoe de drie lagen samenwerken
 
 ```typescript
-interface Herinnering {
-  id: string;
-  personage: string;           // Eigenaar van de herinnering
-  type: "ervaring" | "observatie" | "emotie" | "kennis" | "geheim";
-  inhoud: string;              // De herinnering zelf
-  tijdstip: VerhaalTijdstip;   // Wanneer in het verhaal
-  locatie: string;             // Waar het plaatsvond
-  betrokkenPersonages: string[];
-  emotioneleLading: number;    // -1 (pijnlijk) tot 1 (vreugdevol)
-  belangrijkheid: number;      // 0-1, hoe belangrijk voor dit personage
+// Voorbeeld: Lily betreedt de Lichttuin en het systeem zoekt relevante context
+
+async function bereidSceneVoor(personage: string, locatie: string) {
+
+  // STAP 1: D1 — Exacte state ophalen
+  const personageState = await d1.prepare(
+    `SELECT * FROM personages WHERE naam = ?`
+  ).bind(personage).first();
+
+  const locatieState = await d1.prepare(
+    `SELECT * FROM locaties WHERE naam = ?`
+  ).bind(locatie).first();
+
+  const relaties = await d1.prepare(
+    `SELECT * FROM relaties WHERE personage_a = ?`
+  ).bind(personage).all();
+
+  // STAP 2: Vectorize — Semantisch relevante herinneringen zoeken
+  const sceneContext = `${personage} betreedt ${locatie}`;
+  const embedding = await ai.run("@cf/baai/bge-base-en-v1.5", {
+    text: sceneContext
+  });
+
+  const relevantHerinneringen = await vectorize.query(embedding.data[0], {
+    topK: 5,
+    filter: { personage: personage },
+    returnMetadata: true
+  });
+
+  // STAP 3: R2 — Volledige inhoud ophalen voor de top-resultaten
+  const volledigeHerinneringen = await Promise.all(
+    relevantHerinneringen.matches.map(async (match) => {
+      const r2Key = match.metadata.r2_key;
+      const object = await r2.get(r2Key);
+      return {
+        samenvatting: match.metadata.samenvatting,    // Uit Vectorize
+        volledigeInhoud: await object.json(),          // Uit R2
+        score: match.score                             // Relevantie
+      };
+    })
+  );
+
+  // Ook locatie-geschiedenis ophalen
+  const locatieGeschiedenis = await vectorize.query(embedding.data[0], {
+    topK: 3,
+    filter: { type: "locatie_gebeurtenis", locatie: locatie },
+    returnMetadata: true
+  });
+
+  return {
+    personage: personageState,
+    locatie: locatieState,
+    relaties: relaties.results,
+    herinneringen: volledigeHerinneringen,
+    locatieGeschiedenis: locatieGeschiedenis.matches
+  };
 }
 ```
 
-### Voorbeeld: Lily's herinneringen
+### Wat gaat waar? Vuistregels
+
+| Data | Opslag | Waarom |
+|------|--------|--------|
+| "Avara gaf me een bloem en ik voelde iets wegglijden..." (500 woorden) | **R2** (inhoud) + **Vectorize** (index) | Te lang voor Vectorize metadata, moet semantisch zoekbaar zijn |
+| `{ personage: "Lily", locatie: "Lichttuin", emotie: "twijfel" }` | **D1** | Exacte state, vaak gequeried, moet consistent zijn |
+| Volledig geschreven hoofdstuk (5000+ woorden) | **R2** | Grote tekst, opslag |
+| "Lily voelt twijfel bij Avara's bloem" (korte samenvatting) | **Vectorize** metadata | Kort genoeg, maakt snelle scanning mogelijk zonder R2-roundtrip |
+| Relatie Lily↔Theo: "vriendschap, sterkte 0.8" | **D1** | Gestructureerd, verandert vaak, moet queryable zijn |
+| Locatie-conditie Lichttuin: 0.9 → 0.4 → 0.1 | **D1** | Numeriek, per scene bijwerken |
+| Arafel's volledige system prompt + backstory | **R2** | Te groot voor DO storage of D1 |
+| Gave-permissies per personage | **D1** | Gestructureerd, snel opvraagbaar bij elke interactie |
+
+### Herinnering: Vectorize Entry + R2 Object
+
+```typescript
+// Wat in Vectorize staat (compact, zoekbaar)
+interface VectorizeEntry {
+  id: string;                          // "lily_mem_042"
+  values: number[];                    // embedding vector
+  metadata: {
+    personage: string;                 // "Lily"
+    type: "ervaring" | "observatie" | "emotie" | "kennis" | "geheim";
+    locatie: string;                   // "Lichttuin"
+    tijdstip: string;                  // "deel_1:hoofdstuk_03:scene_2"
+    emotioneleLading: number;          // -0.3
+    betrokkenen: string;               // "Avara,Lily" (string want metadata)
+    samenvatting: string;              // "Avara's bloem voelde verkeerd"
+    r2_key: string;                    // "herinneringen/lily/mem_042.json"
+  };
+}
+
+// Wat in R2 staat (volledig, rijk)
+interface R2Herinnering {
+  id: string;
+  personage: string;
+  volledigeInhoud: string;             // De complete herinnering, onbeperkt
+  // "Avara gaf me de mooiste bloem die ik ooit had gezien.
+  //  De blaadjes waren zo dun dat je het licht erdoorheen kon zien,
+  //  als de vleugels van de Lichtlingen in het Fluisterbos. Maar toen
+  //  ik haar aannam voelde ik iets... alsof er iets van me werd
+  //  weggenomen. Iets kleins. Ik weet niet wat. Avara glimlachte
+  //  en ik glimlachte terug, maar mijn vingers trilden een beetje."
+  context: {
+    watGebeurdeErvoor: string;
+    watGebeurdeErna: string;
+    innerlijkeMonoloog: string;        // Lily's gedachten op dat moment
+  };
+  verpijtVanBelangrijkheid: number[];  // Hoe belangrijk was dit over tijd?
+  gekoppeldeHerinneringen: string[];   // Links naar gerelateerde herinneringen
+}
+```
+
+### Voorbeeld: Zoek + Ophaal flow
 
 ```
-Query: "Avara" + "bloemen" + "ongemakkelijk gevoel"
-→ Herinnering: "Avara gaf me de mooiste bloem die ik ooit had gezien.
-   Maar toen ik haar aannam voelde ik iets... alsof er iets van me
-   werd weggenomen. Iets kleins. Ik weet niet wat."
+Lily moet reageren in een nieuwe scène bij de Lichttuin:
 
-Query: "Theo" + "vertrouwen"
-→ Herinnering: "Theo keek me aan bij de sterrenwacht en zei dat
-   sommige sterren alleen zichtbaar zijn als het echt donker is.
-   Ik begreep niet wat hij bedoelde, maar het voelde belangrijk."
+1. VECTORIZE QUERY
+   Zoek: "bloemen" + "Lichttuin" + emotie < 0
+   Filter: personage = "Lily"
+   Top 3 resultaten:
+     → { score: 0.92, samenvatting: "Avara's bloem voelde verkeerd",
+         r2_key: "herinneringen/lily/mem_042.json" }
+     → { score: 0.85, samenvatting: "Paden in tuin werden smaller",
+         r2_key: "herinneringen/lily/mem_058.json" }
+     → { score: 0.71, samenvatting: "Mooie jurk maar ongemakkelijk",
+         r2_key: "herinneringen/lily/mem_023.json" }
+
+2. R2 OPHAAL (alleen top 1-2, bespaar latency)
+   → Volledige tekst van mem_042 en mem_058
+   → Nu heeft Lily's DO de rijke context om mee te reageren
+
+3. D1 CHECK
+   → Huidige relatie Lily↔Avara: "wantrouwen, sterkte 0.3"
+   → Locatie Lichttuin conditie: 0.4 (verwelkend)
+
+4. PERSONAGE-DO REAGEERT
+   Met: volledige herinneringen + huidige relatie + locatie-staat
+   → Genereert een response vanuit Lily's perspectief die
+      gekleurd is door haar eerdere ervaringen
 ```
 
 ### Hoe personages herinneringen gebruiken
 
 Wanneer een personage moet reageren in een scène:
 1. De Verteller geeft de huidige scène-context
-2. Het personage-DO zoekt in Vectorize naar relevante herinneringen
-3. Deze herinneringen kleuren de reactie (een personage met pijnlijke herinneringen aan een plek reageert anders)
-4. Nieuwe ervaringen worden als herinneringen opgeslagen
+2. Het personage-DO zoekt in **Vectorize** naar relevante herinneringen (semantisch)
+3. De beste matches worden opgehaald uit **R2** (volledige inhoud)
+4. Huidige state komt uit **D1** (relaties, locatie, emotie)
+5. Deze drie bronnen samen kleuren de reactie
+6. Na de scène: nieuwe herinneringen worden geschreven naar **R2** + geïndexeerd in **Vectorize** + state-updates in **D1**
 
 ---
 
