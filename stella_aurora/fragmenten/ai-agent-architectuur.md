@@ -1476,6 +1476,263 @@ const lilyCompleteness: CompletenessScore = {
 
 ---
 
+## Schrijfbegeleiding: Stijl, Consistentie en Hoofdstukstatus
+
+Dit is waar het systeem praktisch wordt. Niet de agents en DOs zijn het doel — het doel is een **schrijfbegeleider** die je helpt consistent, in stijl en zonder gaten te schrijven.
+
+### Hoofdstukstatus: Goedgekeurd = Leidend
+
+Elk geschreven stuk heeft een status. Goedgekeurde tekst wordt de maatstaf.
+
+```typescript
+type HoofdstukStatus =
+  | "schets"          // Eerste idee, mag alles nog veranderen
+  | "concept"         // Geschreven maar nog niet beoordeeld
+  | "review"          // Auteur heeft het gelezen, feedback gegeven
+  | "goedgekeurd"     // Dit is de definitieve versie — stijl is leidend
+  ;
+
+interface Hoofdstuk {
+  id: string;                    // "deel_1:hoofdstuk_01"
+  status: HoofdstukStatus;
+  versie: number;
+  tekst_r2_key: string;         // R2 pad naar volledige tekst
+  personages: string[];          // Wie komt erin voor
+  locaties: string[];            // Waar speelt het
+  tijdstip: VerhaalTijdstip;
+  samenvatting: string;
+  stijlNotities: string[];       // Wat is kenmerkend aan de stijl hier
+  beslissingen: Beslissing[];    // Welke verhaal-keuzes zijn hier gemaakt
+}
+
+interface Beslissing {
+  onderwerp: string;             // "Lily's leeftijd in Lolaland"
+  keuze: string;                 // "14-15 jaar"
+  hoofdstuk: string;             // Waar dit is vastgelegd
+  rpioriteit: "definitief" | "voorlopig";
+}
+```
+
+```
+D1: hoofdstukken tabel
+┌────────────────────┬──────────┬────────┬───────────────┐
+│ id                 │ status   │ versie │ r2_key        │
+├────────────────────┼──────────┼────────┼───────────────┤
+│ deel_1:hoofdstuk_01│ goedgek. │ 3      │ hoofdst/1/01  │
+│ deel_1:hoofdstuk_02│ review   │ 2      │ hoofdst/1/02  │
+│ deel_1:avara_tuin  │ concept  │ 1      │ hoofdst/1/at  │
+│ fragment:idee_01   │ schets   │ 1      │ fragm/idee_01 │
+└────────────────────┴──────────┴────────┴───────────────┘
+```
+
+### Stijlbewaking: Goedgekeurde tekst als referentie
+
+Het systeem gebruikt goedgekeurde hoofdstukken als **stijlreferentie** — niet alleen de regels in STIJL.md, maar de daadwerkelijk geschreven en goedgekeurde tekst.
+
+```
+Stijl wordt bepaald door twee bronnen:
+
+1. STIJL.md                    → De regels (wat MOET)
+   "13-jarig perspectief"
+   "Geen volwassen woordkeuzes"
+   "Stijl van Michael Ende"
+
+2. Goedgekeurde hoofdstukken   → Het voorbeeld (hoe het KLINKT)
+   De werkelijke toon, ritme, woordkeuze,
+   zinslengte, manier van beschrijven die
+   de auteur goed heeft bevonden.
+```
+
+```typescript
+// Bij het genereren of beoordelen van tekst:
+async function bouwStijlContext(): Promise<StijlContext> {
+  // 1. Laad stijlregels
+  const stijlRegels = await r2.get("stijl/STIJL.md");
+
+  // 2. Zoek goedgekeurde hoofdstukken als voorbeeldtekst
+  const goedgekeurd = await d1.prepare(
+    `SELECT * FROM hoofdstukken WHERE status = 'goedgekeurd' ORDER BY versie DESC`
+  ).all();
+
+  // 3. Haal relevante passages op (Vectorize zoekt semantisch
+  //    vergelijkbare passages in goedgekeurde tekst)
+  const voorbeeldPassages = await vectorize.query(huidigeSceneEmbedding, {
+    topK: 3,
+    filter: {
+      type: "hoofdstuk_passage",
+      status: "goedgekeurd"
+    }
+  });
+
+  return {
+    regels: stijlRegels,
+    voorbeelden: voorbeeldPassages,    // "Zo klinkt het als het goed is"
+    teVermijden: stijlRegels.vermijd   // "Dit zijn fouten uit eerdere versies"
+  };
+}
+```
+
+### Hoe de begeleider feedback geeft
+
+```
+── JIJ SCHRIJFT ──────────────────────────────────────
+
+"Lily werd overweldigd door een complex gevoel van
+ ambivalentie toen ze de metamorfose van de tuin
+ observeerde."
+
+── BEGELEIDER REAGEERT ───────────────────────────────
+
+⚠ STIJL: Dit klinkt te volwassen voor Lily's perspectief.
+  Woorden als "ambivalentie", "metamorfose" en "observeerde"
+  passen niet bij een 13-jarig meisje.
+
+  In hoofdstuk 1 (goedgekeurd) schreef je:
+  "Lily keek om zich heen en wist niet of ze blij
+   moest zijn of bang."
+
+  Suggestie:
+  "Lily keek naar de tuin en voelde twee dingen
+   tegelijk: het was mooi en het was eng. Alsof de
+   bloemen haar iets probeerden te vertellen, maar
+   ze kon het niet verstaan."
+
+
+── JIJ SCHRIJFT ──────────────────────────────────────
+
+"Theo pakte zijn kompas en liep naar het zuiden."
+
+── BEGELEIDER REAGEERT ───────────────────────────────
+
+⚠ CONSISTENTIE: In hoofdstuk 2 (review) is vastgelegd
+  dat Theo's kompas een sterrenlicht-kern heeft die
+  naar de Sterrenwacht wijst, niet naar het zuiden.
+
+  Bovendien: Theo is momenteel in de Nevelbergen
+  (D1: locatie). Kompassen werken daar niet
+  (Nevelbergen config: "kompassen onbetrouwbaar").
+
+  Bedoel je dat Theo het probeert maar het kompas
+  draait in het rond?
+
+
+── JIJ SCHRIJFT ──────────────────────────────────────
+
+"De Kindvrouw keek haar aan met ogen vol begrip."
+
+── BEGELEIDER REAGEERT ───────────────────────────────
+
+⚠ NAAMGEVING: In goedgekeurde hoofdstukken gebruik je
+  "Ella" voor dit personage. "Kindvrouw" komt voor in
+  oudere fragmenten maar is niet de vastgestelde naam.
+
+  (Bekende inconsistentie — zie inconsistenties.md)
+  Wil je dit nu definitief vastleggen?
+  → [Ella]  [Kindvrouw]  [Beide, afhankelijk van context]
+```
+
+### Inconsistentie-detectie
+
+Het systeem kent drie soorten inconsistenties:
+
+```typescript
+type InconsistentieType =
+  | "feitelijk"      // Iets klopt niet met vastgestelde feiten
+  | "stijl"          // Tekst wijkt af van goedgekeurde stijl
+  | "naamgeving"     // Naam/term inconsistent gebruikt
+  | "tijdlijn"       // Gebeurtenissen in verkeerde volgorde
+  | "locatie"        // Personage op verkeerde plek
+  | "karakter"       // Personage gedraagt zich out-of-character
+  ;
+
+interface Inconsistentie {
+  type: InconsistentieType;
+  ernst: "blokkeer" | "waarschuwing" | "opmerking";
+  beschrijving: string;
+  bron: string;              // Waar is het origineel vastgelegd?
+  suggestie: string;         // Hoe op te lossen
+}
+```
+
+**Waar het systeem op let:**
+
+| Check | Bron | Voorbeeld |
+|-------|------|-----------|
+| Lily's leeftijd | D1: personages | "Lily is 12" → waarschuwing: vastgesteld op 11 (echte wereld) / 14-15 (Lolaland) |
+| Wie is waar | D1: locaties | Theo in Lichttuin terwijl hij in Nevelbergen zou zijn |
+| Naam-consistentie | D1: beslissingen | "Kindvrouw" → in goedgekeurde tekst is het "Ella" |
+| Stijl | Vectorize: goedgekeurde passages | Te volwassen taalgebruik voor Lily's perspectief |
+| Karakter | R2: personage profiel | Arafel die grof is → past niet bij "sophisticated, nooit grof" |
+| Relatie | D1: relaties | Avara helpt Lily → maar relatie is "manipulatief" |
+| Tijdlijn | D1: tijdlijn | Scène na Theo's offer maar Theo is nog aanwezig |
+
+### Bestaande tekst importeren
+
+De al geschreven hoofdstukken en fragmenten worden geïmporteerd met status:
+
+```
+Bestaande bestanden → import naar systeem:
+
+stella_aurora/deel_1/
+  hoofdstuk_01.md          → status: "review" (al geschreven, nog beoordelen)
+  hoofdstuk_02.md          → status: "review"
+  hoofdstuk_xx-avaras-tuin → status: "concept"
+
+stella_aurora/fragmenten/
+  Voorstel_compleet_H1.md  → status: "schets" (alternatieve versie)
+  idee_01.md               → status: "schets"
+  alle 16 fragmenten...    → status: "schets"
+
+stella_aurora/Achtergrondinfo/
+  34 bestanden             → importeer als achtergrondcontext
+                              (niet als hoofdstukken maar als kennisbron)
+                              → naar Vectorize + R2
+
+stella_aurora/STIJL.md     → wordt de stijlregelbasis
+stella_aurora/Georganiseerde_Achtergrond/inconsistenties.md
+                           → bestaande inconsistenties worden
+                              vastgelegd als "te beslissen" items
+```
+
+Bij het importeren:
+1. Tekst wordt geïndexeerd in **Vectorize** (zoekbaar)
+2. Volledige tekst naar **R2** (opslag)
+3. Metadata naar **D1** (status, personages, locaties)
+4. **Beslissingen** worden geëxtraheerd: welke keuzes zijn in deze tekst gemaakt?
+5. **Inconsistenties** worden gedetecteerd tegen bestaande beslissingen
+
+### Het schrijfproces
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                  SCHRIJFMODUS                            │
+│                                                         │
+│  ┌─────────────────────────────────────────────────┐    │
+│  │  Editor                                         │    │
+│  │                                                 │    │
+│  │  Lily liep door de tuin en voelde hoe de...     │    │
+│  │  █                                              │    │
+│  │                                                 │    │
+│  └─────────────────────────────────────────────────┘    │
+│                                                         │
+│  ┌───────────────┐  ┌───────────────┐  ┌─────────────┐ │
+│  │ Begeleider    │  │ Wereld-state  │  │ Context     │ │
+│  │               │  │               │  │             │ │
+│  │ ✓ Stijl ok    │  │ Lily: Licht-  │  │ H1 (goedk.) │ │
+│  │ ⚠ "voelde"→   │  │   tuin        │  │ H2 (review) │ │
+│  │   specifieker │  │ Avara: nabij  │  │             │ │
+│  │               │  │ Tuin: bloei   │  │ Relatie:    │ │
+│  │ Suggestie:    │  │   0.9         │  │ Lily↔Avara: │ │
+│  │ "voelde hoe   │  │ Arafel: luist.│  │ wantrouwen  │ │
+│  │  de warmte    │  │               │  │ 0.3         │ │
+│  │  van de zon   │  │ [Detail...]   │  │             │ │
+│  │  anders was"  │  │               │  │ [Meer...]   │ │
+│  └───────────────┘  └───────────────┘  └─────────────┘ │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
 ## Toekomstige Mogelijkheden
 
 ### "Wat als" scenarios
