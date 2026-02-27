@@ -3,8 +3,8 @@
 ## Overzicht Deel 1
 
 - **Deel titel**: Stella Crepuscula (Avondster)
-- **Hoofdthema**: Lily's verleiding en manipulatie in de Lichttuin
-- **Verhaalboog**: Van onschuld naar beginnende corruptie, Lily raakt verstrikt in Arafel's web
+- **Hoofdthema**: Lisa's verleiding en manipulatie in de Lichttuin
+- **Verhaalboog**: Van onschuld naar beginnende corruptie, Lisa raakt verstrikt in Arafel's web
 - **Belangrijkste locaties**: Lichttuin, mogelijk eerste glimp van andere locaties
 
 ## Hoofdstukken

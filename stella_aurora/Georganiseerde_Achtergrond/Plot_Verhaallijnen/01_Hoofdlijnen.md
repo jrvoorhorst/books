@@ -2,9 +2,9 @@
 
 ## Centrale verhaallijn
 
-- **Essentie**: Lily's reis van manipulatie en schuld naar verlossing en genade
+- **Essentie**: Lisa's reis van manipulatie en schuld naar verlossing en genade
 - **Structuur**: Driedelig (Stella Crepuscula, Stella Noctis, Stella Aurora)
-- **Arc**: Lily raakt verstrikt in Arafel's manipulatie, ondergaat beproevingen, en wordt uiteindelijk gered door Theo' offer
+- **Arc**: Lisa raakt verstrikt in Arafel's manipulatie, ondergaat beproevingen, en wordt uiteindelijk gered door Thomas' offer
 
 ### Belangrijkste documenten:
 
@@ -12,20 +12,20 @@
 - `Verhaalontwikkeling.md`
 - `structurele opbouw.md`
 
-## Lily's manipulatie door Avara en Arafel
+## Lisa's manipulatie door Avara en Arafel
 
-- **Begin**: Lily komt in de Lichttuin terecht
-- **Midden**: Lily wordt gemanipuleerd in een schuldpositie
-- **Eind**: Lily wordt volledig afhankelijk van Arafel
+- **Begin**: Lisa komt in de Lichttuin terecht
+- **Midden**: Lisa wordt gemanipuleerd in een schuldpositie
+- **Eind**: Lisa wordt volledig afhankelijk van Arafel
 
 ### Belangrijkste documenten:
 
 - `Verhaallijn tuin en manipulatie.md`
-- `Lily's schuldsituatie.md`
+- `Lisa's schuldsituatie.md`
 
-## Lily's reis naar de toren van Arafel
+## Lisa's reis naar de toren van Arafel
 
-- **Begin**: Lily besluit naar de toren te gaan
+- **Begin**: Lisa besluit naar de toren te gaan
 - **Midden**: Reis door de Nevelbergen met gevaren en ontmoetingen
 - **Eind**: Aankomst bij de toren
 
@@ -34,25 +34,25 @@
 - `Reis door de nevelbergen.md`
 - `Samenvatting reis naar Arafels toren.md`
 
-## Theo' schuldovername en verlossing
+## Thomas' schuldovername en verlossing
 
-- **Begin**: Lily's schuldsituatie is uitzichtloos
+- **Begin**: Lisa's schuldsituatie is uitzichtloos
 - **Midden**: Oordeel in de Spiegelzaal
-- **Eind**: Theo neemt Lily's schuld over en redt haar
+- **Eind**: Thomas neemt Lisa's schuld over en redt haar
 
 ### Belangrijkste documenten:
 
-- `Theo rol in schuldovername.md`
+- `Thomas rol in schuldovername.md`
 - `laatste hoofdstuk, einde van het boek.md`
 
-## Transformatie van Lily
+## Transformatie van Lisa
 
-- **Begin**: Lily als kwetsbaar, naïef meisje
+- **Begin**: Lisa als kwetsbaar, naïef meisje
 - **Midden**: Geleidelijke corruptie door Arafel
 - **Eind**: Verlost door offer, transformatie naar zuiverheid
 
 ### Belangrijkste documenten:
 
-- `Lily's transformatie.md`
-- `Ontwikkeling van Lily.md`
+- `Lisa's transformatie.md`
+- `Ontwikkeling van Lisa.md`
 - `Sterrenjurk, symboliek en ontwikkeling.md`

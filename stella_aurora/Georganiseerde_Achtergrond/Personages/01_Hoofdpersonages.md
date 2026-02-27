@@ -1,6 +1,6 @@
 # Hoofdpersonages - Stella Aurora
 
-## Lily
+## Lisa
 
 - **Basis**: Protagonist, in echte wereld ongeveer 11 jaar, in Lolaland 13-15 jaar
 - **Ontwikkeling**: Ondergaat transformatie van schuld naar genade
@@ -10,16 +10,16 @@
 
 ### Belangrijkste documenten:
 
-- `Ontwikkeling van Lily.md`
-- `Lily's transformatie.md`
-- `Lily's schuldsituatie.md`
+- `Ontwikkeling van Lisa.md`
+- `Lisa's transformatie.md`
+- `Lisa's schuldsituatie.md`
 - `Hoofdpersonen Lolaland.md`
 
 ## Ella / Kindvrouw
 
 - **Basis**: Goddelijke figuur in het verhaal
 - **Kenmerken**: Stralend, vol genade en wijsheid
-- **Doel**: Begeleidt Lily, biedt oordeel maar ook genade
+- **Doel**: Begeleidt Lisa, biedt oordeel maar ook genade
 - **Verblijfplaats**: De Spiegelzaal
 - **Rol**: Representeert God/Christus
 
@@ -28,23 +28,23 @@
 - `Ella als goddelijk figuur.md`
 - `Hoofdpersonen Lolaland.md`
 
-## Theo
+## Thomas
 
 - **Basis**: Zoon van Ella (in sommige documenten)
 - **Kenmerken**: Ondersteunend, zelfopofferend
-- **Doel**: Neemt Lily's schuld over
-- **Rol**: Christusfiguur, redt Lily door offer
+- **Doel**: Neemt Lisa's schuld over
+- **Rol**: Christusfiguur, redt Lisa door offer
 
 ### Belangrijkste documenten:
 
-- `Theo rol in schuldovername.md`
+- `Thomas rol in schuldovername.md`
 - `Hoofdpersonen Lolaland.md`
 
 ## Arafel / Schaduwkoningin
 
 - **Basis**: Antagonist
 - **Kenmerken**: Manipulatief, verleidelijk, machtig
-- **Doel**: Lily's ziel vangen, corrumperen
+- **Doel**: Lisa's ziel vangen, corrumperen
 - **Verblijfplaats**: De Zwarte Toren
 - **Rol**: Representeert Satan/het kwaad
 
@@ -57,5 +57,5 @@
 ## Onduidelijkheden en Inconsistenties
 
 - **Naamgeving**: Afwisselend gebruik van "Kindvrouw" en "Ella" voor hetzelfde personage
-- **Leeftijd Lily**: Variaties in Lily's leeftijd (11 in echte wereld vs 13-14 of 14-15 in Lolaland)
-- **Personage-relaties**: Onduidelijkheid of Theo de zoon is van Ella
+- **Leeftijd Lisa**: Variaties in Lisa's leeftijd (11 in echte wereld vs 13-14 of 14-15 in Lolaland)
+- **Personage-relaties**: Onduidelijkheid of Thomas de zoon is van Ella

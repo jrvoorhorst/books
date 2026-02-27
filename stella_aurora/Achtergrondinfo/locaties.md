@@ -29,7 +29,7 @@
 
 ### De Sterrenwacht
 - Jacob's domein
-- Plaats waar Theo werkt en leert
+- Plaats waar Thomas werkt en leert
 - Bewaarplaats van belangrijke sterrenkaarten
 - Plek van wijsheid en kennis
 - Verbinding tussen aarde en hemel
@@ -58,7 +58,7 @@
 
 ### Het Schemerland
 - Plaats van verbanning/beproeving
-- Waar Theo naartoe gaat na zijn offer
+- Waar Thomas naartoe gaat na zijn offer
 - Gebied tussen licht en duister
 
 ## Kenmerken van de Wereld
@@ -82,7 +82,7 @@
 - Grenzen tussen verschillende staten van zijn
 
 ### Magische Eigenschappen
-- Veranderende leeftijd (Lily)
+- Veranderende leeftijd (Lisa)
 - Verschuivende werkelijkheid
 - Levende architectuur
 - Reagerende natuur

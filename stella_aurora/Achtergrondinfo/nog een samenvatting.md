@@ -1,4 +1,4 @@
-Hoofdpersonage: Lily
+Hoofdpersonage: Lisa
 
 Oorspronkelijk 11 jaar oud
 In Lolaland lijkt ze 14-15 jaar, maar behoudt kinderlijke onschuld

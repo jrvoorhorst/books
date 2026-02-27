@@ -3,7 +3,7 @@
 ## Bijbelse thematiek
 
 - **Essentie**: Verhaal als allegorische representatie van Bijbelse heilsgeschiedenis
-- **Parallellen**: Arafel als Satan, Ella als God, Theo als Christus, Lily als menselijke ziel
+- **Parallellen**: Arafel als Satan, Ella als God, Thomas als Christus, Lisa als menselijke ziel
 - **Kern**: Verlossing door schuldovername, genade versus oordeel
 
 ### Belangrijkste documenten:
@@ -14,18 +14,18 @@
 
 ## Schuld en Verlossing
 
-- **Essentie**: Lily's schuld en de onmogelijkheid deze zelf af te lossen
+- **Essentie**: Lisa's schuld en de onmogelijkheid deze zelf af te lossen
 - **Ontwikkeling**: Manipulatie → Schuldpositie → Uitzichtloosheid → Offer → Verlossing
-- **Symboliek**: Schuldovername door Theo als Christusoffer
+- **Symboliek**: Schuldovername door Thomas als Christusoffer
 
 ### Belangrijkste documenten:
 
-- `Lily's schuldsituatie.md`
-- `Theo rol in schuldovername.md`
+- `Lisa's schuldsituatie.md`
+- `Thomas rol in schuldovername.md`
 
 ## De Sterrenjurk als Morele Barometer
 
-- **Essentie**: Jurk die Lily's spirituele/morele staat weerspiegelt
+- **Essentie**: Jurk die Lisa's spirituele/morele staat weerspiegelt
 - **Fasen**: Vier duidelijk verschillende stadia, corresponderend met haar reis
 - **Inspiratie**: Gebaseerd op een gezang met vier verzen
 
@@ -36,7 +36,7 @@
 
 ## Manipulatie en Vrije Wil
 
-- **Essentie**: Spanning tussen manipulatie (Arafel/Avara) en vrije keuze (Lily)
+- **Essentie**: Spanning tussen manipulatie (Arafel/Avara) en vrije keuze (Lisa)
 - **Ontwikkeling**: Subtiele manipulatie → Afhankelijkheid → Verlies autonomie
 - **Symboliek**: Tuin als plaats van keuze en verleiding (Edenparallel)
 

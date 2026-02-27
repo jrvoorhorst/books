@@ -3,7 +3,7 @@
 ## Nina
 
 - **Basis**: Bijpersonage, vermoedelijk ontmoet in de Nevelbergen
-- **Rol**: Begeleidt Lily op een bepaald moment in het verhaal
+- **Rol**: Begeleidt Lisa op een bepaald moment in het verhaal
 - **Relatie**: Heeft dialoog met Jacob, details hiervan zijn belangrijk voor de plot
 
 ### Belangrijkste documenten:
@@ -15,7 +15,7 @@
 
 - **Basis**: Bijpersonage
 - **Rol**: Heeft belangrijke dialoog met Nina
-- **Functie**: Mogelijk een ondersteunende rol in Lily's reis
+- **Functie**: Mogelijk een ondersteunende rol in Lisa's reis
 
 ### Belangrijkste documenten:
 
@@ -24,7 +24,7 @@
 ## Avara
 
 - **Basis**: Tuinierster of beheerster van de Lichttuin
-- **Rol**: Manipuleert Lily in de Lichttuin
+- **Rol**: Manipuleert Lisa in de Lichttuin
 - **Relatie tot Arafel**: Werkt mogelijk voor/met Arafel, mate van autonomie onduidelijk
 
 ### Belangrijkste documenten:

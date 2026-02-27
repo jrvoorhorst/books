@@ -39,14 +39,14 @@
 - Speelt in op schuldgevoel
 
 ## Impact op Personages
-### Lily
+### Lisa
 - Geleidelijke manipulatie
 - Groeiend besef van gevaar
 - Vlucht na zien van Nina met kettinkje
 - Blijvend schuldgevoel over Nina
 
 ### Nina
-- Onschuldige bewondering voor Lily
+- Onschuldige bewondering voor Lisa
 - Stapsgewijze 'voorbereiding'
 - Tragisch lot (gesuggereerd)
 - Symbool voor cyclus van misbruik
@@ -74,7 +74,7 @@
 - Creëert spanning zonder expliciet te worden
 - Waarschuwing voor manipulatie/misbruik
 - Laag voor verschillende leeftijden/ervaringen
-- Katalysator voor Lily's reis
+- Katalysator voor Lisa's reis
 
 ## Schrijftechnische Elementen
 - Subtiele hints en suggesties
