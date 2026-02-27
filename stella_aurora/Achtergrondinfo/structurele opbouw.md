@@ -5,58 +5,58 @@
 
 ## DEEL 1: AVONDSTER
 ### Begin: Gezamenlijke reis
-- Doorlopend verhaal vanuit Lily's perspectief
-- Theo als constante, betrouwbare metgezel
+- Doorlopend verhaal vanuit Lisa's perspectief
+- Thomas als constante, betrouwbare metgezel
 - Basis van vertrouwen en vriendschap
 - Eerste avonturen samen
 
 ### Overgang: De Lichttuin
 - Eerste splitsing in narratief
-- Lily bij Avara
-- Theo bij Jacob
+- Lisa bij Avara
+- Thomas bij Jacob
 - Begin van om-en-om hoofdstukken
 - Subtiele verwijdering begint
 
 ### Parallelle verhaallijnen
-1. Lily in de Lichttuin:
+1. Lisa in de Lichttuin:
    - Groeiende band met Avara
    - Eerste tekenen van manipulatie
    - Verlies van eigen licht
    - Toenemende isolatie
 
-2. Theo bij Jacob:
+2. Thomas bij Jacob:
    - Werk aan astronomische klok
    - Wijze lessen van Jacob
-   - Groeiende zorgen om Lily
+   - Groeiende zorgen om Lisa
    - Eigen ontwikkeling
 
 ## DEEL 2: NACHTSTER
-### Hoofdverhaal: Lily's val
+### Hoofdverhaal: Lisa's val
 - Langere hoofdstukken
 - Onder invloed Schaduwkoningin
 - Verraad van geheimen
 - Toenemende duisternis
 
-### Tussendoor: Theo' glimpen
+### Tussendoor: Thomas' glimpen
 - Kortere hoofdstukken
-- Pogingen Lily te bereiken
+- Pogingen Lisa te bereiken
 - Voorbereidingen op redding
 - Groeiend inzicht in gevaar
 
 ### Climax
 - Dramatische hereniging
-- Theo' zelfopoffering
-- Lily's ontwaken
+- Thomas' zelfopoffering
+- Lisa's ontwaken
 - Keerpunt in het verhaal
 
 ## DEEL 3: MORGENSTER
-### Lily's herstel
+### Lisa's herstel
 - Focus op verwerking
 - Leren van ervaringen
 - Nieuwe kracht vinden
 - Brief van Avara als afsluiting
 
-### Theo' transformatie
+### Thomas' transformatie
 - Ontsnapping uit verbanning
 - Innerlijke groei
 - Terugkeer als wijzer persoon
@@ -64,8 +64,8 @@
 
 ### Gezamenlijke afsluiting
 - Hereniging op nieuw niveau
-- Theo prominenter aanwezig
-- Lily's verlangen naar huis
+- Thomas prominenter aanwezig
+- Lisa's verlangen naar huis
 - Balans tussen fantasie en realiteit
 
 ## Thematische Ontwikkeling
@@ -126,7 +126,7 @@
    - Herstel en groei
 
 3. Karakterontwikkeling:
-   - Parallelle groei Lily/Theo
+   - Parallelle groei Lisa/Thomas
    - Contrasterende mentoren
    - Verschillende vormen van wijsheid
    - Transformatie door beproeving

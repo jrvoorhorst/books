@@ -16,15 +16,15 @@ Dit document verzamelt diverse inconsistenties die zijn geïdentificeerd tijdens
 
 ## 2. Personage-details
 
-### Lily's leeftijd
+### Lisa's leeftijd
 
-- **Inconsistentie**: Sommige documenten vermelden dat Lily 11 jaar is in de echte wereld en 13-14 jaar in Lolaland, terwijl andere documenten suggereren dat ze 14-15 jaar is in Lolaland
-- **Oplossingsrichting**: Standardiseer Lily's leeftijd voor consistentie
+- **Inconsistentie**: Sommige documenten vermelden dat Lisa 11 jaar is in de echte wereld en 13-14 jaar in Lolaland, terwijl andere documenten suggereren dat ze 14-15 jaar is in Lolaland
+- **Oplossingsrichting**: Standardiseer Lisa's leeftijd voor consistentie
 
-### Theo' relatie tot Ella
+### Thomas' relatie tot Ella
 
-- **Inconsistentie**: Sommige documenten suggereren dat Theo de zoon van Ella is, terwijl dit in andere documenten niet expliciet vermeld wordt
-- **Oplossingsrichting**: Verduidelijk of Theo letterlijk Ella's zoon is, of dit symbolisch bedoeld is
+- **Inconsistentie**: Sommige documenten suggereren dat Thomas de zoon van Ella is, terwijl dit in andere documenten niet expliciet vermeld wordt
+- **Oplossingsrichting**: Verduidelijk of Thomas letterlijk Ella's zoon is, of dit symbolisch bedoeld is
 
 ## 3. Verhaalelementen
 
@@ -47,5 +47,5 @@ Dit document verzamelt diverse inconsistenties die zijn geïdentificeerd tijdens
 
 ### Vertelperspectief
 
-- **Inconsistentie**: Er zijn enkele onduidelijkheden over of het hele verhaal vanuit Lily's eerste-persoonsperspectief wordt verteld
+- **Inconsistentie**: Er zijn enkele onduidelijkheden over of het hele verhaal vanuit Lisa's eerste-persoonsperspectief wordt verteld
 - **Oplossingsrichting**: Verduidelijk het vertelperspectief voor elk deel van de trilogie

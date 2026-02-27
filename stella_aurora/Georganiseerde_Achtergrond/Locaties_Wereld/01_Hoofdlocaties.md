@@ -4,7 +4,7 @@
 
 - **Beschrijving**: De fantasiewereld waarin het verhaal zich afspeelt
 - **Kenmerken**: Victoriaanse en Lolita-elementen, geen moderne technologie
-- **Functie**: Setting voor Lily's spirituele reis
+- **Functie**: Setting voor Lisa's spirituele reis
 
 ### Belangrijkste documenten:
 
@@ -15,7 +15,7 @@
 
 - **Beschrijving**: Gotische architectuur, verblijfplaats van Ella/Kindvrouw
 - **Kenmerken**: Spiegels, ornamenten, symbolische elementen
-- **Functie**: Plaats van oordeel en transformatie, waar Lily's schuld uiteindelijk wordt beoordeeld
+- **Functie**: Plaats van oordeel en transformatie, waar Lisa's schuld uiteindelijk wordt beoordeeld
 
 ### Belangrijkste documenten:
 
@@ -27,7 +27,7 @@
 
 - **Beschrijving**: Donkere, imposante toren
 - **Kenmerken**: Verblijfplaats van Arafel/Schaduwkoningin
-- **Functie**: Centrum van manipulatie en corruptie, bestemming van Lily's reis
+- **Functie**: Centrum van manipulatie en corruptie, bestemming van Lisa's reis
 
 ### Belangrijkste documenten:
 
@@ -39,7 +39,7 @@
 
 - **Beschrijving**: Tuin beheerd door Avara
 - **Kenmerken**: Onderdeel van het "tuinsysteem"
-- **Functie**: Plaats waar Lily wordt gemanipuleerd
+- **Functie**: Plaats waar Lisa wordt gemanipuleerd
 
 ### Belangrijkste documenten:
 
@@ -51,7 +51,7 @@
 
 - **Beschrijving**: Gevaarlijk, mistig berggebied
 - **Kenmerken**: Onder invloed van Arafel, moeilijk doordringbaar
-- **Functie**: Uitdagende fase in Lily's reis
+- **Functie**: Uitdagende fase in Lisa's reis
 
 ### Belangrijkste documenten:
 

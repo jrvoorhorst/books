@@ -1,4 +1,4 @@
-# Lily
+# Lisa
 
 ## In de echte wereld
 
@@ -13,33 +13,33 @@
 - lijkt wat ouder, ongeveer 13 jaar
 - slim, nieuwsgierig
 - moedig in moeilijke omstandigheden
-- zwicht voor de verleiding van de schaduwkoningin en is Theo ontrouw / laat hem vallen
+- zwicht voor de verleiding van de schaduwkoningin en is Thomas ontrouw / laat hem vallen
 - Komt in grote problemen in de schaduwland onder de macht van de Schaduwkoningin
 
-# **Lily's schuldsituatie in Lolaland**
+# **Lisa's schuldsituatie in Lolaland**
 
 ## **Opbouw van de situatie**
 
 1. Initiële verleiding door de Schaduwkoningin  
    * Belofte van schoonheid, macht, of volwassenheid
-   * Subtiele manipulatie van Lily's onzekerheden
+   * Subtiele manipulatie van Lisa's onzekerheden
 2. Geleidelijke isolatie  
-   * Lily verbreekt langzaam contact met positieve figuren in Lolaland
+   * Lisa verbreekt langzaam contact met positieve figuren in Lolaland
    * Groeiende afhankelijkheid van de Schaduwkoningin
 3. Morele compromissen  
-   * Lily maakt keuzes die ingaan tegen haar principes
-   * RationaLilytie van haar acties
+   * Lisa maakt keuzes die ingaan tegen haar principes
+   * Rationalisatie van haar acties
 4. Punt van geen terugkeer  
    * Een grote misstap die onomkeerbare gevolgen heeft
-   * Volledig breken met Theo en andere positieve invloeden
+   * Volledig breken met Thomas en andere positieve invloeden
 
 ## **De rol van de Schaduwkoningin**
 
 * Fungeert als een subtiele 'loverboy' figuur
-* Speelt in op Lily's verlangens en onzekerheden
+* Speelt in op Lisa's verlangens en onzekerheden
 * Biedt een illusie van liefde en acceptatie
 
-## **Impact op Lily**
+## **Impact op Lisa**
 
 * Verlies van onschuld en authentieke zelf
 * Groeiend schuldgevoel en schaamte
@@ -53,23 +53,23 @@
 
 ## **Mogelijke scenario's**
 
-1. Lily verraadt een vriend voor persoonlijk gewin
+1. Lisa verraadt een vriend voor persoonlijk gewin
 2. Ze verspreidt leugens of roddels die anderen schaden
 3. Ze steelt of vernielt iets waardevols in Lolaland
 4. Ze helpt de Schaduwkoningin bij het manipuleren van anderen
 
 ## **Opbouw naar verlossing**
 
-* Lily's groeiend besef van haar situatie
+* Lisa's groeiend besef van haar situatie
 * Pogingen om zichzelf te redden die mislukken
 * Het moment waarop ze de volledige consequenties onder ogen ziet
 
-## **Theo' interventie**
+## **Thomas' interventie**
 
-* Zijn pogingen om Lily te bereiken ondanks haar afwijzing
+* Zijn pogingen om Lisa te bereiken ondanks haar afwijzing
 * Het cruciale moment waarop hij haar schuld overneemt
 
-  # **Lily's jurk met sterren: Symboliek en thematische diepgang**
+  # **Lisa's jurk met sterren: Symboliek en thematische diepgang**
 
   ## **Centrale thema's geïnspireerd door het gezang**
 
@@ -78,41 +78,41 @@
 3. Gevoel van verlatenheid en zoeken naar hoop
 4. Vinden van een vaste ster als baken
 
-   ## **Verwerking in Lily's reis**
+   ## **Verwerking in Lisa's reis**
 
    ### **Fase 1: Initieel verlangen (Vers 1\)**
 
-* Lily's aankomst in Lolaland, vol verwondering en hoop
+* Lisa's aankomst in Lolaland, vol verwondering en hoop
 * De jurk met heldere sterren symboliseert haar pure verlangen
 * Zoektocht naar betekenis en richting in de nieuwe wereld
 
   ### **Fase 2: Zelfgemaakte lichten (Vers 2\)**
-* Lily probeert zelf haar weg te vinden, geleid door de Schaduwkoningin
+* Lisa probeert zelf haar weg te vinden, geleid door de Schaduwkoningin
 * De sterren op de jurk beginnen te vervagen
 * Illusie van controle en volwassenheid, maar groeiende innerlijke duisternis
 
   ### **Fase 3: Gevoel van verlatenheid (Vers 3\)**
-* Lily realiseert zich dat ze de weg kwijt is, maar kan niet terug
+* Lisa realiseert zich dat ze de weg kwijt is, maar kan niet terug
 * De laatste sterren op de jurk flikkeren zwak
 * Wanhopig zoeken naar een uitweg, een teken van hoop
 
   ### **Fase 4: Vinden van de vaste ster (Vers 4\)**
-* Theo verschijnt als de 'vaste ster', biedt onvoorwaardelijke hulp
-* Zijn overname van Lily's schuld laat de sterren op de jurk weer oplichten
-* Lily vindt nieuwe moed en richting
+* Thomas verschijnt als de 'vaste ster', biedt onvoorwaardelijke hulp
+* Zijn overname van Lisa's schuld laat de sterren op de jurk weer oplichten
+* Lisa vindt nieuwe moed en richting
 
   ## **Symbolische elementen**
-* De jurk als 'firmament' van Lily's ziel
+* De jurk als 'firmament' van Lisa's ziel
 * Sterren als representatie van zuiverheid, hoop en goddelijke leiding
 * Duisternis als symbool voor verwarring en morele afdwaling
-* Theo als de 'stille vaste ster' die leiding en verlossing biedt
+* Thomas als de 'stille vaste ster' die leiding en verlossing biedt
 
   ## **Sleutelmomenten in het verhaal**
 
-1. Lily ontvangt de jurk, vol verwondering over de lichtgevende sterren
-2. Geleidelijke vervaging van sterren tijdens Lily's afdwaling
+1. Lisa ontvangt de jurk, vol verwondering over de lichtgevende sterren
+2. Geleidelijke vervaging van sterren tijdens Lisa's afdwaling
 3. Moment van wanhoop als de laatste ster dreigt te doven
-4. Dramatische scène waarin Theo' zelfopoffering de sterren doet herleven
+4. Dramatische scène waarin Thomas' zelfopoffering de sterren doet herleven
 
    ## **Thematische boodschap**
 
@@ -133,40 +133,40 @@
 
 # 
 
-# Theo
+# Thomas
 
 - Leeft in Lolaland, maar er schemert door dat hij ook in de gewone wereld leeft
 - 14 jaar, moedige jongen
-- Neemt de schuld van Lily over
+- Neemt de schuld van Lisa over
 - Analogie met Jezus
 
-# **Theo' rol in de schuldovername**
+# **Thomas' rol in de schuldovername**
 
-## **Karakter Theo**
+## **Karakter Thomas**
 
-* Leeftijdsgenoot van Lily of iets ouder
+* Leeftijdsgenoot van Lisa of iets ouder
 * Wijs voor zijn leeftijd, maar nog steeds met jongensachtige trekken
 * Loyaal en zorgzaam, met een sterk gevoel voor rechtvaardigheid
 
 ## **Ontwikkeling van de relatie**
 
-1. Eerste ontmoeting: Theo als mysterieuze figuur in Lolaland
-2. Groeiend vertrouwen: Theo helpt Lily bij kleine uitdagingen
+1. Eerste ontmoeting: Thomas als mysterieuze figuur in Lolaland
+2. Groeiend vertrouwen: Thomas helpt Lisa bij kleine uitdagingen
 3. Vriendschap: Ze delen geheimen en zorgen
-4. Verbondenheid: Theo begrijpt Lily's worsteling op een diep niveau
+4. Verbondenheid: Thomas begrijpt Lisa's worsteling op een diep niveau
 
 ## **De schuldovername**
 
-* Aanleiding: Een cruciale fout of misstap van Lily
-* Theo' keuze: Hij neemt vrijwillig de consequenties op zich
+* Aanleiding: Een cruciale fout of misstap van Lisa
+* Thomas' keuze: Hij neemt vrijwillig de consequenties op zich
 * Symboliek: Weerspiegeling van onbaatzuchtige liefde en opoffering
 
-## **Impact op Lily**
+## **Impact op Lisa**
 
 * Schok en onbegrip: Waarom zou iemand dit voor haar doen?
-* Schuldgevoel: Worsteling met het accepteren van Theo' gift
+* Schuldgevoel: Worsteling met het accepteren van Thomas' gift
 * Inzicht: Begrip van onvoorwaardelijke liefde en vergeving
-* Transformatie: Lily leert zichzelf en anderen te vergeven
+* Transformatie: Lisa leert zichzelf en anderen te vergeven
 
 ## **Thematische resonantie**
 
@@ -177,13 +177,13 @@
 ## **Uitwerking in het verhaal**
 
 * Geleidelijke opbouw naar het moment van schuldovername
-* Emotionele nasleep en verwerking door Lily
-* Verandering in de dynamiek tussen Lily en Theo
-* Invloed op Lily's verdere keuzes en groei in Lolaland
+* Emotionele nasleep en verwerking door Lisa
+* Verandering in de dynamiek tussen Lisa en Thomas
+* Invloed op Lisa's verdere keuzes en groei in Lolaland
 
-# **Theo' Ouji-geïnspireerde outfit in Lolaland**
+# **Thomas' Ouji-geïnspireerde outfit in Lolaland**
 
-Als Lily Theo voor het eerst ziet, valt haar blik meteen op zijn bijzondere kleding. Hij draagt een outfit die tegelijkertijd schattig en elegant is, precies passend bij de wonderlijke sfeer van Lolaland:
+Als Lisa Thomas voor het eerst ziet, valt haar blik meteen op zijn bijzondere kleding. Hij draagt een outfit die tegelijkertijd schattig en elegant is, precies passend bij de wonderlijke sfeer van Lolaland:
 
 * Een crèmekleurig overhemd met een kanten jabot die als een waterval over zijn borst valt
 * Een koraalrood vest met glanzende parelmoeren knopen, versierd met subtiele gouden borduurwerk van kleine sterren
@@ -192,7 +192,7 @@ Als Lily Theo voor het eerst ziet, valt haar blik meteen op zijn bijzondere kled
 * Glanzend bruine schoenen met een kleine hak, versierd met zilveren gespen
 * Op zijn hoofd een kleine, schuinstaande hoge hoed in dezelfde crèmekleur als zijn overhemd, met een lint in koraalrood en een kleine veer
 
-Het geheel geeft Theo een uitstraling die tegelijkertijd jongensachtig en wijs is, alsof hij een prins uit een sprookjesboek is gestapt die alle geheimen van Lolaland kent.
+Het geheel geeft Thomas een uitstraling die tegelijkertijd jongensachtig en wijs is, alsof hij een prins uit een sprookjesboek is gestapt die alle geheimen van Lolaland kent.
 
 # 
 
@@ -207,18 +207,18 @@ Het geheel geeft Theo een uitstraling die tegelijkertijd jongensachtig en wijs i
 
 * Charmant en verleidelijk, maar met een ondertoon van gevaar
 * Manipulatief en meedogenloos in het nastreven van haar doelen
-* Schijnbaar begripvol voor Lily's onzekerheden, maar gebruikt deze tegen haar
+* Schijnbaar begripvol voor Lisa's onzekerheden, maar gebruikt deze tegen haar
 
 ## **Rol in het verhaal**
 
 * Vertegenwoordigt de donkere kant van volwassenheid en vrouwelijkheid
-* Probeert Lily te verleiden tot het opgeven van haar onschuld en authenticiteit
-* Staat symbool voor de angsten en twijfels die Lily heeft over het opgroeien
+* Probeert Lisa te verleiden tot het opgeven van haar onschuld en authenticiteit
+* Staat symbool voor de angsten en twijfels die Lisa heeft over het opgroeien
 
-## **Connectie met Lily's realiteit**
+## **Connectie met Lisa's realiteit**
 
-* Weerspiegelt mogelijk negatieve aspecten van Lily's moeder of andere vrouwelijke rolmodellen
-* Vertegenwoordigt maatschappelijke druk en verwachtingen waar Lily mee worstelt
+* Weerspiegelt mogelijk negatieve aspecten van Lisa's moeder of andere vrouwelijke rolmodellen
+* Vertegenwoordigt maatschappelijke druk en verwachtingen waar Lisa mee worstelt
 
 ## **Krachten en vaardigheden**
 
@@ -252,17 +252,17 @@ Het geheel geeft Theo een uitstraling die tegelijkertijd jongensachtig en wijs i
 * De Schaduwkoningin probeert haar eigen domein te creëren binnen Lolaland
 * Hun voormalige vriendschap kleurt hun huidige rivaliteit
 
-## **Impact op Lily**
+## **Impact op Lisa**
 
-* Lily wordt het middelpunt van hun conflict
-* De Schaduwkoningin ziet in Lily een kans om Ella te 'verslaan'
-* Ella hoopt via Lily de Schaduwkoningin te 'verlossen'
+* Lisa wordt het middelpunt van hun conflict
+* De Schaduwkoningin ziet in Lisa een kans om Ella te 'verslaan'
+* Ella hoopt via Lisa de Schaduwkoningin te 'verlossen'
 
-## **Theo' Rol**
+## **Thomas' Rol**
 
-* Als zoon van Ella, vertegenwoordigt Theo haar waarden in Lolaland
-* Hij fungeert als tegenpool van de Schaduwkoningin's invloed op Lily
-* Zijn band met Lily weerspiegelt de vroegere vriendschap tussen Ella en de Schaduwkoningin
+* Als zoon van Ella, vertegenwoordigt Thomas haar waarden in Lolaland
+* Hij fungeert als tegenpool van de Schaduwkoningin's invloed op Lisa
+* Zijn band met Lisa weerspiegelt de vroegere vriendschap tussen Ella en de Schaduwkoningin
 
 ## **Thematische Elementen**
 
@@ -283,4 +283,4 @@ Het geheel geeft Theo een uitstraling die tegelijkertijd jongensachtig en wijs i
 * Ella's onveranderlijke natuur vs. de transformatie van de Schaduwkoningin
 * Lolaland als een fysieke manifestatie van hun gedeelde verleden en huidige conflict
 
-Deze dynamiek biedt een rijke achtergrond voor je verhaal, waarbij de complexiteit van vriendschap, rivaliteit en persoonlijke groei centraal staat. Het geeft ook ruimte voor Lily om te navigeren tussen deze twee invloeden, wat past bij haar coming-of-age reis.
+Deze dynamiek biedt een rijke achtergrond voor je verhaal, waarbij de complexiteit van vriendschap, rivaliteit en persoonlijke groei centraal staat. Het geeft ook ruimte voor Lisa om te navigeren tussen deze twee invloeden, wat past bij haar coming-of-age reis.

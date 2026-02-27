@@ -46,7 +46,7 @@
 - Beschermende houding
 
 ### De Vertrouwelinge
-- Verschijnt als Lily's leeftijdsgenoot
+- Verschijnt als Lisa's leeftijdsgenoot
 - Uitnodigende, vriendelijke présence
 - Toegankelijke maar verfijnde stijl
 - Sprankelende, begrijpende blik
@@ -64,17 +64,17 @@
 - Kan streng zijn wanneer nodig
 - Beschermt Lolaland met kracht indien bedreigd
 
-### Relatie met Lily
-- Verschijnt in vorm die Lily op dat moment nodig heeft
+### Relatie met Lisa
+- Verschijnt in vorm die Lisa op dat moment nodig heeft
 - Fungeert als moreel kompas
 - Daagt uit tot groei en zelfinzicht
 - Biedt troost en wijsheid op cruciale momenten
 
 ## Rol in het Verhaal
 ### Als Mentor
-- Begeleidt Lily's morele ontwikkeling
+- Begeleidt Lisa's morele ontwikkeling
 - Laat zien dat goedheid verschillende vormen kent
-- Leert Lily omgaan met complexe keuzes
+- Leert Lisa omgaan met complexe keuzes
 - Demonstreert balans tussen genade en rechtvaardigheid
 
 ### Als Beschermer
@@ -84,9 +84,9 @@
 - Biedt veilige haven in tijden van nood
 
 ### Als Spiegel
-- Reflecteert Lily's innerlijke groei
+- Reflecteert Lisa's innerlijke groei
 - Toont verschillende aspecten van liefde en wijsheid
-- Helpt Lily haar eigen kracht te ontdekken
+- Helpt Lisa haar eigen kracht te ontdekken
 - Verbindt menselijke en goddelijke aspecten
 
 ## Symbolische Betekenis
@@ -95,4 +95,4 @@
 - Symboliseert transformerende kracht van liefde
 - Weerspiegelt verschillende aspecten van het goddelijke
 
-Deze karakterschets vormt de basis voor Ella's rol in het verhaal, waarbij haar verschillende verschijningsvormen en eigenschappen kunnen worden ingezet op momenten die Lily's ontwikkeling en het plot het beste dienen.
+Deze karakterschets vormt de basis voor Ella's rol in het verhaal, waarbij haar verschillende verschijningsvormen en eigenschappen kunnen worden ingezet op momenten die Lisa's ontwikkeling en het plot het beste dienen.

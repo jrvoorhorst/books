@@ -6,7 +6,7 @@
 
 ## Nieuwe Ontwikkelingen in het Plot
 
-### De Reis van Lily en Theo
+### De Reis van Lisa en Thomas
 - Vertrek vanuit de Sterrenwacht met twee ponies
 - Beschermende mantels van grijze wol met kleine lichtjes
 - Waarheidscompassen van Jacob als gids
@@ -16,11 +16,11 @@
 1. Ontmoeting met bergbewoner
    - Waarschuwing over de nevel
    - "Weinigen keren terug uit de nevel"
-   - Trigger voor Lily's twijfels
+   - Trigger voor Lisa's twijfels
 
 2. De Nachtwake
    - Klein vuur in een grot
-   - Lily's zorgen om Nina
+   - Lisa's zorgen om Nina
    - Mysterieuze bezoeker in grijze mantel
    - Verzwakkende bescherming van de mantels
 
@@ -28,7 +28,7 @@
    - Oeroud labyrint van basaltblokken
    - Veranderende paden en structuren
    - Kompassen die verschillende richtingen wijzen
-   - Onvermijdelijke scheiding van Lily en Theo
+   - Onvermijdelijke scheiding van Lisa en Thomas
 
 ## Nieuwe Elementen en Locaties
 
@@ -40,23 +40,23 @@
   * Vermogen om reizigers te sturen
 
 - Twee Paden:
-  * Het Dodenpad (Theo) - langs rotswanden
-  * De Oude Reisweg (Lily) - naar Arafel's toren
+  * Het Dodenpad (Thomas) - langs rotswanden
+  * De Oude Reisweg (Lisa) - naar Arafel's toren
 
 ### Arafel's Toren
 - Eerste glimp: zwart tegen grijze lucht
 - Toren van schaduwen en geheimen
-- Onvermijdelijke bestemming voor Lily
+- Onvermijdelijke bestemming voor Lisa
 
 ## Karakterontwikkeling
 
-### Lily
+### Lisa
 - Groeiende twijfels en angsten
 - Zorgen om Nina
-- Verlies van Theo' bescherming
+- Verlies van Thomas' bescherming
 - Gedwongen zelfstandigheid
 
-### Theo
+### Thomas
 - Beschermende rol
 - Wijze woorden over sterren
 - Vertrouwen in Jacob's bescherming
@@ -81,18 +81,18 @@
 
 ## Naderende Ontwikkelingen
 
-### Lily's Pad
+### Lisa's Pad
 - Reis naar Arafel's toren
 - Confrontatie met schaduwen
 - Zoektocht naar waarheid
 
-### Theo' Pad
+### Thomas' Pad
 - Het dodenpad langs de rotswanden
 - Eigen beproevingen
 - Reis naar de Spiegelzaal
 
 ## Toekomstige Vertelstructuur
-- Alternerende hoofdstukken tussen Lily en Theo
+- Alternerende hoofdstukken tussen Lisa en Thomas
 - Parallelle reizen naar één bestemming
 - Uiteindelijke hereniging in Ella's Spiegelzaal
 

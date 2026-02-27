@@ -17,7 +17,7 @@
 - 'Mist' en 'missen' zijn thematisch verbonden
 
 ## Het Grote Verraad
-### Lily's Keuze
+### Lisa's Keuze
 - Krijgt slecht advies over een kortere route naar Ella
 - Komt bij Arafel's toren
 - Wordt verleid om Jacob's sterrenkaart af te geven
@@ -29,16 +29,16 @@
 - Dorpen worden geïsoleerd
 - De Lichttuin wordt bedreigd
 
-## Theo' Offer
+## Thomas' Offer
 ### De Confrontatie in de Spiegelzaal
-- Lily kan haar schuld niet bekennen aan Theo
+- Lisa kan haar schuld niet bekennen aan Thomas
 - Waarheid komt uit voor Ella's troon
-- Theo neemt vrijwillig Lily's straf op zich
-- Onthulling dat Theo al "bij Ella is van oude tijden af"
+- Thomas neemt vrijwillig Lisa's straf op zich
+- Onthulling dat Thomas al "bij Ella is van oude tijden af"
 
 ### De Verlossing
-- Theo gaat naar de Nevelbergen
-- Lily wordt vergeven door zijn offer
+- Thomas gaat naar de Nevelbergen
+- Lisa wordt vergeven door zijn offer
 - Ze krijgt een nieuwe missie
 
 ## Nina's Introductie
@@ -50,15 +50,15 @@
 - Symboliseert onschuld en zuiverheid
 
 ### Rol in het Verhaal
-- Spiegelpersonage voor Lily's vroegere onschuld
+- Spiegelpersonage voor Lisa's vroegere onschuld
 - Wordt bedreigd door de oprukkende nevel
 - Mogelijk verbonden met een later ziek meisje
-- Wacht op Lily's terugkeer
+- Wacht op Lisa's terugkeer
 
 ## Openstaande Plotlijnen
-1. Lily's zoektocht naar Nina in de Lichttuin
+1. Lisa's zoektocht naar Nina in de Lichttuin
 2. De missie met de geneeskrachtige plant
-3. Theo' strijd met Arafel
+3. Thomas' strijd met Arafel
 4. De mogelijke verbinding tussen Nina en het zieke meisje
 5. De uiteindelijke verlossing van het land van de nevel
 

@@ -5,14 +5,14 @@
 
 ## Kernthema's en Karakters
 
-### Lily als Hoofdpersonage
+### Lisa als Hoofdpersonage
 - In ontwikkeling, nog relatief oppervlakkig
 - Gebaseerd op praktijkervaring met kinderen
 - Focus op kwetsbaarheid én innerlijke kracht
 - Worsteling met communicatie onder druk
 
-### Theo als Medereiziger
-- Leeftijdsgenoot van Lily
+### Thomas als Medereiziger
+- Leeftijdsgenoot van Lisa
 - Christus-typologie in verlossingsthema
 - Vermogen tot constructieve communicatie
 - Rol in schuld overnemen/verlossing

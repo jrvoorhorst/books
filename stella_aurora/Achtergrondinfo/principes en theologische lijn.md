@@ -1,4 +1,4 @@
-# Kernprincipes Lolaland: Theologische Diepgang en Literaire Aanpak
+# Kernprincipes Lolaland: Thomaslogische Diepgang en Literaire Aanpak
 
 
 
@@ -11,7 +11,7 @@
    - Geen zoete godfiguur, maar complex en soms streng
    - Handelt uit liefde, zelfs bij strenge oordelen
 
-2. Theo' zelfopoffering
+2. Thomas' zelfopoffering
    - Vrijwillig karakter van het offer
    - Geen religieuze plicht maar uit liefde
    - Echte consequenties (verbanning naar Schemerland)
@@ -23,7 +23,7 @@
    - Weigert aangeboden verlossing
    - Trekt zich terug in plaats van dramatische nederlaag
 
-### Theologische Principes vertaald naar Verhaal
+### Thomaslogische Principes vertaald naar Verhaal
 
 1. Rechtvaardigheid en Genade
    - Daden hebben echte consequenties
@@ -47,7 +47,7 @@
 
 ### Symboliek
 1. De Sterrenjurk
-   - Weerspiegelt Lily's spirituele staat
+   - Weerspiegelt Lisa's spirituele staat
    - Sterren doven en herleven
    - Nieuwe glans na transformatie
 
@@ -93,7 +93,7 @@
    - Transformerende kracht
 
 3. Waarheid en Zelfkennis
-   - Pijnlijke zelfreaLilytie
+   - Pijnlijke zelfrealisatie
    - Groei door inzicht
    - Acceptatie van eigen fouten
 
@@ -101,7 +101,7 @@
 1. Meerdere Lagen:
    - Toegankelijk verhaal voor jonge lezers
    - Diepere betekenis voor oudere lezers
-   - Theologische laag voor wie het wil zien
+   - Thomaslogische laag voor wie het wil zien
 
 2. Universele Aanspreekbaarheid:
    - Herkenbare emoties en conflicten

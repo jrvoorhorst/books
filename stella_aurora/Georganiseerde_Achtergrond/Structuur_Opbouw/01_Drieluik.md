@@ -13,7 +13,7 @@
 
 ## Deel 1: Stella Crepuscula (Avondster)
 
-- **Focus**: Lily's verleiding en manipulatie door Avara en later Arafel
+- **Focus**: Lisa's verleiding en manipulatie door Avara en later Arafel
 - **Setting**: Voornamelijk de Lichttuin en omgeving
 - **Thema**: Begin van corruptie, verlies van onschuld
 - **Hoofdstukken**: Geschat 10-12 hoofdstukken
@@ -26,7 +26,7 @@
 
 ## Deel 2: Stella Noctis (Nachtster)
 
-- **Focus**: Lily's reis door de Nevelbergen naar Arafel's toren
+- **Focus**: Lisa's reis door de Nevelbergen naar Arafel's toren
 - **Setting**: Nevelbergen, diverse locaties, Zwarte Toren
 - **Thema**: Volledige corruptie, duisternis, verlies
 - **Hoofdstukken**: Geschat 10-15 hoofdstukken
@@ -50,12 +50,12 @@
 - `structurele opbouw.md`
 - `Stella Aurora - titels en delen.md`
 - `laatste hoofdstuk, einde van het boek.md`
-- `Theo rol in schuldovername.md`
+- `Thomas rol in schuldovername.md`
 
 ## Speciale Structuurelementen
 
-- **Sterrenjurk Ontwikkeling**: Vier fasen van de sterrenjurk corresponderen met Lily's spirituele staat
-- **Vertelperspectief**: Eerste persoon vanuit Lily's perspectief
+- **Sterrenjurk Ontwikkeling**: Vier fasen van de sterrenjurk corresponderen met Lisa's spirituele staat
+- **Vertelperspectief**: Eerste persoon vanuit Lisa's perspectief
 - **Tijdsverloop**: Opeenvolgende gebeurtenissen met mogelijk enkele flashbacks
 
 ### Belangrijkste documenten:

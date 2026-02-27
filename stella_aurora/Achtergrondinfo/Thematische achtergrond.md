@@ -3,7 +3,7 @@
 
 
 ## Emotionele Ontwikkeling & Karakterisering
-### Lily als Tienermeisje
+### Lisa als Tienermeisje
 - Combinatie van vrouwelijkheid en avontuurlijkheid
 - Realistische emotionele ontwikkeling voor haar leeftijd
 - Worsteling met intense emoties en driftbuien
